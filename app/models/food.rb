@@ -12,4 +12,6 @@ class Food < ActiveRecord::Base
            :foreign_key => :child_food_id,
            :dependent => :destroy
   has_many :child_foods, :through => :child_connections
+
+  validates_uniqueness_of :name
 end
