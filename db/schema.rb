@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425184053) do
+ActiveRecord::Schema.define(:version => 20130425184739) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130425184053) do
   end
 
   add_index "ingredients", ["food_id"], :name => "index_ingredients_on_food_id"
+  add_index "ingredients", ["recipe_id"], :name => "index_ingredients_on_recipe_id"
   add_index "ingredients", ["unit_of_measurement_id"], :name => "index_ingredients_on_unit_of_measurement_id"
 
   create_table "recipes", :force => true do |t|
