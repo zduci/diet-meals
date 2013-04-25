@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425174332) do
+ActiveRecord::Schema.define(:version => 20130425175134) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(:version => 20130425174332) do
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "ingredients", :force => true do |t|
+    t.integer  "food_id"
+    t.integer  "quantity"
+    t.integer  "unit_of_measurement_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "unit_of_measurements", :force => true do |t|
