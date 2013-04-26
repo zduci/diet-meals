@@ -1,7 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+[["kilogram", "kg"],
+ ["gram", "g"],
+ ["pound", "lb"],
+ ["ounce", "oz"]].each do |unit_of_measurement|
+  UnitOfMeasurement.find_or_create_by_name_and_short_name(unit_of_measurement[0],
+                                                          unit_of_measurement[1])
+end
+
