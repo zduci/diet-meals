@@ -6,3 +6,10 @@
                                                           unit_of_measurement[1])
 end
 
+sugar = Food.create_by_name(:sugar)
+fruit = Food.create_by_name(:fruit)
+tomato = Food.create_by_name(:tomato)
+apple = Food.create_by_name(:apple)
+citrus = Food.create_by_name(:citrus)
+lemon = Food.create_by_name(:lemon)
+vitamins = Food.create_by_name(:vitamin)
