@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425184739) do
+ActiveRecord::Schema.define(:version => 20130501182728) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130425184739) do
   end
 
   add_index "food_connections", ["child_food_id"], :name => "index_food_connections_on_child_food_id"
+  add_index "food_connections", ["parent_food_id", "child_food_id"], :name => "index_food_connections_on_parent_food_id_and_child_food_id", :unique => true
   add_index "food_connections", ["parent_food_id"], :name => "index_food_connections_on_parent_food_id"
 
   create_table "foods", :force => true do |t|
