@@ -49,6 +49,12 @@ describe FoodGraph do
       create_connections
       FoodGraph.find_descendants(fruit).should =~ ['apple', 'citrus', 'orange']
     end
+
+    it 'checks for descendant' do
+      create_connections
+      FoodGraph.has_descendant(citrus, 'orange').should be_true
+      FoodGraph.has_descendant(citrus, 'apple').should be_false
+    end
   end
 end
 

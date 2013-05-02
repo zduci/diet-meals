@@ -18,6 +18,10 @@ class FoodGraph
     search_ancestors(food, ancestor)
   end
 
+  def self.has_descendant(food, descendant)
+    search_descendants(food, descendant)
+  end
+
   private
   def self.traverse_graph(food, method, result=[])
     food.send(method).each do |element|
@@ -31,6 +35,14 @@ class FoodGraph
     food.parent_foods.each do |element|
       return true if element.name == ancestor || 
                      search_ancestors(element, ancestor)
+    end
+    false
+  end
+
+  def self.search_descendants(food, descendant)
+    food.child_foods.each do |element|
+      return true if element.name == descendant || 
+                     search_descendants(element, descendant)
     end
     false
   end
