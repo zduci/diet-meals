@@ -22,4 +22,19 @@ describe FoodGraph do
     FoodGraph.connect(fruit, orange)
   end
 
+  it 'retrieves all ancestors' do
+    fruit = FactoryGirl.create(:food, :name => :fruit)
+    apple = FactoryGirl.create(:food, :name => :apple)
+    citrus = FactoryGirl.create(:food, :name => :citrus)
+    orange = FactoryGirl.create(:food, :name => :orange)
+    sugar = FactoryGirl.create(:food, :name => :sugar)
+    fruit_apple = FactoryGirl.create(:food_connection, :parent_food => fruit, :child_food => apple)
+    fruit_citrus = FactoryGirl.create(:food_connection, :parent_food => fruit, :child_food => citrus)
+    citrus_orange = FactoryGirl.create(:food_connection, :parent_food => citrus, :child_food => orange)
+    sugar_orange = FactoryGirl.create(:food_connection, :parent_food => sugar, :child_food => orange)
+    FoodGraph.find_ancestors(orange).should =~ ['fruit', 'citrus', 'sugar']
+  end
+
 end
+
+
