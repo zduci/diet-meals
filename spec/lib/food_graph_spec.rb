@@ -34,6 +34,10 @@ describe FoodGraph do
     FoodGraph.find_ancestors(orange).should =~ ['fruit', 'citrus', 'sugar']
   end
 
+  it 'retrieves all ancestors' do
+    create_connections
+    FoodGraph.find_descendants(fruit).should =~ ['apple', 'citrus', 'orange']
+  end
 end
 
 

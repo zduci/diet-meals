@@ -10,6 +10,10 @@ class FoodGraph
     traverse_ancestors(food, [])
   end
 
+  def self.find_descendants(food)
+    traverse_descendants(food, [])
+  end
+
   private
   def self.traverse_ancestors(food, ancestors)
     food.parent_foods.each do |parent|
@@ -17,5 +21,13 @@ class FoodGraph
       traverse_ancestors(parent, ancestors)
     end
     ancestors
+  end
+
+  def self.traverse_descendants(food, descendants)
+    food.child_foods.each do |child|
+      descendants << child.name
+      traverse_descendants(child, descendants)
+    end
+    descendants
   end
 end
