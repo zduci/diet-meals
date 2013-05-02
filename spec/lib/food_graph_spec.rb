@@ -16,27 +16,33 @@ describe FoodGraph do
   end
 
 
-  it 'creates a connection between foods if it does not exist' do
-    FoodGraph.connect(fruit, orange)
+  context 'conncetions' do
+    it 'creates a connection between foods if it does not exist' do
+      FoodGraph.connect(fruit, orange)
 
-    orange.parent_foods.should == [fruit]
-    fruit.child_foods.should == [orange]
+      orange.parent_foods.should == [fruit]
+      fruit.child_foods.should == [orange]
+    end
+
+    it 'does not create a connection between foods if it alreasy exists' do
+      FoodGraph.connect(fruit, orange)
+      FoodConnection.should_not_receive(:create)
+      FoodGraph.connect(fruit, orange)
+    end
   end
 
-  it 'does not create a connection between foods if it alreasy exists' do
-    FoodGraph.connect(fruit, orange)
-    FoodConnection.should_not_receive(:create)
-    FoodGraph.connect(fruit, orange)
+  context 'ancestors' do
+    it 'retrieves all ancestors' do
+      create_connections
+      FoodGraph.find_ancestors(orange).should =~ ['fruit', 'citrus', 'sugar']
+    end
   end
 
-  it 'retrieves all ancestors' do
-    create_connections
-    FoodGraph.find_ancestors(orange).should =~ ['fruit', 'citrus', 'sugar']
-  end
-
-  it 'retrieves all ancestors' do
-    create_connections
-    FoodGraph.find_descendants(fruit).should =~ ['apple', 'citrus', 'orange']
+  context 'descendants' do
+    it 'retrieves all descendants' do
+      create_connections
+      FoodGraph.find_descendants(fruit).should =~ ['apple', 'citrus', 'orange']
+    end
   end
 end
 
