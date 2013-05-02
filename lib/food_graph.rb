@@ -14,7 +14,7 @@ class FoodGraph
     traverse_graph(food, :child_foods)
   end
 
-  def self.has_ancestors(food, ancestor)
+  def self.has_ancestor(food, ancestor)
     search_graph(food, ancestor, :parent_foods)
   end
 

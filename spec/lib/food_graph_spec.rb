@@ -39,8 +39,8 @@ describe FoodGraph do
 
     it 'checks for ancestor' do
       create_connections
-      FoodGraph.has_ancestors(orange, 'fruit').should be_true
-      FoodGraph.has_ancestors(orange, 'apple').should be_false
+      FoodGraph.has_ancestor(orange, 'fruit').should be_true
+      FoodGraph.has_ancestor(orange, 'apple').should be_false
     end
   end
 
