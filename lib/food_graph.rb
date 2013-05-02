@@ -15,11 +15,11 @@ class FoodGraph
   end
 
   def self.has_ancestors(food, ancestor)
-    search_ancestors(food, ancestor)
+    search_graph(food, ancestor, :parent_foods)
   end
 
   def self.has_descendant(food, descendant)
-    search_descendants(food, descendant)
+    search_graph(food, descendant, :child_foods)
   end
 
   private
@@ -31,19 +31,12 @@ class FoodGraph
     result
   end
 
-  def self.search_ancestors(food, ancestor)
-    food.parent_foods.each do |element|
-      return true if element.name == ancestor || 
-                     search_ancestors(element, ancestor)
+  def self.search_graph(food, target, method)
+    food.send(method).each do |element|
+      return true if element.name == target || 
+                     search_graph(element, target, method)
     end
     false
   end
 
-  def self.search_descendants(food, descendant)
-    food.child_foods.each do |element|
-      return true if element.name == descendant || 
-                     search_descendants(element, descendant)
-    end
-    false
-  end
 end
