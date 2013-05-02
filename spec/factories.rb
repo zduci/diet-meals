@@ -1,6 +1,5 @@
 FactoryGirl.define do
-  factory :fruit, :class => Food do
-    name :fruit
+  factory :food do
   end
 
   factory :orange, :class => Food do
