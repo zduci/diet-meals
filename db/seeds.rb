@@ -1,3 +1,5 @@
+require_relative '../lib/food_graph'
+
 [["kilogram", "kg"],
  ["gram", "g"],
  ["pound", "lb"],
@@ -24,3 +26,12 @@ FoodGraph.connect(citrus, orange)
 FoodGraph.connect(sugar, orange)
 FoodGraph.connect(fruit, apple)
 FoodGraph.connect(sugar, apple)
+
+
+Diet.create(:name => 'Slow Carb Diet').tap do |diet|
+  diet.allowed << [Food.find_or_create_by_name(:meat),
+                   Food.find_or_create_by_name(:eggs),
+                   Food.find_or_create_by_name(:vegetables),
+                   Food.find_or_create_by_name(:legumes)]
+end
+            
