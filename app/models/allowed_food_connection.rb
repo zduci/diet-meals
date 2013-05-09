@@ -1,4 +1,4 @@
-class AllowedFood < ActiveRecord::Base
+class AllowedFoodConnection < ActiveRecord::Base
   attr_accessible :diet_id, :food_id
 
   belongs_to :diet
