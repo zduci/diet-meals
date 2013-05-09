@@ -5,15 +5,15 @@ describe MealClassifier do
   let(:simple_restrictive_diet) { stub(:restrictive => true) }
   let(:simple_unrestrictive_diet) { stub(:restrictive => false) }
 
-  context 'classifying meals' do
-    it 'returns unrestrictive diets ' do
-      Diet.stub(:all) { [simple_unrestrictive_diet] }
-      MealClassifier.classify(stub).should == [simple_unrestrictive_diet]
+  context 'unrestrictive diets' do
+    it 'checks if meal is compatible with simple diet' do
+      MealClassifier.compatible?(simple_unrestrictive_diet, stub).should be_true
     end
+  end
 
-    it 'returns unrestrictive diets ' do
-      Diet.stub(:all) { [simple_restrictive_diet] }
-      MealClassifier.classify(stub).should == []
+  context 'restrictive_diets' do
+    it 'checks if meal is compatible with simple diet' do
+      MealClassifier.compatible?(simple_restrictive_diet, stub).should be_false
     end
   end
 end
