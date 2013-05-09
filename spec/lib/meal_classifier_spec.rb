@@ -1,4 +1,4 @@
-require_relative '../lib/meal_classifier'
+require 'meal_classifier'
 require 'spec_helper'
 
 describe MealClassifier do
