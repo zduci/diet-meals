@@ -7,6 +7,6 @@ class Diet < ActiveRecord::Base
            :source => :food
   has_many :not_allowed_foods
   has_many :not_allowed, 
-           :through => :allowed_foods,
+           :through => :not_allowed_foods,
            :source => :food
 end
