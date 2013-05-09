@@ -5,8 +5,8 @@ class Diet < ActiveRecord::Base
   has_many :allowed, 
            :through => :allowed_foods,
            :source => :food
-  has_many :not_allowed_foods
-  has_many :not_allowed, 
-           :through => :not_allowed_foods,
+  has_many :forbidden_food_connections
+  has_many :forbidden_foods, 
+           :through => :forbidden_food_connections,
            :source => :food
 end
