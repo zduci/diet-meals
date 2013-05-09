@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508200302) do
+ActiveRecord::Schema.define(:version => 20130509184801) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(:version => 20130508200302) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "foods", ["name"], :name => "index_foods_on_name"
 
   create_table "ingredients", :force => true do |t|
     t.integer  "food_id"
