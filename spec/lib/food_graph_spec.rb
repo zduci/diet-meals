@@ -24,7 +24,7 @@ describe FoodGraph do
       fruit.child_foods.should == [orange]
     end
 
-    it 'does not create a connection between foods if it alreasy exists' do
+    it 'does not create a connection between foods if it already exists' do
       FoodGraph.connect(fruit, orange)
       FoodConnection.should_not_receive(:create)
       FoodGraph.connect(fruit, orange)
