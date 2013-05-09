@@ -62,6 +62,7 @@ module DietMeals
     # Use rspec as default testing framework
     config.generators do |g|
       g.test_framework :rspec
+      g.model_specs false
     end
   end
 end
