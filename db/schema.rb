@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130509191432) do
+ActiveRecord::Schema.define(:version => 20130509191837) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(:version => 20130509191432) do
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
-  create_table "allowed_foods", :force => true do |t|
+  create_table "allowed_food_connections", :force => true do |t|
     t.integer  "diet_id",    :null => false
     t.integer  "food_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "allowed_foods", ["food_id", "diet_id"], :name => "index_allowed_foods_on_food_id_and_diet_id", :unique => true
+  add_index "allowed_food_connections", ["food_id", "diet_id"], :name => "index_allowed_foods_on_food_id_and_diet_id", :unique => true
 
   create_table "diets", :force => true do |t|
     t.string   "name",        :null => false
