@@ -1,5 +1,4 @@
 require 'meal_classifier'
-require 'spec_helper'
 
 describe MealClassifier do
   let(:empty_restrictive_diet) { stub(:restrictive => true) }
@@ -8,7 +7,7 @@ describe MealClassifier do
   let(:empty_diet) { stub(:empty_diet) }
 
   context 'unrestrictive diets' do
-    it 'approves any meal for empty diets' do
+    it 'accepts any meal for empty diets' do
       MealClassifier.compatible?(empty_unrestrictive_diet, empty_diet).should be_true
     end
   end
