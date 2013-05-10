@@ -4,7 +4,10 @@ describe MealClassifier do
   let(:empty_restrictive_diet) { stub(:restrictive => true, :allowed_foods => []) }
   let(:empty_unrestrictive_diet) { stub(:restrictive => false, :forbidden_foods => []) }
 
+  let(:rice) { stub(:rice) }
+
   let(:empty_meal) { stub(:ingredients => []) }
+  let(:rice_meal) { stub(:ingredients => [rice]) }
 
   context 'unrestrictive diets' do
     it 'accepts any meal for empty diets' do
@@ -12,9 +15,7 @@ describe MealClassifier do
     end
 
     it 'rejects meals containing forbidden ingredients' do
-      rice = stub(:rice)
       no_rice = stub(:restrictive => false, :forbidden_foods => [rice])
-      rice_meal = stub(:ingredients => [rice])
       MealClassifier.compatible?(no_rice, rice_meal).should be_false
     end
   end
@@ -25,9 +26,7 @@ describe MealClassifier do
     end
 
     it 'accepts meals containing allowed ingredients' do
-      rice = stub(:rice)
       allows_rice = stub(:restrictive => true, :allowed_foods => [rice])
-      rice_meal = stub(:ingredients => [rice])
       MealClassifier.compatible?(allows_rice, rice_meal).should be_true
     end
   end
