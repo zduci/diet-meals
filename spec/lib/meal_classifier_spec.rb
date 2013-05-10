@@ -2,18 +2,20 @@ require 'meal_classifier'
 require 'spec_helper'
 
 describe MealClassifier do
-  let(:simple_restrictive_diet) { stub(:restrictive => true) }
-  let(:simple_unrestrictive_diet) { stub(:restrictive => false) }
+  let(:empty_restrictive_diet) { stub(:restrictive => true) }
+  let(:empty_unrestrictive_diet) { stub(:restrictive => false) }
+
+  let(:empty_diet) { stub(:empty_diet) }
 
   context 'unrestrictive diets' do
-    it 'checks if meal is compatible with simple diet' do
-      MealClassifier.compatible?(simple_unrestrictive_diet, stub).should be_true
+    it 'approves any meal for empty diets' do
+      MealClassifier.compatible?(empty_unrestrictive_diet, empty_diet).should be_true
     end
   end
 
   context 'restrictive_diets' do
-    it 'checks if meal is compatible with simple diet' do
-      MealClassifier.compatible?(simple_restrictive_diet, stub).should be_false
+    it 'rejects any meal for empty diets' do
+      MealClassifier.compatible?(empty_restrictive_diet, empty_diet).should be_false
     end
   end
 end
