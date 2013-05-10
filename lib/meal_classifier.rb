@@ -4,6 +4,10 @@ class MealClassifier
   end
    
   def self.compatible?(diet, meal)
-    !diet.restrictive
+    unless diet.restrictive
+      (diet.forbidden_foods & meal.ingredients).empty?
+    else
+      false
+    end
   end
 end
