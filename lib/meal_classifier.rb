@@ -17,7 +17,7 @@ class MealClassifier
     if diet.allowed_foods.empty?
       false
     else
-      (diet.allowed_foods & meal.ingredients).sort == meal.ingredients
+      (including_children(diet.allowed_foods) & meal.ingredients).sort == meal.ingredients
     end
   end
 
@@ -28,6 +28,12 @@ class MealClassifier
   def self.including_parents(foods)
     foods.inject(foods) do |result, element|
       result + element.parent_foods
+    end
+  end
+
+  def self.including_children(foods)
+    foods.inject(foods) do |result, element|
+      result + element.children_foods
     end
   end
 end
