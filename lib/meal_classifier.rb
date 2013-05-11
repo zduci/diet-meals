@@ -22,6 +22,12 @@ class MealClassifier
   end
 
   def self.compatible_for_unrestrictive(diet, meal)
-    (diet.forbidden_foods & meal.ingredients).empty?
+    (diet.forbidden_foods & including_parents(meal.ingredients)).empty?
+  end
+
+  def self.including_parents(foods)
+    foods.inject(foods) do |result, element|
+      result + element.parent_foods
+    end
   end
 end
