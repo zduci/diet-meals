@@ -35,7 +35,7 @@ class MealClassifier
 
   def self.including_children(foods)
     foods.inject(foods) do |result, element|
-      result + element.children_foods
+      result + element.child_foods
     end
   end
 end
