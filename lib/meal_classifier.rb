@@ -19,7 +19,7 @@ class MealClassifier
     if diet.allowed_foods.empty?
       false
     else
-      (including_descendants(diet.allowed_foods) & meal.ingredients).sort == meal.ingredients
+      ((including_descendants(diet.allowed_foods) & meal.ingredients) - diet.forbidden_foods).sort == meal.ingredients
     end
   end
 
