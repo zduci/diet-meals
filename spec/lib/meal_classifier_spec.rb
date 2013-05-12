@@ -1,7 +1,6 @@
 require 'meal_classifier'
 
 describe MealClassifier do
-
   let(:empty_meal) { stub(:ingredients => []) }
 
   context 'unrestrictive diets' do
@@ -36,10 +35,14 @@ describe MealClassifier do
       no_carbs_except_rice = stub(:restrictive => false, :forbidden_foods => [carbs], :allowed_foods => [rice])
       MealClassifier.compatible?(no_carbs_except_rice, rice_meal).should be_true
     end
+
+    it 'accepts meals containing allowed ingredients with forbidden ancestor foods' do
+      no_carbs_except_brown_rice = stub(:restrictive => false, :forbidden_foods => [carbs], :allowed_foods => [brown_rice])
+      MealClassifier.compatible?(no_carbs_except_brown_rice, brown_rice_meal).should be_true
+    end
   end
 
   context 'restrictive_diets' do
-
     let(:meat) { stub(:meat, :child_foods => [chicken]) }
     let(:chicken) { stub(:chicken, :child_foods => [chicken_breast]) }
     let(:chicken_breast) { stub(:chicken_breast, :child_foods => []) }
