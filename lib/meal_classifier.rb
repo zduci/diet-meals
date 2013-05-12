@@ -1,3 +1,5 @@
+require 'food_graph'
+
 class MealClassifier
   def self.classify(meal)
     Diet.all.select { |diet| compatible?(diet, meal) }
@@ -22,12 +24,12 @@ class MealClassifier
   end
 
   def self.compatible_for_unrestrictive(diet, meal)
-    (diet.forbidden_foods & including_parents(meal.ingredients)).empty?
+    (diet.forbidden_foods & including_ancestors(meal.ingredients)).empty?
   end
 
-  def self.including_parents(foods)
-    foods.inject(foods) do |result, element|
-      result + element.parent_foods
+  def self.including_ancestors(foods)
+    foods.inject(foods) do |result, food|
+      result + FoodGraph.find_ancestors(food)
     end
   end
 

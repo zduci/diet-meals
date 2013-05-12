@@ -6,12 +6,14 @@ describe MealClassifier do
 
   let(:carbs) { stub(:carbs, :parent_foods => []) }
   let(:rice) { stub(:rice, :parent_foods => [carbs], :children_foods => []) }
+  let(:brown_rice) { stub(:rice, :parent_foods => [rice], :children_foods => []) }
 
   let(:meat) { stub(:meat, :children_foods => [chicken]) }
   let(:chicken) { stub(:chicken) }
 
   let(:empty_meal) { stub(:ingredients => []) }
   let(:rice_meal) { stub(:ingredients => [rice]) }
+  let(:brown_rice_meal) { stub(:ingredients => [brown_rice]) }
   let(:chicken_meal) { stub(:ingredients => [chicken]) }
 
   context 'unrestrictive diets' do
@@ -27,6 +29,11 @@ describe MealClassifier do
     it 'rejects meals containing children foods of forbidden ingredients' do
       no_carbs = stub(:restrictive => false, :forbidden_foods => [carbs])
       MealClassifier.compatible?(no_carbs, rice_meal).should be_false
+    end
+
+    it 'rejects meals containing descendant foods of forbidden ingredients' do
+      no_carbs = stub(:restrictive => false, :forbidden_foods => [carbs])
+      MealClassifier.compatible?(no_carbs, brown_rice_meal).should be_false
     end
   end
 
