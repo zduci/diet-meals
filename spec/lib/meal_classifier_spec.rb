@@ -70,9 +70,14 @@ describe MealClassifier do
       MealClassifier.compatible?(allows_meat, chicken_breast_meal).should be_true
     end
 
-    it 'rejects meals containing forbidden ingredients with accepted parent foods' do
+    it 'rejects meals containing forbidden ingredients with accepted child foods' do
       allows_meat_except_chicken = stub(:restrictive => true, :forbidden_foods => [chicken], :allowed_foods => [meat])
       MealClassifier.compatible?(allows_meat_except_chicken, chicken_meal).should be_false
+    end
+
+    it 'rejects meals containing forbidden ingredients with accepted descendant foods' do
+      allows_meat_except_chicken_breast = stub(:restrictive => true, :forbidden_foods => [chicken_breast], :allowed_foods => [meat])
+      MealClassifier.compatible?(allows_meat_except_chicken_breast, chicken_breast_meal).should be_false
     end
   end
 end
