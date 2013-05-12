@@ -10,7 +10,7 @@ describe MealClassifier do
 
   let(:meat) { stub(:meat, :child_foods => [chicken]) }
   let(:chicken) { stub(:chicken, :child_foods => [chicken_breast]) }
-  let(:chicken_breast) { stub(:chicken_breast) }
+  let(:chicken_breast) { stub(:chicken_breast, :child_foods => []) }
 
   let(:empty_meal) { stub(:ingredients => []) }
   let(:rice_meal) { stub(:ingredients => [rice]) }
@@ -52,6 +52,11 @@ describe MealClassifier do
     it 'accepts meals containing child foods of alowed ingredients' do
       allows_meat = stub(:restrictive => true, :allowed_foods => [meat])
       MealClassifier.compatible?(allows_meat, chicken_meal).should be_true
+    end
+
+    it 'accepts meals containing descendant foods of alowed ingredients' do
+      allows_meat = stub(:restrictive => true, :allowed_foods => [meat])
+      MealClassifier.compatible?(allows_meat, chicken_breast_meal).should be_true
     end
   end
 end

@@ -19,7 +19,7 @@ class MealClassifier
     if diet.allowed_foods.empty?
       false
     else
-      (including_children(diet.allowed_foods) & meal.ingredients).sort == meal.ingredients
+      (including_descendants(diet.allowed_foods) & meal.ingredients).sort == meal.ingredients
     end
   end
 
@@ -33,9 +33,9 @@ class MealClassifier
     end
   end
 
-  def self.including_children(foods)
-    foods.inject(foods) do |result, element|
-      result + element.child_foods
+  def self.including_descendants(foods)
+    foods.inject(foods) do |result, food|
+      result + FoodGraph.find_descendants(food)
     end
   end
 end
