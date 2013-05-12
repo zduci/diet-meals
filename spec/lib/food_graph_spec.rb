@@ -34,28 +34,26 @@ describe FoodGraph do
   context 'ancestors' do
     it 'retrieves all ancestors' do
       create_connections
-      FoodGraph.find_ancestors(orange).should =~ ['fruit', 'citrus', 'sugar']
+      FoodGraph.find_ancestors(orange).should =~ [fruit, citrus, sugar]
     end
 
     it 'checks for ancestor' do
       create_connections
-      FoodGraph.has_ancestor(orange, 'fruit').should be_true
-      FoodGraph.has_ancestor(orange, 'apple').should be_false
+      FoodGraph.has_ancestor(orange, fruit).should be_true
+      FoodGraph.has_ancestor(orange, apple).should be_false
     end
   end
 
   context 'descendants' do
     it 'retrieves all descendants' do
       create_connections
-      FoodGraph.find_descendants(fruit).should =~ ['apple', 'citrus', 'orange']
+      FoodGraph.find_descendants(fruit).should =~ [apple, citrus, orange]
     end
 
     it 'checks for descendant' do
       create_connections
-      FoodGraph.has_descendant(citrus, 'orange').should be_true
-      FoodGraph.has_descendant(citrus, 'apple').should be_false
+      FoodGraph.has_descendant(citrus, orange).should be_true
+      FoodGraph.has_descendant(citrus, apple).should be_false
     end
   end
 end
-
-

@@ -25,7 +25,7 @@ class FoodGraph
   private
   def self.traverse_graph(food, method, result=[])
     food.send(method).each do |element|
-      result << element.name
+      result << element
       traverse_graph(element, method, result)
     end
     result
@@ -33,7 +33,7 @@ class FoodGraph
 
   def self.search_graph(food, target, method)
     food.send(method).each do |element|
-      return true if element.name == target || 
+      return true if element == target || 
                      search_graph(element, target, method)
     end
     false
