@@ -27,15 +27,19 @@ class MealClassifier
     (diet.forbidden_foods & including_ancestors(meal.ingredients)).empty?
   end
 
+  private
+
   def self.including_ancestors(foods)
-    foods.inject(foods) do |result, food|
-      result + FoodGraph.find_ancestors(food)
-    end
+    including(:find_ancestors, foods)
   end
 
   def self.including_descendants(foods)
+    including(:find_descendants, foods)
+  end
+
+  def self.including(method, foods)
     foods.inject(foods) do |result, food|
-      result + FoodGraph.find_descendants(food)
+      result + FoodGraph.send(method, food)
     end
   end
 end
