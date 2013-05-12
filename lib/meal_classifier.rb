@@ -24,7 +24,7 @@ class MealClassifier
   end
 
   def self.compatible_for_unrestrictive(diet, meal)
-    (diet.forbidden_foods & including_ancestors(meal.ingredients)).empty?
+    ((diet.forbidden_foods & including_ancestors(meal.ingredients)) - including_ancestors(diet.allowed_foods)).empty?
   end
 
   private
