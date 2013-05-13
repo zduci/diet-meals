@@ -30,24 +30,11 @@ class MealClassifier
   private
 
   def self.allowed_meal_ingredients(diet, meal)
-    ((including_descendants(diet.allowed_foods) & meal.ingredients) - diet.forbidden_foods).sort
+    ((FoodGraph.including_descendants(diet.allowed_foods) & meal.ingredients) - diet.forbidden_foods).sort
   end
 
   def self.forbidden_meal_ingredients(diet, meal)
-    (diet.forbidden_foods & including_ancestors(meal.ingredients)) - including_ancestors(diet.allowed_foods)
+    (diet.forbidden_foods & FoodGraph.including_ancestors(meal.ingredients)) - FoodGraph.including_ancestors(diet.allowed_foods)
   end
 
-  def self.including_ancestors(foods)
-    including(:find_ancestors, foods)
-  end
-
-  def self.including_descendants(foods)
-    including(:find_descendants, foods)
-  end
-
-  def self.including(method, foods)
-    foods.inject(foods) do |result, food|
-      result + FoodGraph.send(method, food)
-    end
-  end
 end

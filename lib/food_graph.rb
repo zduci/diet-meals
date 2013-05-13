@@ -22,6 +22,20 @@ class FoodGraph
     search_graph(food, descendant, :child_foods)
   end
 
+  def self.including_ancestors(foods)
+    including(:find_ancestors, foods)
+  end
+
+  def self.including_descendants(foods)
+    including(:find_descendants, foods)
+  end
+
+  def self.including(method, foods)
+    foods.inject(foods) do |result, food|
+      result + FoodGraph.send(method, food)
+    end
+  end
+
   private
   def self.traverse_graph(food, method, result=[])
     food.send(method).each do |element|
