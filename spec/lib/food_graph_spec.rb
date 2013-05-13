@@ -15,8 +15,7 @@ describe FoodGraph do
     FactoryGirl.create(:food_connection, :parent_food => sugar, :child_food => orange)
   end
 
-
-  context 'conncetions' do
+  context 'connections' do
     it 'creates a connection between foods if it does not exist' do
       FoodGraph.connect(fruit, orange)
 
