@@ -59,5 +59,10 @@ describe FoodGraph do
       FoodGraph.has_descendant(citrus, orange).should be_true
       FoodGraph.has_descendant(citrus, apple).should be_false
     end
+
+    it 'returns the foods along with their descendants' do
+      create_connections
+      FoodGraph.including_descendants([citrus, sugar]).should =~ [citrus, orange, orange, sugar]
+    end
   end
 end
