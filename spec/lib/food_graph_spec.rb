@@ -8,13 +8,6 @@ describe FoodGraph do
   let(:orange) { FactoryGirl.create(:food, :name => :orange) }
   let(:sugar) { FactoryGirl.create(:food, :name => :sugar) }
 
-  def create_connections
-    FactoryGirl.create(:food_connection, :parent_food => fruit, :child_food => apple)
-    FactoryGirl.create(:food_connection, :parent_food => fruit, :child_food => citrus)
-    FactoryGirl.create(:food_connection, :parent_food => citrus, :child_food => orange)
-    FactoryGirl.create(:food_connection, :parent_food => sugar, :child_food => orange)
-  end
-
   context 'connections' do
     it 'creates a connection between foods if it does not exist' do
       FoodGraph.connect(fruit, orange)
@@ -30,39 +23,44 @@ describe FoodGraph do
     end
   end
 
-  context 'ancestors' do
-    it 'retrieves all ancestors' do
-      create_connections
-      FoodGraph.find_ancestors(orange).should =~ [fruit, citrus, sugar]
+  context 'family graph' do
+    before(:each) { create_connections }
+
+    def create_connections
+      FactoryGirl.create(:food_connection, :parent_food => fruit, :child_food => apple)
+      FactoryGirl.create(:food_connection, :parent_food => fruit, :child_food => citrus)
+      FactoryGirl.create(:food_connection, :parent_food => citrus, :child_food => orange)
+      FactoryGirl.create(:food_connection, :parent_food => sugar, :child_food => orange)
     end
 
-    it 'checks for ancestor' do
-      create_connections
-      FoodGraph.has_ancestor(orange, fruit).should be_true
-      FoodGraph.has_ancestor(orange, apple).should be_false
+    context 'ancestors' do
+      it 'retrieves all ancestors' do
+        FoodGraph.find_ancestors(orange).should =~ [fruit, citrus, sugar]
+      end
+
+      it 'checks for ancestor' do
+        FoodGraph.has_ancestor(orange, fruit).should be_true
+        FoodGraph.has_ancestor(orange, apple).should be_false
+      end
+
+      it 'returns the foods along with their ancestors' do
+        FoodGraph.including_ancestors([apple, orange]).should == [apple, orange, fruit, citrus, sugar]
+      end
     end
 
-    it 'returns the foods along with their ancestors' do
-      create_connections
-      FoodGraph.including_ancestors([apple, orange]).should == [apple, orange, fruit, citrus, sugar]
-    end
-  end
+    context 'descendants' do
+      it 'retrieves all descendants' do
+        FoodGraph.find_descendants(fruit).should =~ [apple, citrus, orange]
+      end
 
-  context 'descendants' do
-    it 'retrieves all descendants' do
-      create_connections
-      FoodGraph.find_descendants(fruit).should =~ [apple, citrus, orange]
-    end
+      it 'checks for descendant' do
+        FoodGraph.has_descendant(citrus, orange).should be_true
+        FoodGraph.has_descendant(citrus, apple).should be_false
+      end
 
-    it 'checks for descendant' do
-      create_connections
-      FoodGraph.has_descendant(citrus, orange).should be_true
-      FoodGraph.has_descendant(citrus, apple).should be_false
-    end
-
-    it 'returns the foods along with their descendants' do
-      create_connections
-      FoodGraph.including_descendants([citrus, sugar]).should =~ [citrus, orange, sugar]
+      it 'returns the foods along with their descendants' do
+        FoodGraph.including_descendants([citrus, sugar]).should =~ [citrus, orange, sugar]
+      end
     end
   end
 end
