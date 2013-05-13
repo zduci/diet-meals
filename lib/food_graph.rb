@@ -33,7 +33,7 @@ class FoodGraph
   def self.including(method, foods)
     foods.inject(foods) do |result, food|
       result + FoodGraph.send(method, food)
-    end
+    end.uniq
   end
 
   private

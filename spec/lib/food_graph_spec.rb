@@ -44,7 +44,7 @@ describe FoodGraph do
 
     it 'returns the foods along with their ancestors' do
       create_connections
-      FoodGraph.including_ancestors([apple, orange]).should =~ [apple, orange, fruit, citrus, fruit, sugar]
+      FoodGraph.including_ancestors([apple, orange]).should == [apple, orange, fruit, citrus, sugar]
     end
   end
 
@@ -62,7 +62,7 @@ describe FoodGraph do
 
     it 'returns the foods along with their descendants' do
       create_connections
-      FoodGraph.including_descendants([citrus, sugar]).should =~ [citrus, orange, orange, sugar]
+      FoodGraph.including_descendants([citrus, sugar]).should =~ [citrus, orange, sugar]
     end
   end
 end
