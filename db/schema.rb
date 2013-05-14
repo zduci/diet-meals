@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514211514) do
+ActiveRecord::Schema.define(:version => 20130514212221) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(:version => 20130514211514) do
   add_index "forbidden_food_connections", ["food_id", "diet_id"], :name => "index_forbidden_food_connections_on_food_id_and_diet_id", :unique => true
 
   create_table "ingredients", :force => true do |t|
-    t.integer  "food_id"
-    t.integer  "quantity"
-    t.integer  "unit_of_measurement_id"
+    t.integer  "food_id",                :null => false
+    t.integer  "quantity",               :null => false
+    t.integer  "unit_of_measurement_id", :null => false
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.integer  "recipe_id"
