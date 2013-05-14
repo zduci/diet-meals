@@ -19,22 +19,22 @@ class MealClassifier
     if diet.allowed_foods.empty?
       false
     else
-      allowed_meal_ingredients(diet, meal) == meal.ingredients
+      allowed_meal_foods(diet, meal) == meal.foods
     end
   end
 
   def self.compatible_for_unrestrictive(diet, meal)
-    forbidden_meal_ingredients(diet, meal).empty?
+    forbidden_meal_foods(diet, meal).empty?
   end
 
   private
 
-  def self.allowed_meal_ingredients(diet, meal)
-    ((FoodGraph.including_descendants(diet.allowed_foods) & meal.ingredients) - diet.forbidden_foods).sort
+  def self.allowed_meal_foods(diet, meal)
+    ((FoodGraph.including_descendants(diet.allowed_foods) & meal.foods) - diet.forbidden_foods).sort
   end
 
-  def self.forbidden_meal_ingredients(diet, meal)
-    (diet.forbidden_foods & FoodGraph.including_ancestors(meal.ingredients)) - FoodGraph.including_ancestors(diet.allowed_foods)
+  def self.forbidden_meal_foods(diet, meal)
+    (diet.forbidden_foods & FoodGraph.including_ancestors(meal.foods)) - FoodGraph.including_ancestors(diet.allowed_foods)
   end
 
 end
