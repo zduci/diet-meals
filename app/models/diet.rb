@@ -11,4 +11,6 @@ class Diet < ActiveRecord::Base
            :through => :forbidden_food_connections,
            :source => :food,
            :dependent => :destroy
+
+  validates :name, :presence => true
 end
