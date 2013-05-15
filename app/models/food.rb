@@ -13,5 +13,7 @@ class Food < ActiveRecord::Base
            :dependent => :destroy
   has_many :child_foods, :through => :child_connections
 
+  has_many :ingredients, :dependent => :destroy
+
   validates_uniqueness_of :name
 end
