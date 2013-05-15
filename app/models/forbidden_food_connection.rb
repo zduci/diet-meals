@@ -4,6 +4,6 @@ class ForbiddenFoodConnection < ActiveRecord::Base
   belongs_to :diet
   belongs_to :food
 
-  validates :diet, :presence => true
-  validates :food, :presence => true
+  validates :diet_id, :presence => true, :uniqueness => {:scope => :food_id }
+  validates :food_id, :presence => true
 end
