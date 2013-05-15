@@ -4,9 +4,11 @@ class Diet < ActiveRecord::Base
   has_many :allowed_food_connections
   has_many :allowed_foods, 
            :through => :allowed_food_connections,
-           :source => :food
+           :source => :food,
+           :dependent => :destroy
   has_many :forbidden_food_connections
   has_many :forbidden_foods, 
            :through => :forbidden_food_connections,
-           :source => :food
+           :source => :food,
+           :dependent => :destroy
 end
