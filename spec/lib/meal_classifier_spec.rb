@@ -1,15 +1,15 @@
 require 'meal_classifier'
 
 describe MealClassifier do
-  let(:empty_meal) { stub(:ingredients => []) }
+  let(:empty_meal) { stub(:foods => []) }
 
   context 'unrestrictive diets' do
     let(:carbs) { stub(:carbs, :parent_foods => []) }
     let(:rice) { stub(:rice, :parent_foods => [carbs], :child_foods => []) }
     let(:brown_rice) { stub(:rice, :parent_foods => [rice], :child_foods => []) }
 
-    let(:rice_meal) { stub(:ingredients => [rice]) }
-    let(:brown_rice_meal) { stub(:ingredients => [brown_rice]) }
+    let(:rice_meal) { stub(:foods => [rice]) }
+    let(:brown_rice_meal) { stub(:foods => [brown_rice]) }
 
     let(:empty_unrestrictive_diet) { stub(:restrictive => false, :forbidden_foods => [], :allowed_foods => []) }
     let(:no_carbs) { stub(:restrictive => false, :forbidden_foods => [carbs], :allowed_foods => []) }
@@ -47,8 +47,8 @@ describe MealClassifier do
     let(:chicken) { stub(:chicken, :child_foods => [chicken_breast]) }
     let(:chicken_breast) { stub(:chicken_breast, :child_foods => []) }
 
-    let(:chicken_meal) { stub(:ingredients => [chicken]) }
-    let(:chicken_breast_meal) { stub(:ingredients => [chicken_breast]) }
+    let(:chicken_meal) { stub(:foods => [chicken]) }
+    let(:chicken_breast_meal) { stub(:foods => [chicken_breast]) }
 
     let(:allows_meat) { stub(:restrictive => true, :allowed_foods => [meat], :forbidden_foods => []) }
     let(:empty_restrictive_diet) { stub(:restrictive => true, :allowed_foods => [], :forbidden_foods => []) }
