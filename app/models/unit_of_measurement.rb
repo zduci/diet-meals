@@ -3,6 +3,6 @@ class UnitOfMeasurement < ActiveRecord::Base
 
   has_many :ingredients, :dependent => :destroy
 
-  validates :name, :presence => true
-  validates :short_name, :presence => true
+  validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
+  validates :short_name, :presence => true, :uniqueness => { :case_sensitive => false }
 end
