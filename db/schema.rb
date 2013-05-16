@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514212221) do
+ActiveRecord::Schema.define(:version => 20130516213347) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20130514212221) do
     t.integer  "unit_of_measurement_id", :null => false
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
-    t.integer  "recipe_id"
+    t.integer  "recipe_id",              :null => false
   end
 
   add_index "ingredients", ["food_id"], :name => "index_ingredients_on_food_id"
