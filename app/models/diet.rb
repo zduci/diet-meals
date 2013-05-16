@@ -12,5 +12,5 @@ class Diet < ActiveRecord::Base
            :source => :food,
            :dependent => :destroy
 
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
 end
