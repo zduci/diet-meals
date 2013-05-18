@@ -52,5 +52,4 @@ class FoodGraph
     end
     false
   end
-
 end
