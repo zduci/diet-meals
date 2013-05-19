@@ -23,13 +23,13 @@ class FoodGraph
     including(:find_descendants, foods)
   end
 
+  private
   def self.including(method, foods)
     foods.inject(foods) do |result, food|
       result + FoodGraph.send(method, food)
     end.uniq
   end
 
-  private
   def self.traverse_graph(food, method, result=[])
     food.send(method).each do |element|
       result << element
