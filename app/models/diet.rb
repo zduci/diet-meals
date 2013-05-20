@@ -1,5 +1,5 @@
 class Diet < ActiveRecord::Base
-  attr_accessible :name, :restrictive
+  attr_accessible :name, :exclusive
 
   has_many :allowed_food_connections
   has_many :allowed_foods, 

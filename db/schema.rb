@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516214343) do
+ActiveRecord::Schema.define(:version => 20130520175125) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(:version => 20130516214343) do
   add_index "allowed_food_connections", ["food_id", "diet_id"], :name => "index_allowed_foods_on_food_id_and_diet_id", :unique => true
 
   create_table "diets", :force => true do |t|
-    t.string   "name",        :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.boolean  "restrictive", :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.boolean  "exclusive",  :null => false
   end
 
   create_table "food_connections", :force => true do |t|
