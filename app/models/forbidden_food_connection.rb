@@ -1,5 +1,5 @@
 class ForbiddenFoodConnection < ActiveRecord::Base
-  attr_accessible :diet_id, :food_id
+  attr_accessible :diet, :food
 
   belongs_to :diet
   belongs_to :food
