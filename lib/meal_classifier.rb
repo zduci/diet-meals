@@ -6,16 +6,16 @@ class MealClassifier
   end
    
   def self.compatible?(diet, meal)
-    if diet.restrictive
-      compatible_for_restrictive(diet, meal)
+    if diet.exclusive
+      compatible_for_exclusive(diet, meal)
     else
-      compatible_for_unrestrictive(diet, meal)
+      compatible_for_inclusive(diet, meal)
     end
   end
 
   private
 
-  def self.compatible_for_restrictive(diet, meal)
+  def self.compatible_for_exclusive(diet, meal)
     if diet.allowed_foods.empty?
       false
     else
@@ -23,7 +23,7 @@ class MealClassifier
     end
   end
 
-  def self.compatible_for_unrestrictive(diet, meal)
+  def self.compatible_for_inclusive(diet, meal)
     forbidden_meal_foods(diet, meal).empty?
   end
 

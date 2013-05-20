@@ -10,15 +10,15 @@ describe MealClassifier do
   let(:rice_meal) { stub(:foods => [rice]) }
   let(:brown_rice_meal) { stub(:foods => [brown_rice]) }
 
-  let(:empty_unrestrictive_diet) { stub(:restrictive => false, :forbidden_foods => [], :allowed_foods => []) }
-  let(:no_carbs) { stub(:restrictive => false, :forbidden_foods => [carbs], :allowed_foods => []) }
+  let(:empty_inclusive_diet) { stub(:exclusive => false, :forbidden_foods => [], :allowed_foods => []) }
+  let(:no_carbs) { stub(:exclusive => false, :forbidden_foods => [carbs], :allowed_foods => []) }
 
   it 'accepts any meal for empty diets' do
-    MealClassifier.compatible?(empty_unrestrictive_diet, empty_meal).should be_true
+    MealClassifier.compatible?(empty_inclusive_diet, empty_meal).should be_true
   end
 
   it 'rejects meals containing forbidden ingredients' do
-    no_rice = stub(:restrictive => false, :forbidden_foods => [rice], :allowed_foods => [])
+    no_rice = stub(:exclusive => false, :forbidden_foods => [rice], :allowed_foods => [])
     MealClassifier.compatible?(no_rice, rice_meal).should be_false
   end
 
@@ -31,12 +31,12 @@ describe MealClassifier do
   end
 
   it 'accepts meals containing allowed ingredients with forbidden parent foods' do
-    no_carbs_except_rice = stub(:restrictive => false, :forbidden_foods => [carbs], :allowed_foods => [rice])
+    no_carbs_except_rice = stub(:exclusive => false, :forbidden_foods => [carbs], :allowed_foods => [rice])
     MealClassifier.compatible?(no_carbs_except_rice, rice_meal).should be_true
   end
 
   it 'accepts meals containing allowed ingredients with forbidden ancestor foods' do
-    no_carbs_except_brown_rice = stub(:restrictive => false, :forbidden_foods => [carbs], :allowed_foods => [brown_rice])
+    no_carbs_except_brown_rice = stub(:exclusive => false, :forbidden_foods => [carbs], :allowed_foods => [brown_rice])
     MealClassifier.compatible?(no_carbs_except_brown_rice, brown_rice_meal).should be_true
   end
 end
