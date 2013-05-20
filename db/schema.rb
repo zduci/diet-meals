@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520175125) do
+ActiveRecord::Schema.define(:version => 20130520182344) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(:version => 20130520175125) do
   add_index "allowed_food_connections", ["diet_id"], :name => "index_allowed_food_connections_on_diet_id"
   add_index "allowed_food_connections", ["food_id", "diet_id"], :name => "index_allowed_foods_on_food_id_and_diet_id", :unique => true
 
+  create_table "diet_food_connections", :force => true do |t|
+    t.integer  "diet_id",    :null => false
+    t.integer  "food_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "diet_food_connections", ["food_id", "diet_id"], :name => "index_forbidden_food_connections_on_food_id_and_diet_id", :unique => true
+
   create_table "diets", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
@@ -66,15 +75,6 @@ ActiveRecord::Schema.define(:version => 20130520175125) do
   end
 
   add_index "foods", ["name"], :name => "index_foods_on_name"
-
-  create_table "forbidden_food_connections", :force => true do |t|
-    t.integer  "diet_id",    :null => false
-    t.integer  "food_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "forbidden_food_connections", ["food_id", "diet_id"], :name => "index_forbidden_food_connections_on_food_id_and_diet_id", :unique => true
 
   create_table "ingredients", :force => true do |t|
     t.integer  "food_id",                :null => false
