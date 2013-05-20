@@ -6,4 +6,5 @@ class DietFoodConnection < ActiveRecord::Base
 
   validates :diet_id, :presence => true, :uniqueness => {:scope => :food_id }
   validates :food_id, :presence => true
+  validates :allowed, :presence => true
 end
