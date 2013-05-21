@@ -45,10 +45,26 @@ hot_sauce = Food.find_or_create_by_name(:hot_sauce)
 spices = Food.find_or_create_by_name(:spices)
 herbs = Food.find_or_create_by_name(:herbs)
 
+FoodConnection.connect(vegetables, starches)
+FoodConnection.connect(starches, potatoes)
+FoodConnection.connect(starches, sweet_potatoes)
+FoodConnection.connect(starches, yams)
+
 Diet.create(:name => 'Slow Carb Diet', :exclusive => true).tap do |diet|
-  diet.allowed_foods << [Food.find_or_create_by_name(:meat),
-                         Food.find_or_create_by_name(:eggs),
-                         Food.find_or_create_by_name(:vegetables),
-                         Food.find_or_create_by_name(:legumes)]
+  diet.allowed_foods << [eggs,
+                         meat,
+                         seafood,
+                         beans,
+                         vegetables,
+                         yams,
+                         oil,
+                         ghee,
+                         cottage_cheese,
+                         mustard,
+                         salsa,
+                         hot_sauce,
+                         spices,
+                         herbs]
+  diet.forbidden_foods << [starches]
 end
             
