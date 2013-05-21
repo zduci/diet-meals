@@ -27,6 +27,24 @@ FoodConnection.connect(sugar, orange)
 FoodConnection.connect(fruit, apple)
 FoodConnection.connect(sugar, apple)
 
+eggs = Food.find_or_create_by_name(:eggs)
+meat = Food.find_or_create_by_name(:meat)
+seafood = Food.find_or_create_by_name(:seafood)
+beans = Food.find_or_create_by_name(:beans)
+vegetables = Food.find_or_create_by_name(:vegetables)
+starches = Food.find_or_create_by_name(:starches)
+potatoes = Food.find_or_create_by_name(:potatoes)
+sweet_potatoes = Food.find_or_create_by_name(:sweet_potatoes)
+yams = Food.find_or_create_by_name(:yams)
+oil = Food.find_or_create_by_name(:oil)
+ghee = Food.find_or_create_by_name(:ghee)
+cottage_cheese = Food.find_or_create_by_name(:cottage_cheese)
+mustard = Food.find_or_create_by_name(:mustard)
+salsa = Food.find_or_create_by_name(:salsa)
+hot_sauce = Food.find_or_create_by_name(:hot_sauce)
+spices = Food.find_or_create_by_name(:spices)
+herbs = Food.find_or_create_by_name(:herbs)
+
 Diet.create(:name => 'Slow Carb Diet', :exclusive => true).tap do |diet|
   diet.allowed_foods << [Food.find_or_create_by_name(:meat),
                          Food.find_or_create_by_name(:eggs),
