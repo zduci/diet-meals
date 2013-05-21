@@ -29,10 +29,10 @@ FoodGraphConnection.create(fruit, apple)
 FoodGraphConnection.create(sugar, apple)
 
 
-Diet.create(:name => 'Slow Carb Diet').tap do |diet|
-  diet.allowed << [Food.find_or_create_by_name(:meat),
-                   Food.find_or_create_by_name(:eggs),
-                   Food.find_or_create_by_name(:vegetables),
-                   Food.find_or_create_by_name(:legumes)]
+Diet.create(:name => 'Slow Carb Diet', :exclusive => true).tap do |diet|
+  diet.allowed_foods << [Food.find_or_create_by_name(:meat),
+                         Food.find_or_create_by_name(:eggs),
+                         Food.find_or_create_by_name(:vegetables),
+                         Food.find_or_create_by_name(:legumes)]
 end
             
