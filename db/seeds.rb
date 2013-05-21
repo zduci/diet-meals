@@ -1,4 +1,5 @@
 require_relative '../lib/food_graph'
+require_relative '../lib/food_graph_connection'
 
 [["kilogram", "kg"],
  ["gram", "g"],
