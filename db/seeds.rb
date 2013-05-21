@@ -1,5 +1,4 @@
 require_relative '../lib/food_graph'
-require_relative '../lib/food_graph_connection'
 
 [["kilogram", "kg"],
  ["gram", "g"],
@@ -18,16 +17,15 @@ lemon = Food.find_or_create_by_name(:lemon)
 vitamins = Food.find_or_create_by_name(:vitamin)
 orange = Food.find_or_create_by_name(:orange)
 
-FoodGraphConnection.create(vitamins, fruit)
-FoodGraphConnection.create(fruit, tomato)
-FoodGraphConnection.create(fruit, apple)
-FoodGraphConnection.create(fruit, citrus)
-FoodGraphConnection.create(citrus, lemon)
-FoodGraphConnection.create(citrus, orange)
-FoodGraphConnection.create(sugar, orange)
-FoodGraphConnection.create(fruit, apple)
-FoodGraphConnection.create(sugar, apple)
-
+FoodConnection.connect(vitamins, fruit)
+FoodConnection.connect(fruit, tomato)
+FoodConnection.connect(fruit, apple)
+FoodConnection.connect(fruit, citrus)
+FoodConnection.connect(citrus, lemon)
+FoodConnection.connect(citrus, orange)
+FoodConnection.connect(sugar, orange)
+FoodConnection.connect(fruit, apple)
+FoodConnection.connect(sugar, apple)
 
 Diet.create(:name => 'Slow Carb Diet', :exclusive => true).tap do |diet|
   diet.allowed_foods << [Food.find_or_create_by_name(:meat),
