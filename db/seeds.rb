@@ -50,7 +50,7 @@ FoodConnection.connect(starches, potatoes)
 FoodConnection.connect(starches, sweet_potatoes)
 FoodConnection.connect(starches, yams)
 
-Diet.create(:name => 'Slow Carb Diet', :exclusive => true).tap do |diet|
+Diet.create!(:name => 'Slow Carb Diet', :exclusive => true).tap do |diet|
   diet.allowed_foods << [eggs,
                          meat,
                          seafood,
