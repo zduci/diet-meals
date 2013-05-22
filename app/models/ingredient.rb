@@ -7,5 +7,5 @@ class Ingredient < ActiveRecord::Base
   validates :recipe_id, :presence => true
   validates :unit_of_measurement_id, :presence => true
   validates :food_id, :presence => true
-  validates :quanity, :presence => true
+  validates :quantity, :presence => true
 end
