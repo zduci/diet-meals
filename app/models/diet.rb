@@ -1,16 +1,19 @@
 class Diet < ActiveRecord::Base
   attr_accessible :name, :exclusive
 
-  has_many :diet_food_connections
+  has_many :allowed_diet_food_connections, 
+           :conditions => { :allowed => true }, 
+           :class_name => DietFoodConnection
   has_many :allowed_foods, 
-           :conditions => 'allowed = true',
-           :through => :diet_food_connections,
+           :through => :allowed_diet_food_connections,
            :source => :food,
            :dependent => :destroy
-  has_many :diet_food_connections
+
+  has_many :forbidden_diet_food_connections, 
+           :conditions => { :allowed => false }, 
+           :class_name => DietFoodConnection
   has_many :forbidden_foods, 
-           :conditions => 'allowed = false',
-           :through => :diet_food_connections,
+           :through => :forbidden_diet_food_connections,
            :source => :food,
            :dependent => :destroy
 
