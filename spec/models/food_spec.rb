@@ -9,7 +9,7 @@ describe Food do
     FactoryGirl.build(:food).should be_invalid
   end
 
-  it 'is invalid if the name is not unique' do
+  it 'is invalid without a unique name' do
     FactoryGirl.create(:food, :name => 'avocado')
     FactoryGirl.build(:food, :name => 'avocado').should be_invalid
   end
