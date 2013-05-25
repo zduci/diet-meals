@@ -12,4 +12,9 @@ describe Diet do
   it 'is invalid without an exclusive attribute' do
     FactoryGirl.build(:diet, :name => 'Slow Carb Diet').should be_invalid
   end
+
+  it 'is invalid without a unique name' do
+    FactoryGirl.create(:diet, :name => 'Slow Carb Diet', :exclusive => true)
+    FactoryGirl.build(:diet, :name => 'Slow Carb Diet', :exclusive => true).should be_invalid
+  end
 end
