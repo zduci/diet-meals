@@ -18,4 +18,5 @@ class Diet < ActiveRecord::Base
            :dependent => :destroy
 
   validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
+  validates :exclusive, :presence => true
 end
