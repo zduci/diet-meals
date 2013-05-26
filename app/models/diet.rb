@@ -20,10 +20,6 @@ class Diet < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :exclusive, :inclusion => {:in => [true, false]}
 
-  def exclusive?
-    exclusive
-  end
-
   def inclusive?
     !exclusive
   end

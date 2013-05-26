@@ -24,11 +24,7 @@ describe Diet do
     end
   end
 
-  context 'types of diet' do
-    it 'checks if it is exclusive' do
-      FactoryGirl.build(:diet, :name => 'Exclusive diet', :exclusive => true).should be_exclusive
-    end
-
+  describe 'Diet#inclusive?' do
     it 'checks if it is inclusive' do
       FactoryGirl.build(:diet, :name => 'Inclusive diet', :exclusive => false).should be_inclusive
     end
