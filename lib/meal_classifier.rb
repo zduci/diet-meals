@@ -38,7 +38,7 @@ class MealClassifier
   end
 
   def self.foods_from_meal_forbidden_on_diet(diet, meal)
-    diet.forbidden_foods & including_ancestors(meal.foods) - FoodGraph.including_ancestors(diet.allowed_foods)
+    diet.forbidden_foods & including_ancestors(meal.foods) - including_ancestors(diet.allowed_foods)
   end
 
   def self.including_ancestors(foods)
