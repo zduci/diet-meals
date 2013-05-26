@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe Recipe do
-  it 'can create a valid instance' do
+  it 'can create a valid instance with no duration' do
     FactoryGirl.build(:recipe, :instructions => 'Boil the egg', :name => 'Boiled egg').should be_valid
+  end
+
+  it 'can create a valid instance with duration' do
+    FactoryGirl.build(:recipe, :instructions => 'Boil the egg', :name => 'Boiled egg', :duration => 30).should be_valid
   end
 
   it 'is invalid without instructions' do
