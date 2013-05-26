@@ -16,10 +16,10 @@ class MealClassifier
   private
 
   def self.compatible_for_exclusive(diet, meal)
-    if diet.allowed_foods.empty?
-      false
-    else
+    if diet.has_allowed_foods?
       allowed_meal_foods(diet, meal) == meal.foods
+    else
+      false
     end
   end
 

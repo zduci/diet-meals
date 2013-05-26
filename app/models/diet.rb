@@ -31,4 +31,8 @@ class Diet < ActiveRecord::Base
   def self.create_exclusive(name)
     create!(:name => name, :exclusive => true)
   end
+
+  def has_allowed_foods?
+    allowed_foods.present?
+  end
 end

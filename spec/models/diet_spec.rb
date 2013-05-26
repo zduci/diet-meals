@@ -34,6 +34,16 @@ describe Diet do
     end
   end
 
+  describe 'Diet#has_allowed_foods?' do
+    it 'returns true if it has allowed foods' do
+      FactoryGirl.build(:diet, :allowed_foods => [FactoryGirl.build(:food)]).should have_allowed_foods
+    end
+    
+    it 'returns false if it does not have allowed foods' do
+      FactoryGirl.build(:diet).should_not have_allowed_foods
+    end
+  end
+
   context 'constructors' do
     it 'creates inclusive diets' do
       Diet.create_inclusive('inclusive diet').should be_inclusive
