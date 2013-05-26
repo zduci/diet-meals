@@ -9,7 +9,7 @@ describe Recipe do
     FactoryGirl.build(:name => 'Boiled egg').should be_invalid
   end
 
-  it 'can create a valid instance' do
+  it 'is invalid without a name' do
     FactoryGirl.build(instructions => 'Boil the egg').should be_invalid
   end
 end
