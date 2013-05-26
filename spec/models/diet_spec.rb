@@ -28,6 +28,10 @@ describe Diet do
     it 'checks if it is inclusive' do
       FactoryGirl.build(:diet, :name => 'Inclusive diet', :exclusive => false).should be_inclusive
     end
+
+    it 'checks if it is inclusive' do
+      FactoryGirl.build(:diet, :name => 'Inclusive diet', :exclusive => true).should_not be_inclusive
+    end
   end
 
   context 'constructors' do
