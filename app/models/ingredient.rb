@@ -8,4 +8,8 @@ class Ingredient < ActiveRecord::Base
   validates :unit_of_measurement_id, :presence => true
   validates :food_id, :presence => true
   validates :quantity, :presence => true, :numericality => {:greater_than_or_equal_to => 1}
+
+  def self.create_ingredient(recipe, food, unit_of_measurement, quantity)
+    create!(:recipe => recipe, :food => food, :unit_of_measurement => unit_of_measurement, :quantity => quantity)
+  end
 end

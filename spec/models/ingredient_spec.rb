@@ -28,4 +28,9 @@ describe Ingredient do
   it 'is invalid without a positive value greater than 0' do
     FactoryGirl.build(:ingredient, :food => food, :unit_of_measurement => unit_of_measurement, :recipe => recipe, :quantity => 0).should be_invalid
   end
+
+  it 'creates ingredients by recipe, food, unit_of_measurement and quantity' do
+    Ingredient.should_receive(:create!).with(:recipe => recipe, :food => food, :unit_of_measurement => unit_of_measurement, :quantity  => 1)
+    Ingredient.create_ingredient(recipe, food, unit_of_measurement, 1)
+  end
 end
