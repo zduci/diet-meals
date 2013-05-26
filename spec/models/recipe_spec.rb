@@ -21,4 +21,9 @@ describe Recipe do
     Recipe.should_receive(:create!).with(:name => 'Boiled egg', :instructions => 'boil the egg')
     Recipe.create_recipe('Boiled egg', 'boil the egg')
   end
+
+  it 'creates a new recipe by name, instructions and duration' do
+    Recipe.should_receive(:create!).with(:name => 'Boiled egg', :instructions => 'boil the egg', :duration => 30)
+    Recipe.create_recipe('Boiled egg', 'boil the egg', 30)
+  end
 end

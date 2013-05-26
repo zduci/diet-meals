@@ -7,9 +7,9 @@ class Recipe < ActiveRecord::Base
   validates :name, :presence => true
   validates :duration, :allow_blank => true, :numericality => {:greater_than_or_equal_to => 1}
 
-
-  def self.create_recipe(name, instructions)
-    create!(:name => name, :instructions => instructions)
+  def self.create_recipe(name, instructions, duration=nil)
+    duration.present? ?
+      create!(:name => name, :instructions => instructions, :duration => duration)
+      : create!(:name => name, :instructions => instructions)
   end
-
 end
