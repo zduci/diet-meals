@@ -5,10 +5,12 @@ describe MealClassifier do
 
   let(:meat) { stub(:meat, :child_foods => [chicken]) }
   let(:chicken) { stub(:chicken, :child_foods => [chicken_breast]) }
-  let(:chicken_breast) { stub(:chicken_breast, :child_foods => []) }
+  let(:chicken_breast) { stub(:chicken_breast, :child_foods => [fat_free_chicken_breast]) }
+  let(:fat_free_chicken_breast) { stub(:fat_free_chicken_breast, :child_foods => []) }
 
   let(:chicken_meal) { stub(:foods => [chicken]) }
   let(:chicken_breast_meal) { stub(:foods => [chicken_breast]) }
+  let(:fat_free_chicken_breast_meal) { stub(:foods => [fat_free_chicken_breast]) }
 
   let(:allows_meat) { stub(:exclusive? => true, :allowed_foods => [meat], :forbidden_foods => [], :has_allowed_foods? => true) }
   let(:empty_exclusive_diet) { stub(:exclusive? => true, :allowed_foods => [], :forbidden_foods => [], :has_allowed_foods? => false) }
@@ -43,5 +45,10 @@ describe MealClassifier do
   it 'rejects meals containing foods with rejected parent foods' do
     allows_meat_except_chicken = stub(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_meat_except_chicken, chicken_breast_meal).should be_false
+  end
+
+  it 'rejects meals containing foods with rejected ancestor foods' do
+    allows_meat_except_chicken = stub(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true)
+    MealClassifier.compatible?(allows_meat_except_chicken, fat_free_chicken_breast_meal).should be_false
   end
 end
