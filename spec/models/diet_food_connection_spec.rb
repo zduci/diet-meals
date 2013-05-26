@@ -20,4 +20,13 @@ describe DietFoodConnection do
   it 'is invalid without an allowed attribute' do
     FactoryGirl.build(:diet_food_connection, :diet => diet, :food => food).should be_invalid
   end
+
+  it 'is invalid without an unique food' do
+    FactoryGirl.create(:diet_food_connection, :diet => diet, :food => food, :allowed => true)
+    FactoryGirl.build(:diet_food_connection, :diet => diet, :food => food, :allowed => true).should be_invalid
+  end
+
+  it 'is invalid without a boolean allowed attribute' do
+    FactoryGirl.build(:diet_food_connection, :diet => diet, :food => food, :allowed => nil).should be_invalid
+  end
 end
