@@ -39,11 +39,13 @@ describe DietFoodConnection do
 
   describe 'alternative constructors' do
     it 'can create allowed connections' do
-      DietFoodConnection.create_allowed(diet, food).should be_allowed
+      DietFoodConnection.should_receive(:create!).with(:diet => diet, :food => food, :allowed => true)
+      DietFoodConnection.create_allowed(diet, food)
     end
 
     it 'can create forbidden connections' do
-      DietFoodConnection.create_forbidden(diet, food).should be_forbidden
+      DietFoodConnection.should_receive(:create!).with(:diet => diet, :food => food, :allowed => false)
+      DietFoodConnection.create_forbidden(diet, food)
     end
   end
 end
