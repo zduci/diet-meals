@@ -22,11 +22,11 @@ describe MealClassifier do
     MealClassifier.compatible?(allows_chicken, chicken_meal).should be_true
   end
 
-  it 'accepts meals containing child foods of alowed ingredients' do
+  it 'accepts meals containing child foods of allowed ingredients' do
     MealClassifier.compatible?(allows_meat, chicken_meal).should be_true
   end
 
-  it 'accepts meals containing descendant foods of alowed ingredients' do
+  it 'accepts meals containing descendant foods of allowed ingredients' do
     MealClassifier.compatible?(allows_meat, chicken_breast_meal).should be_true
   end
 
