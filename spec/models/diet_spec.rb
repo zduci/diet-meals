@@ -17,4 +17,8 @@ describe Diet do
     FactoryGirl.create(:diet, :name => 'Slow Carb Diet', :exclusive => true)
     FactoryGirl.build(:diet, :name => 'Slow Carb Diet', :exclusive => true).should be_invalid
   end
+
+  it 'is valid for inclusive diets' do
+    FactoryGirl.build(:diet, :name => 'Inclusive diet', :exclusive => true).should be_valid
+  end
 end
