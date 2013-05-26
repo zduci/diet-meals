@@ -30,7 +30,7 @@ class MealClassifier
   private
 
   def self.foods_from_meal_allowed_on_diet(diet, meal)
-    allowed_foods_with_descendendants(diet) & meal.foods - diet.forbidden_foods
+    allowed_foods_with_descendendants(diet) & meal.foods - FoodGraph.including_descendants(diet.forbidden_foods)
   end
 
   def self.allowed_foods_with_descendendants(diet)
