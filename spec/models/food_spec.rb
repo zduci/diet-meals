@@ -13,4 +13,9 @@ describe Food do
     FactoryGirl.create(:food, :name => 'avocado')
     FactoryGirl.build(:food, :name => 'avocado').should be_invalid
   end
+
+  it 'creates an instance by name' do
+    Food.should_receive(:create!).with(:name => 'avocado')
+    Food.create_food('avocado')
+  end
 end
