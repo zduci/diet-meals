@@ -35,7 +35,6 @@ describe FoodConnection do
     it 'is invalid without a unique parent child food pair' do
       FactoryGirl.create(:food_connection, :parent_food => fruit, :child_food => orange)
       FactoryGirl.build(:food_connection, :parent_food => fruit, :child_food => orange).should be_invalid
-
     end
   end
 
