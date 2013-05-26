@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Ingredient do
-  let(:food) { FactoryGirl.create(:food) }
-  let(:unit_of_measurement) { FactoryGirl.create(:unit_of_measurement) }
-  let(:recipe) { FactoryGirl.create(:recipe) }
+  let(:food) { FactoryGirl.create(:egg) }
+  let(:unit_of_measurement) { FactoryGirl.create(:gram) }
+  let(:recipe) { FactoryGirl.create(:boiled_egg) }
 
   it 'can create a valid object' do
     FactoryGirl.build(:ingredient, :food => food, :unit_of_measurement => unit_of_measurement, :recipe => recipe, :quantity => 1).should be_valid

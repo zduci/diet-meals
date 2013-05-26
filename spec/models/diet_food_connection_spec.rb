@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe DietFoodConnection do
-  let(:diet) { FactoryGirl.create(:diet) }
-  let(:food) { FactoryGirl.create(:food) }
-  let(:allowed) { FactoryGirl.create(:diet) }
+  let(:diet) { FactoryGirl.create(:eggs_only) }
+  let(:food) { FactoryGirl.create(:egg) }
 
   it 'can create a valid instance' do
     FactoryGirl.build(:diet_food_connection, :diet => diet, :food => food, :allowed => true).should be_valid
