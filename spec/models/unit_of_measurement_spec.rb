@@ -22,4 +22,9 @@ describe UnitOfMeasurement do
     FactoryGirl.create(:unit_of_measurement, :name => 'meter', :short_name => 'm')
     FactoryGirl.build(:unit_of_measurement, :name => 'unique', :short_name => 'm').should be_invalid
   end
+
+  it 'creates a new instance by name and short name' do
+    UnitOfMeasurement.should_receive(:create!).with(:name => 'meter', :short_name => 'm')
+    UnitOfMeasurement.create_unit_of_measurement('meter', 'm')
+  end
 end
