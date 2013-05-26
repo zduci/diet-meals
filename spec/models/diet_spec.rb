@@ -33,4 +33,8 @@ describe Diet do
   it 'creates inclusive diets' do
     Diet.create_inclusive('inclusive diet').should be_inclusive
   end
+
+  it 'creates exclusive diets' do
+    Diet.create_exclusive('exclusive diet').should be_exclusive
+  end
 end

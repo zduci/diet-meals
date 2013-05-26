@@ -31,4 +31,8 @@ class Diet < ActiveRecord::Base
   def self.create_inclusive(name)
     create!(:name => name, :exclusive => false)
   end
+
+  def self.create_exclusive(name)
+    create!(:name => name, :exclusive => true)
+  end
 end
