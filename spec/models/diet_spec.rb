@@ -21,4 +21,12 @@ describe Diet do
   it 'is valid for inclusive diets' do
     FactoryGirl.build(:diet, :name => 'Inclusive diet', :exclusive => true).should be_valid
   end
+
+  it 'checks if it is exclusive' do
+    FactoryGirl.build(:diet, :name => 'Exclusive diet', :exclusive => true).should be_exclusive
+  end
+
+  it 'checks if it is inclusive' do
+    FactoryGirl.build(:diet, :name => 'Inclusive diet', :exclusive => false).should be_inclusive
+  end
 end
