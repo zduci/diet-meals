@@ -16,4 +16,9 @@ describe Recipe do
   it 'is invalid if the duration is less than 1' do
     FactoryGirl.build(:recipe, :instructions => 'Boil the egg', :name => 'Boiled egg', :duration => 0).should be_invalid
   end
+
+  it 'creates a new recipe by name and instructions' do
+    Recipe.should_receive(:create!).with(:name => 'Boiled egg', :instructions => 'boil the egg')
+    Recipe.create_recipe('Boiled egg', 'boil the egg')
+  end
 end
