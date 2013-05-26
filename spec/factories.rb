@@ -12,6 +12,8 @@ FactoryGirl.define do
   end
 
   factory :diet do
+    name 'Only eggs'
+    exclusive true
   end
 
   factory :ingredient do
@@ -20,5 +22,8 @@ FactoryGirl.define do
   factory :recipe do
     name 'Boiled egg'
     instructions 'Boil the egg.'
+  end
+
+  factory :diet_food_connection do
   end
 end
