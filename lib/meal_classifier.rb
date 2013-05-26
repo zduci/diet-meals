@@ -6,7 +6,7 @@ class MealClassifier
   end
    
   def self.compatible?(diet, meal)
-    if diet.exclusive
+    if diet.exclusive?
       compatible_for_exclusive(diet, meal)
     else
       compatible_for_inclusive(diet, meal)

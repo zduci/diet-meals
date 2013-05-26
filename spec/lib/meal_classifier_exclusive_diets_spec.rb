@@ -10,15 +10,15 @@ describe MealClassifier do
   let(:chicken_meal) { stub(:foods => [chicken]) }
   let(:chicken_breast_meal) { stub(:foods => [chicken_breast]) }
 
-  let(:allows_meat) { stub(:exclusive => true, :allowed_foods => [meat], :forbidden_foods => [], :has_allowed_foods? => true) }
-  let(:empty_exclusive_diet) { stub(:exclusive => true, :allowed_foods => [], :forbidden_foods => [], :has_allowed_foods? => false) }
+  let(:allows_meat) { stub(:exclusive? => true, :allowed_foods => [meat], :forbidden_foods => [], :has_allowed_foods? => true) }
+  let(:empty_exclusive_diet) { stub(:exclusive? => true, :allowed_foods => [], :forbidden_foods => [], :has_allowed_foods? => false) }
 
   it 'rejects any meal for empty diets' do
     MealClassifier.compatible?(empty_exclusive_diet, empty_meal).should be_false
   end
 
   it 'accepts meals containing allowed ingredients' do
-    allows_chicken = stub(:exclusive => true, :allowed_foods => [chicken], :forbidden_foods => [], :has_allowed_foods? => true)
+    allows_chicken = stub(:exclusive? => true, :allowed_foods => [chicken], :forbidden_foods => [], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_chicken, chicken_meal).should be_true
   end
 
@@ -31,12 +31,12 @@ describe MealClassifier do
   end
 
   it 'rejects meals containing forbidden ingredients with accepted child foods' do
-    allows_meat_except_chicken = stub(:exclusive => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true)
+    allows_meat_except_chicken = stub(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_meat_except_chicken, chicken_meal).should be_false
   end
 
   it 'rejects meals containing forbidden ingredients with accepted descendant foods' do
-    allows_meat_except_chicken_breast = stub(:exclusive => true, :forbidden_foods => [chicken_breast], :allowed_foods => [meat], :has_allowed_foods? => true)
+    allows_meat_except_chicken_breast = stub(:exclusive? => true, :forbidden_foods => [chicken_breast], :allowed_foods => [meat], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_meat_except_chicken_breast, chicken_breast_meal).should be_false
   end
 end
