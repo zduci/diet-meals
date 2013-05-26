@@ -17,24 +17,31 @@ class MealClassifier
 
   def self.compatible_for_exclusive(diet, meal)
     if diet.has_allowed_foods?
-      allowed_meal_foods(diet, meal) == meal.foods
+      foods_from_meal_allowed_on_diet(diet, meal) == meal.foods
     else
       false
     end
   end
 
   def self.compatible_for_inclusive(diet, meal)
-    forbidden_meal_foods(diet, meal).empty?
+    foods_from_meal_forbidden_on_diet(diet, meal).empty?
   end
 
   private
 
-  def self.allowed_meal_foods(diet, meal)
-    ((FoodGraph.including_descendants(diet.allowed_foods) & meal.foods) - diet.forbidden_foods).sort
+  def self.foods_from_meal_allowed_on_diet(diet, meal)
+    allowed_foods_with_descendendants(diet) & meal.foods - diet.forbidden_foods
   end
 
-  def self.forbidden_meal_foods(diet, meal)
-    (diet.forbidden_foods & FoodGraph.including_ancestors(meal.foods)) - FoodGraph.including_ancestors(diet.allowed_foods)
+  def self.allowed_foods_with_descendendants(diet)
+    FoodGraph.including_descendants(diet.allowed_foods)
   end
 
+  def self.foods_from_meal_forbidden_on_diet(diet, meal)
+    diet.forbidden_foods & foods_with_ancestors(meal) - FoodGraph.including_ancestors(diet.allowed_foods)
+  end
+
+  def self.foods_with_ancestors(meal)
+    FoodGraph.including_ancestors(meal.foods)
+  end
 end
