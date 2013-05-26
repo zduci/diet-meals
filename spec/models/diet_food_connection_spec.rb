@@ -28,4 +28,8 @@ describe DietFoodConnection do
   it 'is invalid without a boolean allowed attribute' do
     FactoryGirl.build(:diet_food_connection, :diet => diet, :food => food, :allowed => nil).should be_invalid
   end
+
+  it 'checks if it is allowed' do
+    FactoryGirl.build(:diet_food_connection, :diet => diet, :food => food, :allowed => false).should be_forbidden
+  end
 end
