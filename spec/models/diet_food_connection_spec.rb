@@ -36,4 +36,8 @@ describe DietFoodConnection do
   it 'can create allowed connections' do
     DietFoodConnection.create_allowed(diet, food).should be_allowed
   end
+
+  it 'can create forbidden connections' do
+    DietFoodConnection.create_forbidden(diet, food).should be_forbidden
+  end
 end
