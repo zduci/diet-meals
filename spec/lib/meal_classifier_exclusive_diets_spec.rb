@@ -15,6 +15,8 @@ describe MealClassifier do
   let(:allows_meat) { stub(:exclusive? => true, :allowed_foods => [meat], :forbidden_foods => [], :has_allowed_foods? => true) }
   let(:empty_exclusive_diet) { stub(:exclusive? => true, :allowed_foods => [], :forbidden_foods => [], :has_allowed_foods? => false) }
 
+  let(:allows_meat_except_chicken) { stub(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true) }
+
   it 'rejects any meal for empty diets' do
     MealClassifier.compatible?(empty_exclusive_diet, empty_meal).should be_false
   end
@@ -33,7 +35,6 @@ describe MealClassifier do
   end
 
   it 'rejects meals containing forbidden foods with accepted parent foods' do
-    allows_meat_except_chicken = stub(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_meat_except_chicken, chicken_meal).should be_false
   end
 
@@ -43,12 +44,10 @@ describe MealClassifier do
   end
 
   it 'rejects meals containing foods with rejected parent foods' do
-    allows_meat_except_chicken = stub(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_meat_except_chicken, chicken_breast_meal).should be_false
   end
 
   it 'rejects meals containing foods with rejected ancestor foods' do
-    allows_meat_except_chicken = stub(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_meat_except_chicken, fat_free_chicken_breast_meal).should be_false
   end
 end
