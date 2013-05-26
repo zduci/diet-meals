@@ -4,7 +4,7 @@ require_relative '../../lib/meal_classifier'
 describe MealClassifier do
 
   context 'MealClassifier#classify' do
-    before(:all) do
+    before(:each) do
       @egg = FactoryGirl.create(:egg)
       @boiled_egg = FactoryGirl.build(:boiled_egg, :foods => [@egg])
       @eggs_only = FactoryGirl.create(:eggs_only, :allowed_foods => [@egg])
