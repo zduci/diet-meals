@@ -11,4 +11,8 @@ class DietFoodConnection < ActiveRecord::Base
   def forbidden?
     !allowed
   end
+
+  def self.create_allowed(diet, food)
+    create!(:diet => diet, :food => food, :allowed => true)
+  end
 end

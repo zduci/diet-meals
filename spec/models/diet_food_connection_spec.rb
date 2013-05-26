@@ -32,4 +32,8 @@ describe DietFoodConnection do
   it 'checks if it is allowed' do
     FactoryGirl.build(:diet_food_connection, :diet => diet, :food => food, :allowed => false).should be_forbidden
   end
+
+  it 'can create allowed connections' do
+    DietFoodConnection.create_allowed(diet, food).should be_allowed
+  end
 end
