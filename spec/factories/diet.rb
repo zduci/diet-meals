@@ -1,8 +1,5 @@
 FactoryGirl.define do
-  factory :diet do
-  end
-
-  factory :eggs_only, :class => :diet do
+  factory :diet, :aliases => [:eggs_only] do
     name 'Eggs only'
     exclusive true
   end
