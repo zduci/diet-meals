@@ -3,23 +3,23 @@ require 'spec_helper'
 describe Recipe do
   context 'validations' do
     it 'can create a valid instance with no duration' do
-      FactoryGirl.build(:recipe, :instructions => 'Boil the egg', :name => 'Boiled egg').should be_valid
+      FactoryGirl.build(:recipe, :duration => nil).should be_valid
     end
 
     it 'can create a valid instance with duration' do
-      FactoryGirl.build(:recipe, :instructions => 'Boil the egg', :name => 'Boiled egg', :duration => 30).should be_valid
+      FactoryGirl.build(:recipe, :duration => 30).should be_valid
     end
 
     it 'is invalid without instructions' do
-      FactoryGirl.build(:recipe, :name => 'Boiled egg').should be_invalid
+      FactoryGirl.build(:recipe, :instructions => nil).should be_invalid
     end
 
     it 'is invalid without a name' do
-      FactoryGirl.build(:recipe, :instructions => 'Boil the egg').should be_invalid
+      FactoryGirl.build(:recipe, :name => nil).should be_invalid
     end
 
     it 'is invalid if the duration is less than 1' do
-      FactoryGirl.build(:recipe, :instructions => 'Boil the egg', :name => 'Boiled egg', :duration => 0).should be_invalid
+      FactoryGirl.build(:recipe, :duration => 0).should be_invalid
     end
   end
 

@@ -1,8 +1,5 @@
 FactoryGirl.define do
-  factory :recipe do
-  end
-
-  factory :boiled_egg, :class => :recipe do
+  factory :recipe, :aliases => [:boiled_egg] do
     name 'Boiled egg'
     instructions 'Boil the egg.'
   end
