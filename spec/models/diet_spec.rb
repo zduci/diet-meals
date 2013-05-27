@@ -20,7 +20,7 @@ describe Diet do
     end
 
     it 'is valid for inclusive diets' do
-      FactoryGirl.build(:diet, :exclusive => true).should be_valid
+      FactoryGirl.build(:diet, :exclusive => false).should be_valid
     end
   end
 
