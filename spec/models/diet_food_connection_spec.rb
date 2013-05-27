@@ -33,7 +33,7 @@ describe DietFoodConnection do
   end
 
   describe 'DietFoodConnection#forbidden?' do
-    it 'checks if it is allowed' do
+    it 'checks if it is forbidden' do
       FactoryGirl.build(:diet_food_connection, :allowed => false).should be_forbidden
     end
   end
