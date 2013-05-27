@@ -1,8 +1,5 @@
 FactoryGirl.define do
-  factory :food do
-  end
-
-  factory :egg, :class => :food do
+  factory :food, :aliases => [:egg] do
     name 'egg'
   end
 

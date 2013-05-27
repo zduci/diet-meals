@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Food do
   it 'can create a valid object' do
-    FactoryGirl.build(:food, :name => 'avocado').should be_valid
+    FactoryGirl.build(:food).should be_valid
   end
 
   it 'is invalid without a name' do
-    FactoryGirl.build(:food).should be_invalid
+    FactoryGirl.build(:food, :name => nil).should be_invalid
   end
 
   it 'is invalid without a unique name' do
