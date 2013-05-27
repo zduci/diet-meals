@@ -21,15 +21,15 @@ describe FoodConnection do
 
   context 'validations' do
     it 'can create a valid object' do
-      FactoryGirl.build(:food_connection, :parent_food => fruit, :child_food => orange).should be_valid
+      FactoryGirl.build(:food_connection).should be_valid
     end
 
     it 'is invalid without a parent food' do
-      FactoryGirl.build(:food_connection, :child_food => orange).should be_invalid
+      FactoryGirl.build(:food_connection, :parent_food => nil).should be_invalid
     end
 
     it 'is invalid without a child food' do
-      FactoryGirl.build(:food_connection, :parent_food => fruit,).should be_invalid
+      FactoryGirl.build(:food_connection, :child_food => nil).should be_invalid
     end
 
     it 'is invalid without a unique parent child food pair' do
