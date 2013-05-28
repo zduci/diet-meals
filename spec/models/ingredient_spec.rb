@@ -10,8 +10,8 @@ describe Ingredient do
       FactoryGirl.build(:ingredient, :food => nil).should be_invalid
     end
 
-    it 'is invalid without a recipe' do
-      FactoryGirl.build(:ingredient, :recipe => nil).should be_invalid
+    it 'is invalid without a meal' do
+      FactoryGirl.build(:ingredient, :meal => nil).should be_invalid
     end
 
     it 'is invalid without a unit of measurement' do
@@ -28,12 +28,12 @@ describe Ingredient do
   end
 
   context 'alternative constructors' do
-    it 'creates ingredients by recipe, food, unit_of_measurement and quantity' do
-      recipe = stub(:recipe)
+    it 'creates ingredients by meal, food, unit_of_measurement and quantity' do
+      meal = stub(:meal)
       food = stub(:food)
       unit_of_measurement = stub(:unit_of_measurement)
-      Ingredient.should_receive(:create!).with(:recipe => recipe, :food => food, :unit_of_measurement => unit_of_measurement, :quantity  => 1)
-      Ingredient.create_ingredient(recipe, food, unit_of_measurement, 1)
+      Ingredient.should_receive(:create!).with(:meal => meal, :food => food, :unit_of_measurement => unit_of_measurement, :quantity  => 1)
+      Ingredient.create_ingredient(meal, food, unit_of_measurement, 1)
     end
   end
 end
