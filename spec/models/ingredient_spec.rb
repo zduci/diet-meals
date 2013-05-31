@@ -14,10 +14,6 @@ describe Ingredient do
       FactoryGirl.build(:ingredient, :meal => nil).should be_invalid
     end
 
-    it 'is invalid without a unit of measurement' do
-      FactoryGirl.build(:ingredient, :unit_of_measurement => nil).should be_invalid
-    end
-
     it 'is invalid without a quantity' do
       FactoryGirl.build(:ingredient, :quantity => nil).should be_invalid
     end
