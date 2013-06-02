@@ -3,4 +3,8 @@ class DietClassification < ActiveRecord::Base
 
   validates :meal_id, :presence => true
   validates :diet_id, :presence => true
+
+  def self.create_classification(meal, diet)
+    create!(:meal => meal, :diet => diet)
+  end
 end

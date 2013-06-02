@@ -12,4 +12,11 @@ describe DietClassification do
   it 'is not valid without a diet' do
     FactoryGirl.build(:diet_classification, :diet_id => nil).should be_invalid
   end
+
+  it 'creates instances with meal and diet' do
+    meal = stub(:meal)
+    diet = stub(:diet)
+    DietClassification.should_receive(:create!).with(:meal => meal, :diet => diet)
+    DietClassification.create_classification(meal, diet)
+  end
 end
