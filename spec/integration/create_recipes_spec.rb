@@ -10,7 +10,7 @@ describe AddMeal do
   end
 
   it 'can create meals' do
-    boiled_egg = AddMeal.add('boiled eggs', 'boil the eggs, add salt', [{:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'}], 5)
+    boiled_egg = AddMeal.add('boiled eggs', 'boil the eggs, add salt', [{:name => 'egg', :quantity => 2}, 5, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'}])
 
     boiled_egg.name.should == 'boiled egg'
     boiled_egg.instructions.should == 'boil the egg, add salt'
