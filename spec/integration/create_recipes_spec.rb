@@ -1,7 +1,7 @@
 require 'spec_helper'
-require_relative '../../lib/add_meals.rb'
+require_relative '../../lib/add_meal.rb'
 
-describe AddMeals do
+describe AddMeal do
   before(:each) do
     egg = FactoryGirl.create(:food, :name => :egg)
     salt = FactoryGirl.create(:food, :name => :salt)
@@ -10,7 +10,7 @@ describe AddMeals do
   end
 
   it 'can create meals' do
-    boiled_egg = AddMeals.add('boiled eggs', 'boil the eggs, add salt', [{:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'}], 5)
+    boiled_egg = AddMeal.add('boiled eggs', 'boil the eggs, add salt', [{:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'}], 5)
 
     boiled_egg.name.should == 'boiled egg'
     boiled_egg.instructions.should == 'boil the egg, add salt'
