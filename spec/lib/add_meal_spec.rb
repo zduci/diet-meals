@@ -8,7 +8,21 @@ describe AddMeal do
       AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5)
     end
 
-    it 'creates the ingredients for the new meal'
+    it 'creates the ingredients for the new meal' do
+      meal = stub(:meal) 
+      egg = stub(:egg) 
+      salt = stub(:salt) 
+      gram = stub(:gram)
+      Meal.stub(:create_meal).with('boiled eggs', 'boil the eggs, add salt', 5) { meal }
+      Food.stub(:find_by_name).with('egg') { egg }
+      Food.stub(:find_by_name).with('salt') { salt }
+      UnitOfMeasurement.stub(:find_by_short_name).with('g') { gram }
+      Ingredient.should_receive(:create_ingredient).with(meal, egg, 2)
+      Ingredient.should_receive(:create_ingredient).with(meal, salt, 1, gram)
+
+      boiled_egg = AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
+    end
+
     it 'classifies the meal into diets'
   end
 end
