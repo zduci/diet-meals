@@ -27,6 +27,11 @@ describe AddMeal do
       expect{ AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}) }.to raise_error ActiveRecord::RecordNotFound
     end
 
+    it 'fails for inexistent unit of measurement short name' do
+      FactoryGirl.create(:food, :name => 'salt')
+      expect{ AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'}) }.to raise_error ActiveRecord::RecordNotFound
+    end
+
     it 'classifies the meal into diets'
   end
 end
