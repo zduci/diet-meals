@@ -1,4 +1,5 @@
 class UnitOfMeasurement < ActiveRecord::Base
+  PIECE = Class.new
   attr_accessible :name, :short_name
 
   has_many :ingredients, :dependent => :destroy

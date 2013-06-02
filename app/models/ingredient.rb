@@ -1,5 +1,4 @@
 class Ingredient < ActiveRecord::Base
-  PIECE = Class.new
   attr_accessible :quantity, :food, :unit_of_measurement, :meal
   belongs_to :food
   belongs_to :unit_of_measurement
