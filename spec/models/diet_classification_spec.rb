@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe DietClassification do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'can create a valid instance' do
+    FactoryGirl.build(:diet_classification).should be_valid
+  end
 end
