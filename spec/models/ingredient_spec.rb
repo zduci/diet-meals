@@ -24,12 +24,12 @@ describe Ingredient do
   end
 
   context 'alternative constructors' do
-    it 'creates ingredients by meal, food, unit_of_measurement and quantity' do
+    it 'creates ingredients by meal, food, quantity and unit_of_measurement' do
       meal = stub(:meal)
       food = stub(:food)
       unit_of_measurement = stub(:unit_of_measurement)
       Ingredient.should_receive(:create!).with(:meal => meal, :food => food, :unit_of_measurement => unit_of_measurement, :quantity  => 1)
-      Ingredient.create_ingredient(meal, food, unit_of_measurement, 1)
+      Ingredient.create_ingredient(meal, food, 1, unit_of_measurement)
     end
   end
 end
