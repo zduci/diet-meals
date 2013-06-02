@@ -24,9 +24,10 @@ describe Meal do
   end
 
   context '#create_meal' do
-    it 'creates a new meal by name, instructions and duration' do
-      Meal.should_receive(:create!).with(:name => 'Boiled egg', :instructions => 'boil the egg', :duration => 30)
-      Meal.create_meal('Boiled egg', 'boil the egg', 30)
+    it 'creates a new meal by name, instructions, duration and ingredients' do
+      ingredient = stub(:ingredient)
+      Meal.should_receive(:create!).with(:name => 'Boiled egg', :instructions => 'boil the egg', :duration => 30, :ingredients => [ingredient])
+      Meal.create_meal('Boiled egg', 'boil the egg', 30, ingredient)
     end
   end
 end

@@ -7,7 +7,10 @@ class Meal < ActiveRecord::Base
   validates :name, :presence => true
   validates :duration, :numericality => {:greater_than_or_equal_to => 1}
 
-  def self.create_meal(name, instructions, duration)
-    create!(:name => name, :instructions => instructions, :duration => duration)
+  def self.create_meal(name, instructions, duration, *ingredients)
+    create!(:name => name, 
+            :instructions => instructions, 
+            :duration => duration,
+            :ingredients => ingredients)
   end
 end
