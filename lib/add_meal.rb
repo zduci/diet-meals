@@ -2,6 +2,7 @@ class AddMeal
   def self.add(name, instructions, duration, *ingredients)
     meal = Meal.create_meal(name, instructions, duration)
     create_ingredients_for(meal, ingredients)
+    create_classifications(meal)
     meal
   end
 
@@ -22,6 +23,13 @@ class AddMeal
       Ingredient.create_ingredient(meal, 
                                    food,
                                    quantity)
+    end
+  end
+
+  def self.create_classifications(meal)
+    diets = MealClassifier.classify(meal)
+    diets.each do |diet|
+      DietClassification.create_classification(meal, diet)
     end
   end
 end
