@@ -14,13 +14,17 @@ describe AddMeal do
       salt = stub(:salt) 
       gram = stub(:gram)
       Meal.stub(:create_meal).with('boiled eggs', 'boil the eggs, add salt', 5) { meal }
-      Food.stub(:find_by_name).with('egg') { egg }
-      Food.stub(:find_by_name).with('salt') { salt }
-      UnitOfMeasurement.stub(:find_by_short_name).with('g') { gram }
+      Food.stub(:find_by_name!).with('egg') { egg }
+      Food.stub(:find_by_name!).with('salt') { salt }
+      UnitOfMeasurement.stub(:find_by_short_name!).with('g') { gram }
       Ingredient.should_receive(:create_ingredient).with(meal, egg, 2)
       Ingredient.should_receive(:create_ingredient).with(meal, salt, 1, gram)
 
       boiled_egg = AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
+    end
+
+    it 'fails for inexistent food name' do
+      expect{ AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}) }.to raise_error ActiveRecord::RecordNotFound
     end
 
     it 'classifies the meal into diets'
