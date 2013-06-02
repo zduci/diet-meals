@@ -23,6 +23,17 @@ describe Ingredient do
     end
   end
 
+  context '#unit_of_measurement' do
+    it 'returns unit of measurement if different to nil' do
+      unit_of_measurement = FactoryGirl.build(:unit_of_measurement)
+      FactoryGirl.build(:ingredient, :unit_of_measurement => unit_of_measurement).unit_of_measurement.should == unit_of_measurement
+    end
+
+    it 'returns unit of measurement if different to nil' do
+      FactoryGirl.build(:ingredient, :unit_of_measurement => nil).unit_of_measurement.should == UnitOfMeasurement::PIECE
+    end
+  end
+
   context 'alternative constructors' do
     it 'creates ingredients by meal, food, quantity and unit_of_measurement' do
       meal = stub(:meal)

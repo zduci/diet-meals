@@ -11,4 +11,8 @@ class Ingredient < ActiveRecord::Base
   def self.create_ingredient(meal, food, quantity, unit_of_measurement)
     create!(:meal => meal, :food => food, :unit_of_measurement => unit_of_measurement, :quantity => quantity)
   end
+
+  def unit_of_measurement
+    super || UnitOfMeasurement::PIECE
+  end
 end
