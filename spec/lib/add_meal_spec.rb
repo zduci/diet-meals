@@ -4,7 +4,7 @@ require_relative '../../lib/add_meal'
 describe AddMeal do
   describe '#add' do
     context 'adding a new meal' do
-      let(:meal) { stub(:meal)  }
+      let(:meal) { stub(:meal, :reload => true)  }
       let(:egg) { stub(:egg)  }
       let(:salt) { stub(:salt)  }
       let(:gram) { stub(:gram) }
@@ -35,6 +35,17 @@ describe AddMeal do
         MealClassifier.stub(:classify).with(meal) { [diet] }
 
         DietClassification.should_receive(:create_classification).with(meal, diet)
+        AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
+      end
+
+      it 'reloads the meal at the end' do
+        Ingredient.stub(:create_ingredient).with(meal, egg, 2)
+        Ingredient.stub(:create_ingredient).with(meal, salt, 1, gram)
+        MealClassifier.stub(:classify).with(meal) { [diet] }
+        DietClassification.stub(:create_classification).with(meal, diet)
+
+        meal.should_receive(:reload)
+
         AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
       end
     end

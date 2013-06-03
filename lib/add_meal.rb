@@ -3,7 +3,7 @@ class AddMeal
     meal = Meal.create_meal(name, instructions, duration)
     create_ingredients_for(meal, ingredients)
     create_classifications(meal)
-    meal
+    meal.reload
   end
 
   def self.create_ingredients_for(meal, ingredients)
