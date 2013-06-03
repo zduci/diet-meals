@@ -15,6 +15,10 @@ describe AddMeal do
         Food.stub(:find_by_name!).with('egg') { egg }
         Food.stub(:find_by_name!).with('salt') { salt }
         UnitOfMeasurement.stub(:find_by_short_name!).with('g') { gram }
+        Ingredient.stub(:create_ingredient).with(meal, egg, 2)
+        Ingredient.stub(:create_ingredient).with(meal, salt, 1, gram)
+        MealClassifier.stub(:classify).with(meal) { [diet] }
+        DietClassification.stub(:create_classification).with(meal, diet)
       end
 
       it 'creates a new meal' do
@@ -25,27 +29,16 @@ describe AddMeal do
       it 'creates the ingredients for the new meal' do
         Ingredient.should_receive(:create_ingredient).with(meal, egg, 2)
         Ingredient.should_receive(:create_ingredient).with(meal, salt, 1, gram)
-
-        boiled_egg = AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
+        AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
       end
 
       it 'classifies the meal into diets' do
-        Ingredient.stub(:create_ingredient).with(meal, egg, 2)
-        Ingredient.stub(:create_ingredient).with(meal, salt, 1, gram)
-        MealClassifier.stub(:classify).with(meal) { [diet] }
-
         DietClassification.should_receive(:create_classification).with(meal, diet)
         AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
       end
 
       it 'reloads the meal at the end' do
-        Ingredient.stub(:create_ingredient).with(meal, egg, 2)
-        Ingredient.stub(:create_ingredient).with(meal, salt, 1, gram)
-        MealClassifier.stub(:classify).with(meal) { [diet] }
-        DietClassification.stub(:create_classification).with(meal, diet)
-
         meal.should_receive(:reload)
-
         AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
       end
     end
