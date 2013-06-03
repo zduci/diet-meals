@@ -17,6 +17,9 @@ class Diet < ActiveRecord::Base
            :source => :food,
            :dependent => :destroy
 
+  has_many :diet_classifications
+  has_many :meals, :through => :diet_classifications
+
   validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :exclusive, :inclusion => {:in => [true, false]}
 
