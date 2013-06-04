@@ -6,6 +6,7 @@ class AddMeal
     meal.reload
   end
 
+  private
   def self.create_ingredients_for(meal, ingredients)
     ingredients.each { |ingredient_attributes| create_ingredient_for(meal, ingredient_attributes) }
   end
