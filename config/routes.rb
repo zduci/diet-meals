@@ -6,4 +6,5 @@ DietMeals::Application.routes.draw do
   root :to => 'home#index'
 
   get 'meals/new' => 'meals#new'
+  get 'meals/show/:id' => 'meals#show'
 end

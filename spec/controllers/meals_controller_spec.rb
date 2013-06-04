@@ -10,4 +10,13 @@ describe MealsController do
     end
   end
 
+  describe '#show' do
+    it 'returns the requested meal' do
+      id = '1'
+      meal = stub(:meal)
+      Meal.stub(:find_by_id).with(id) { meal }
+      get :show, :id => id
+      assigns['meal'].should == meal
+    end
+  end
 end
