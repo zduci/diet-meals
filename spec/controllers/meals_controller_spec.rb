@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe MealsController do
-  describe '#show' do
+  describe '#new' do
     it 'returns an empty meal' do
       meal = stub(:meal)
       Meal.stub(:new) { meal }
