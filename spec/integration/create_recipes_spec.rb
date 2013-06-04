@@ -1,7 +1,6 @@
 require 'spec_helper'
-require_relative '../../lib/add_meal.rb'
 
-describe AddMeal do
+describe 'adding a meal' do
   before(:each) do
     @egg = FactoryGirl.create(:food, :name => :egg)
     @salt = FactoryGirl.create(:food, :name => :salt)
@@ -11,8 +10,18 @@ describe AddMeal do
   end
 
   it 'can create meals' do
-    boiled_egg = AddMeal.add('boiled eggs', 'boil the eggs, add salt', 5, {:name => 'egg', :quantity => 2}, {:name => 'salt', :quantity => 1, :unit_of_measurement => 'g'})
+    visit '/meals/new'
+    fill_in 'name', :with => 'boiled eggs'
+    fill_in 'instructions', :with => 'boil the eggs, add salt'
+    fill_in 'duration', :with => 5
+    fill_in 'food_1', :with => 'egg'
+    fill_in 'quantity_1', :with => 2
+    fill_in 'food_2', :with => 'egg'
+    fill_in 'unit_of_measurement_2', :with => 'g'
+    fill_in 'quantity_2', :with => 2
+    
+    click_button 'add_meal'
 
-    boiled_egg.diets.should == [@allows_eggs]
+    page.should have_content 'allows eggs'
   end
 end
