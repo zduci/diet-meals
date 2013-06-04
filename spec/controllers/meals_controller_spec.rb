@@ -19,4 +19,23 @@ describe MealsController do
       assigns['meal'].should == meal
     end
   end
+
+
+  describe '#create' do
+    it 'adds a new meal' do
+      meal = stub(:meal)
+      name = 'toast'
+      instructions = 'toast the bread'
+      duration = '3'
+      ingredient = {'name' => 'bread', 'quantity' => '2', 'unit_of_measurement' => 'slices'}
+      AddMeal.stub(:add).with(name, instructions, duration, ingredient) { meal }
+      post :create, :name => name,
+                    :instructions => instructions,
+                    :duration => duration,
+                    :ingredients => [ingredient]
+      response.should render_template('show')
+      assigns['meal'].should == meal
+    end
+  end
+
 end
