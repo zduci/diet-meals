@@ -8,7 +8,7 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meal = AddMeal.add(params[:name], params[:instructions], params[:duration], *params[:ingredients])
+    @meal = AddMeal.add(params[:meal][:name], params[:meal][:instructions], params[:meal][:duration], *params[:meal][:ingredients].values)
     render :show
   end
 end
