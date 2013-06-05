@@ -20,7 +20,6 @@ describe MealsController do
     end
   end
 
-
   describe '#create' do
     it 'adds a new meal' do
       meal = stub(:meal)
