@@ -16,7 +16,7 @@ describe 'adding a meal' do
     fill_in 'meal_duration', :with => 5
     fill_in 'meal_ingredients_0_name', :with => 'egg'
     fill_in 'meal_ingredients_0_quantity', :with => 2
-    fill_in 'meal_ingredients_1_name', :with => 'egg'
+    fill_in 'meal_ingredients_1_name', :with => 'salt'
     fill_in 'meal_ingredients_1_unit_of_measurement', :with => 'g'
     fill_in 'meal_ingredients_1_quantity', :with => 2
     
