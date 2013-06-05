@@ -1,0 +1,34 @@
+= form_for(@meal) do |f|
+  = f.label :name
+  = f.text_field :name
+  %br
+
+  = f.label :instructions
+  = f.text_field :instructions
+  %br
+
+  = f.label :duration
+  = f.text_field :duration
+  %br
+
+  = label_tag 'Food 1'
+  = text_field_tag 'meal[ingredients][0][name]'
+  %br
+
+  = label_tag 'Food Quantity 1'
+  = text_field_tag 'meal[ingredients][0][quantity]'
+  %br
+
+  = label_tag 'Food 2'
+  = text_field_tag 'meal[ingredients][1][name]'
+  %br
+
+  = label_tag 'Food Quantity 2'
+  = text_field_tag 'meal[ingredients][1][quantity]'
+  %br
+
+  = label_tag 'Unit of measurement 2'
+  = text_field_tag 'meal[ingredients][1][unit_of_measurement]'
+  %br
+
+  = f.submit 'Add Meal'
