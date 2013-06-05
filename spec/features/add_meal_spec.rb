@@ -11,16 +11,16 @@ describe 'adding a meal' do
 
   it 'can create meals' do
     visit '/meals/new'
-    fill_in 'name', :with => 'boiled eggs'
-    fill_in 'instructions', :with => 'boil the eggs, add salt'
-    fill_in 'duration', :with => 5
-    fill_in 'food_1', :with => 'egg'
-    fill_in 'quantity_1', :with => 2
-    fill_in 'food_2', :with => 'egg'
-    fill_in 'unit_of_measurement_2', :with => 'g'
-    fill_in 'quantity_2', :with => 2
+    fill_in 'meal_name', :with => 'boiled eggs'
+    fill_in 'meal_instructions', :with => 'boil the eggs, add salt'
+    fill_in 'meal_duration', :with => 5
+    fill_in 'meal_ingredients_0_name', :with => 'egg'
+    fill_in 'meal_ingredients_0_quantity', :with => 2
+    fill_in 'meal_ingredients_1_name', :with => 'egg'
+    fill_in 'meal_ingredients_1_unit_of_measurement', :with => 'g'
+    fill_in 'meal_ingredients_1_quantity', :with => 2
     
-    click_button 'add_meal'
+    click_button 'Add Meal'
 
     page.should have_content 'allows eggs'
   end
