@@ -6,7 +6,16 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-  %p.notice= notice
-  %p.alert= alert
+    %p.notice= notice
+    %p.alert= alert
+
+  .navbar.navbar-fixed-top.navbar-inverse
+    .navbar-inner
+      .container
+        %a.btn.btn-navbar{ :data => { :toggle => "collapse", :target => ".nav-collapse" }}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.brand{ :href=> "/" } DietMeals
 
   = yield
