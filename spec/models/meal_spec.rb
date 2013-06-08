@@ -2,17 +2,15 @@ require 'spec_helper'
 
 describe Meal do
   context 'validations' do
+    let(:meal) { FactoryGirl.build(:meal) }
+
     it 'can create a valid instance' do
-      FactoryGirl.build(:meal).should be_valid
+      meal.should be_valid
     end
 
-    it 'is invalid without instructions' do
-      FactoryGirl.build(:meal, :instructions => nil).should be_invalid
-    end
+    it { meal.should validate_presence_of(:instructions) }
 
-    it 'is invalid without a name' do
-      FactoryGirl.build(:meal, :name => nil).should be_invalid
-    end
+    it { meal.should validate_presence_of(:name) }
 
     it 'is invalid without a duration' do
       FactoryGirl.build(:meal, :duration => nil).should be_invalid
