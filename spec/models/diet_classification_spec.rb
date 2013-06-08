@@ -2,17 +2,15 @@ require 'spec_helper'
 
 describe DietClassification do
   describe 'validations' do
+    let(:diet_classification) { FactoryGirl.build(:diet_classification) }
+
     it 'can create a valid instance' do
-      FactoryGirl.build(:diet_classification).should be_valid
+      diet_classification.should be_valid
     end
 
-    it 'is not valid without a meal' do
-      FactoryGirl.build(:diet_classification, :meal_id => nil).should be_invalid
-    end
+    it { diet_classification.should validate_presence_of :meal_id }
 
-    it 'is not valid without a diet' do
-      FactoryGirl.build(:diet_classification, :diet_id => nil).should be_invalid
-    end
+    it { diet_classification.should validate_presence_of :diet_id }
   end
 
   describe 'DietClassification#create_classifiction' do
