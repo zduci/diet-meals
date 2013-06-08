@@ -1,18 +1,15 @@
 require 'spec_helper'
 
 describe Food do
+  let(:food) { FactoryGirl.build(:food) }
+
   it 'can create a valid object' do
-    FactoryGirl.build(:food).should be_valid
+    food.should be_valid
   end
 
-  it 'is invalid without a name' do
-    FactoryGirl.build(:food, :name => nil).should be_invalid
-  end
+  it { food.should validate_presence_of(:name) }
 
-  it 'is invalid without a unique name' do
-    FactoryGirl.create(:food, :name => 'avocado')
-    FactoryGirl.build(:food, :name => 'avocado').should be_invalid
-  end
+  it { food.should validate_uniqueness_of(:name) }
 
   it 'creates an instance by name' do
     Food.should_receive(:create!).with(:name => 'avocado')
