@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Diet do
   context 'validations' do
+    let(:diet) { FactoryGirl.build(:diet) }
+
     it 'can create a valid instance' do
-      FactoryGirl.build(:diet).should be_valid
+      diet.should be_valid
     end
 
-    it 'is invalid without a name' do
-      FactoryGirl.build(:diet, :name => nil).should be_invalid
-    end
+    it { diet.should validate_presence_of(:name) }
 
     it 'is invalid without an exclusive attribute' do
       FactoryGirl.build(:diet, :exclusive => nil).should be_invalid
