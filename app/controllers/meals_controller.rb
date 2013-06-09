@@ -12,6 +12,6 @@ class MealsController < ApplicationController
     redirect_to meal_url(meal)
   rescue StandardError
     flash[:error] = 'There were errors. Meal was not saved'
-    render :action => :new
+    redirect_to :action => :new
   end
 end
