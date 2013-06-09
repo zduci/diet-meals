@@ -35,6 +35,14 @@ describe MealsController do
                     :ingredients => {'0' => ingredient} }
       response.should redirect_to(meal_url(meal))
     end
+
+    it 'displays error for invalid data' do
+      AddMeal.stub(:add).and_raise(StandardError.new)
+      post :create, :meal => { :name => name,
+                    :instructions => instructions,
+                    :duration => duration,
+                    :ingredients => {'0' => ingredient} }
+      flash[:error].should_not be_nil
     end
   end
 
