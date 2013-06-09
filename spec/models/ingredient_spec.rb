@@ -17,6 +17,14 @@ describe Ingredient do
     end
   end
 
+  context 'associations' do
+    it { should belong_to(:food) }
+
+    it { should belong_to(:unit_of_measurement) }
+
+    it { should belong_to(:meal) }
+  end
+
   context '#unit_of_measurement' do
     it 'returns unit of measurement if different to nil' do
       unit_of_measurement = FactoryGirl.build(:unit_of_measurement)
