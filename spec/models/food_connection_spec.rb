@@ -34,4 +34,9 @@ describe FoodConnection do
     end
   end
 
+  context 'associations' do
+    it { should belong_to(:parent_food) }
+
+    it { should belong_to(:child_food) }
+  end
 end
