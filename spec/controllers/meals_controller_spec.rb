@@ -19,12 +19,20 @@ describe MealsController do
   end
 
   describe '#show' do
-    it 'returns the requested meal' do
-      id = '1'
-      meal = stub(:meal)
+    let(:id) { '1' }
+    let(:meal) { stub(:meal) }
+
+    before(:each) do
       Meal.stub(:find_by_id).with(id) { meal }
       get :show, :id => id
+    end
+
+    it 'fetches the requested meal' do
       assigns['meal'].should == meal
+    end
+
+    it 'renders show' do
+      response.should render_template(:show)
     end
   end
 
