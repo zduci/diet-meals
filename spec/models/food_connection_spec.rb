@@ -24,13 +24,9 @@ describe FoodConnection do
       FactoryGirl.build(:food_connection).should be_valid
     end
 
-    it 'is invalid without a parent food' do
-      FactoryGirl.build(:food_connection, :parent_food => nil).should be_invalid
-    end
+    it { should validate_presence_of(:parent_food_id) }
 
-    it 'is invalid without a child food' do
-      FactoryGirl.build(:food_connection, :child_food => nil).should be_invalid
-    end
+    it { should validate_presence_of(:child_food_id) }
 
     it 'is invalid without a unique parent child food pair' do
       FactoryGirl.create(:food_connection, :parent_food => fruit, :child_food => orange)
