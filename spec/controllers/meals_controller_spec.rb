@@ -34,17 +34,30 @@ describe MealsController do
                     :ingredients => {'0' => ingredient} }
     end
 
-    it 'adds a new meal' do
-      AddMeal.stub(:add).with(name, instructions, duration, ingredient) { meal }
-      do_post
-      response.should redirect_to(meal_url(meal))
+    context 'success' do
+      it "adds a new meal" do
+        AddMeal.should_receive(:add).with(name, instructions, duration, ingredient) { meal }
+        do_post
+      end
+
+      it "redirects to the new meal's url" do
+        AddMeal.stub(:add).with(name, instructions, duration, ingredient) { meal }
+        do_post
+        response.should redirect_to(meal_url(meal))
+      end
     end
 
-    it 'displays error for invalid data' do
-      AddMeal.stub(:add).and_raise(StandardError.new)
-      do_post
-      flash[:error].should_not be_nil
+    context 'fail' do
+      before(:each) { AddMeal.stub(:add).and_raise(StandardError.new) }
+      it 'displays error for invalid data' do
+        do_post
+        flash[:error].should_not be_nil
+      end
+
+      it 'redirects to new' do
+        do_post
+        response.should redirect_to(:action => :new)
+      end
     end
   end
-
 end
