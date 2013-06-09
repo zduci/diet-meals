@@ -5,17 +5,15 @@ describe DietFoodConnection do
   let(:food) { stub(:food) }
 
   context 'validations' do
+    let(:diet_food_connection) { FactoryGirl.build(:diet_food_connection) }
+
     it 'can create a valid instance' do
-      FactoryGirl.build(:diet_food_connection).should be_valid
+      diet_food_connection.should be_valid
     end
 
-    it 'is invalid without a diet' do
-      FactoryGirl.build(:diet_food_connection, :diet => nil).should be_invalid
-    end
+    it { should validate_presence_of(:diet_id) }
 
-    it 'is invalidwithout a food' do
-      FactoryGirl.build(:diet_food_connection, :food => nil).should be_invalid
-    end
+    it { should validate_presence_of(:food_id) }
 
     it 'is invalid without an allowed attribute' do
       FactoryGirl.build(:diet_food_connection, :allowed => nil).should be_invalid
