@@ -15,10 +15,6 @@ describe DietFoodConnection do
 
     it { should validate_presence_of(:food_id) }
 
-    it 'is invalid without an allowed attribute' do
-      FactoryGirl.build(:diet_food_connection, :allowed => nil).should be_invalid
-    end
-
     it 'is invalid without an unique food' do
       egg = FactoryGirl.create(:egg)
       FactoryGirl.create(:diet_food_connection, :food => egg)
