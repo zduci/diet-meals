@@ -13,6 +13,12 @@ describe DietClassification do
     it { diet_classification.should validate_presence_of :diet_id }
   end
 
+  context 'associations' do
+    it { should belong_to(:meal) }
+
+    it { should belong_to(:diet) }
+  end
+
   describe 'DietClassification#create_classifiction' do
     it 'creates instances with meal and diet' do
       meal = stub(:meal)
