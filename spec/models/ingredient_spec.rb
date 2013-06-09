@@ -6,17 +6,11 @@ describe Ingredient do
       FactoryGirl.build(:ingredient).should be_valid
     end
 
-    it 'is invalid without a food' do
-      FactoryGirl.build(:ingredient, :food => nil).should be_invalid
-    end
+    it { should validate_presence_of(:food_id) }
 
-    it 'is invalid without a meal' do
-      FactoryGirl.build(:ingredient, :meal => nil).should be_invalid
-    end
+    it { should validate_presence_of(:meal_id) }
 
-    it 'is invalid without a quantity' do
-      FactoryGirl.build(:ingredient, :quantity => nil).should be_invalid
-    end
+    it { should validate_presence_of(:quantity) }
 
     it 'is invalid without a positive value greater than 0' do
       FactoryGirl.build(:ingredient, :quantity => 0).should be_invalid
