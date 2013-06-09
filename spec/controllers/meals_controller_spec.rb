@@ -21,19 +21,20 @@ describe MealsController do
   end
 
   describe '#create' do
+    let(:meal) { stub(:meal) }
+    let(:name) { 'toast' }
+    let(:instructions) { 'toast the bread' }
+    let(:duration) { '3' }
+    let(:ingredient) { {'name' => 'bread', 'quantity' => '2', 'unit_of_measurement' => 'slices'} }
+
     it 'adds a new meal' do
-      meal = stub(:meal)
-      name = 'toast'
-      instructions = 'toast the bread'
-      duration = '3'
-      ingredient = {'name' => 'bread', 'quantity' => '2', 'unit_of_measurement' => 'slices'}
       AddMeal.stub(:add).with(name, instructions, duration, ingredient) { meal }
       post :create, :meal => { :name => name,
                     :instructions => instructions,
                     :duration => duration,
                     :ingredients => {'0' => ingredient} }
-      response.should render_template('show')
-      assigns['meal'].should == meal
+      response.should redirect_to(meal_url(meal))
+    end
     end
   end
 

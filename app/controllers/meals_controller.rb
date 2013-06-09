@@ -8,7 +8,7 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meal = AddMeal.add(params[:meal][:name], params[:meal][:instructions], params[:meal][:duration], *params[:meal][:ingredients].values)
-    render :show
+    meal = AddMeal.add(params[:meal][:name], params[:meal][:instructions], params[:meal][:duration], *params[:meal][:ingredients].values)
+    redirect_to meal_url(meal)
   end
 end
