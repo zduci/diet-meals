@@ -21,6 +21,14 @@ describe Meal do
     end
   end
 
+  context 'associations' do
+    it { should have_many(:ingredients) }
+
+    it { should have_many(:foods) }
+
+    it { should have_many(:diets) }
+  end
+
   context '#create_meal' do
     it 'creates a new meal by name, instructions, duration and ingredients' do
       ingredient = stub(:ingredient)
