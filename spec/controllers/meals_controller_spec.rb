@@ -2,11 +2,19 @@ require 'spec_helper'
 
 describe MealsController do
   describe '#new' do
-    it 'returns an empty meal' do
-      meal = stub(:meal)
+    let(:meal) { stub(:meal) }
+
+    before(:each) do
       Meal.stub(:new) { meal }
       get :new
+    end
+
+    it 'returns an empty meal' do
       assigns['meal'].should == meal
+    end
+
+    it 'renders new' do
+      response.should render_template(:new)
     end
   end
 
