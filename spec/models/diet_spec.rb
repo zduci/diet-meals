@@ -22,6 +22,16 @@ describe Diet do
     end
   end
 
+  context 'associations' do
+    it { should have_many(:allowed_foods) }
+
+    it { should have_many(:forbidden_foods) }
+
+    it { should have_many(:diet_classifications) }
+
+    it { should have_many(:meals) }
+  end
+
   describe 'Diet#inclusive?' do
     it 'checks if it is inclusive' do
       FactoryGirl.build(:diet, :exclusive => false).should be_inclusive
