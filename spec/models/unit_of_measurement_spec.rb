@@ -5,22 +5,18 @@ describe UnitOfMeasurement do
     FactoryGirl.build(:unit_of_measurement).should  be_valid
   end
 
-  it 'is invalid without a name' do
-    FactoryGirl.build(:unit_of_measurement, :name  => nil).should  be_invalid
-  end
+  it { should validate_presence_of(:name) }
 
-  it 'is invalid without a short name' do
-    FactoryGirl.build(:unit_of_measurement, :short_name => nil).should  be_invalid
-  end
+  it { should validate_presence_of(:short_name) }
 
   it 'is invalid without a unique name' do
     FactoryGirl.create(:unit_of_measurement, :name => 'meter', :short_name => 'm')
-    FactoryGirl.build(:unit_of_measurement, :name => 'meter', :short_name => 'unique').should be_invalid
+    should validate_uniqueness_of(:name)
   end
 
   it 'is invalid without a unique short name' do
     FactoryGirl.create(:unit_of_measurement, :name => 'meter', :short_name => 'm')
-    FactoryGirl.build(:unit_of_measurement, :name => 'unique', :short_name => 'm').should be_invalid
+    should validate_uniqueness_of(:short_name)
   end
 
   it 'creates a new instance by name and short name' do
