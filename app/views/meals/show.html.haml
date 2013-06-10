@@ -1,3 +1,13 @@
-= @meal.name
-- @meal.diets.each do |diet|
-  %p= diet.name
+.meal
+  %b= @meal.name
+  %br
+  %b= "#{@meal.duration} minutes"
+  %br
+  %b Ingredients: 
+  %br
+  = render @meal.ingredients
+  %b Instructions:
+  .instructions= @meal.instructions
+  %b Compatible with diets:
+  %br
+  = render @meal.diets
