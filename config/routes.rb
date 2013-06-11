@@ -6,4 +6,5 @@ DietMeals::Application.routes.draw do
   root :to => 'home#index'
 
   resources :meals, :only => [:new, :show, :create]
+  resources :diets, :only => [:show]
 end
