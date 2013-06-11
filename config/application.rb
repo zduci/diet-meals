@@ -63,6 +63,7 @@ module DietMeals
     config.generators do |g|
       g.test_framework :rspec
       g.model_specs false
+      g.template_engine :haml
     end
   end
 end
