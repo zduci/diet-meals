@@ -29,4 +29,11 @@ describe UnitOfMeasurement do
   context 'associations' do
     it { should have_many(:ingredients) }
   end
+
+  describe '::PIECE' do
+    it "is named 'piece'" do
+      UnitOfMeasurement::PIECE.name.should == 'piece'
+    end
+  end
+
 end
