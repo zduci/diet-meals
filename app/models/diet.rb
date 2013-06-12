@@ -38,4 +38,7 @@ class Diet < ActiveRecord::Base
   def has_allowed_foods?
     allowed_foods.present?
   end
+
+  def self.popular
+  end
 end
