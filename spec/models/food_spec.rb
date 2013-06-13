@@ -11,8 +11,8 @@ describe Food do
     it { should validate_uniqueness_of(:name) }
 
     it 'creates an instance by name' do
-      Food.should_receive(:create!).with(:name => 'avocado')
-      Food.create_food('avocado')
+      avocado = Food.create_food('avocado')
+      Food.find_by_name('avocado').should == avocado
     end
   end
 
