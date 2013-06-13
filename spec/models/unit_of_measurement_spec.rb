@@ -21,8 +21,8 @@ describe UnitOfMeasurement do
     end
 
     it 'creates a new instance by name and short name' do
-      UnitOfMeasurement.should_receive(:create!).with(:name => 'meter', :short_name => 'm')
-      UnitOfMeasurement.create_unit_of_measurement('meter', 'm')
+      meter = UnitOfMeasurement.create_unit_of_measurement('meter', 'm')
+      UnitOfMeasurement.find_by_name('meter').should == meter
     end
   end
 
