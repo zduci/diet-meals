@@ -37,17 +37,16 @@ describe Ingredient do
   end
 
   context 'alternative constructors' do
+    let(:meal) { FactoryGirl.create(:meal) }
+    let(:food) { FactoryGirl.create(:food) }
+    let(:unit_of_measurement) { FactoryGirl.create(:unit_of_measurement) }
+
     it 'creates ingredients by meal, food and quantity' do
-      meal = FactoryGirl.create(:meal)
-      food = FactoryGirl.create(:food)
       ingredient = Ingredient.create_ingredient(meal, food, 1)
       Ingredient.find_by_meal_id_and_food_id_and_quantity(meal, food, 1).should == ingredient
     end
 
     it 'creates ingredients by meal, food, quantity and unit_of_measurement' do
-      meal = FactoryGirl.create(:meal)
-      food = FactoryGirl.create(:food)
-      unit_of_measurement = FactoryGirl.create(:unit_of_measurement)
       ingredient = Ingredient.create_ingredient(meal, food, 1, unit_of_measurement)
       Ingredient.find_by_meal_id_and_food_id_and_quantity_and_unit_of_measurement_id(meal, food, 1, unit_of_measurement).should == ingredient
     end
