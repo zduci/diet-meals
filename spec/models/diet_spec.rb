@@ -54,13 +54,11 @@ describe Diet do
 
   context 'constructors' do
     it 'creates inclusive diets' do
-      Diet.should_receive(:create!).with(:name => 'inclusive diet', :exclusive => false)
-      Diet.create_inclusive('inclusive diet')
+      Diet.create_inclusive('inclusive diet').should be_inclusive
     end
 
     it 'creates exclusive diets' do
-      Diet.should_receive(:create!).with(:name => 'exclusive diet', :exclusive => true)
-      Diet.create_exclusive('exclusive diet')
+      Diet.create_exclusive('exclusive diet').should be_exclusive
     end
   end
 end
