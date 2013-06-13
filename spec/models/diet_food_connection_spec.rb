@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe DietFoodConnection do
-  let(:diet) { stub(:diet) }
-  let(:food) { stub(:food) }
-
   context 'validations' do
     let(:diet_food_connection) { FactoryGirl.build(:diet_food_connection) }
 
@@ -39,14 +36,15 @@ describe DietFoodConnection do
   end
 
   describe 'alternative constructors' do
+    let(:diet) { FactoryGirl.create(:diet) }
+    let(:food) { FactoryGirl.create(:food) }
+
     it 'can create allowed connections' do
-      DietFoodConnection.should_receive(:create!).with(:diet => diet, :food => food, :allowed => true)
-      DietFoodConnection.create_allowed(diet, food)
+      DietFoodConnection.create_allowed(diet, food).should be_allowed
     end
 
     it 'can create forbidden connections' do
-      DietFoodConnection.should_receive(:create!).with(:diet => diet, :food => food, :allowed => false)
-      DietFoodConnection.create_forbidden(diet, food)
+      DietFoodConnection.create_forbidden(diet, food).should be_forbidden
     end
   end
 end
