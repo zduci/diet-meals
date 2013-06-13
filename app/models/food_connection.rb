@@ -7,7 +7,7 @@ class FoodConnection < ActiveRecord::Base
   validates :child_food_id, :presence => true
 
   def self.connect(parent, child)
-    return if find_by_parent_food_id_and_child_food_id(parent, child)
+    find_by_parent_food_id_and_child_food_id(parent, child) ||
     create!(:parent_food => parent, :child_food => child)
   end
 end
