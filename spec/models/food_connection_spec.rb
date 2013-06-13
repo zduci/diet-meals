@@ -13,9 +13,8 @@ describe FoodConnection do
     end
 
     it 'does not create a connection between foods if it already exists' do
-      FoodConnection.connect(fruit, orange)
-      FoodConnection.should_not_receive(:create)
-      FoodConnection.connect(fruit, orange)
+      connection = FoodConnection.connect(fruit, orange)
+      FoodConnection.connect(fruit, orange).should == connection
     end
   end
 
