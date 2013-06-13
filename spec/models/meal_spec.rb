@@ -31,9 +31,8 @@ describe Meal do
 
   context '#create_meal' do
     it 'creates a new meal by name, instructions, duration and ingredients' do
-      ingredient = stub(:ingredient)
-      Meal.should_receive(:create!).with(:name => 'Boiled egg', :instructions => 'boil the egg', :duration => 30, :ingredients => [ingredient])
-      Meal.create_meal('Boiled egg', 'boil the egg', 30, ingredient)
+      boiled_egg = Meal.create_meal('Boiled egg', 'boil the egg', 30, FactoryGirl.create(:ingredient))
+      Meal.find_by_name('Boiled egg').should == boiled_egg
     end
   end
 end
