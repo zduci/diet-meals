@@ -21,10 +21,10 @@ describe DietClassification do
 
   describe 'DietClassification#create_classifiction' do
     it 'creates instances with meal and diet' do
-      meal = stub(:meal)
-      diet = stub(:diet)
-      DietClassification.should_receive(:create!).with(:meal => meal, :diet => diet)
-      DietClassification.create_classification(meal, diet)
+      meal = FactoryGirl.create(:meal)
+      diet = FactoryGirl.create(:diet)
+      diet_classification = DietClassification.create_classification(meal, diet)
+      DietClassification.find_by_meal_id_and_diet_id(meal.id, diet.id).should == diet_classification
     end
   end
 end
