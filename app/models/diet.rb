@@ -42,4 +42,8 @@ class Diet < ActiveRecord::Base
   def self.popular
     Diet.all(:limit => 3)
   end
+
+  def popular_meals
+    meals.all(:limit => 5)
+  end
 end

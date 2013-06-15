@@ -71,4 +71,17 @@ describe Diet do
       FactoryGirl.build(:diet, :allowed_foods => []).should_not have_allowed_foods
     end
   end
+
+  describe "#popular_meals" do
+    it 'returns the first 5 meals for this diet' do
+      cheese_pizza = FactoryGirl.create(:meal, :name => 'Cheese pizza')
+      grilled_shrimp = FactoryGirl.create(:meal, :name => 'Grilled Shrimp')
+      chicken_kebab = FactoryGirl.create(:meal, :name => 'Chicken kebab')
+      pork_ribs = FactoryGirl.create(:meal, :name => 'Pork ribs')
+      steak = FactoryGirl.create(:meal, :name => '80z steak')
+      chips = FactoryGirl.create(:meal, :name => 'Chips')
+      diet = FactoryGirl.create(:diet, :meals => [cheese_pizza, grilled_shrimp, chicken_kebab, pork_ribs, steak, chips])
+      diet.popular_meals.should == [cheese_pizza, grilled_shrimp, chicken_kebab, pork_ribs, steak]
+    end
+  end
 end
