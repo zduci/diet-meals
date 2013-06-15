@@ -32,26 +32,6 @@ describe Diet do
     it { should have_many(:meals) }
   end
 
-  describe 'Diet#inclusive?' do
-    it 'checks if it is inclusive' do
-      FactoryGirl.build(:diet, :exclusive => false).should be_inclusive
-    end
-
-    it 'checks if it is inclusive' do
-      FactoryGirl.build(:diet, :exclusive => true).should be_exclusive
-    end
-  end
-
-  describe 'Diet#has_allowed_foods?' do
-    it 'returns true if it has allowed foods' do
-      FactoryGirl.build(:diet, :allowed_foods => [FactoryGirl.build(:food)]).should have_allowed_foods
-    end
-    
-    it 'returns false if it does not have allowed foods' do
-      FactoryGirl.build(:diet, :allowed_foods => []).should_not have_allowed_foods
-    end
-  end
-
   context 'constructors' do
     it 'creates inclusive diets' do
       Diet.create_inclusive('inclusive diet').should be_inclusive
@@ -62,13 +42,33 @@ describe Diet do
     end
   end
 
-  describe '#popular' do
+  describe 'Diet#popular' do
     it 'returns the first 3 diets' do
       dukan = FactoryGirl.create(:diet, :name => 'Dukan diet')
       atkins = FactoryGirl.create(:diet, :name => 'Atkins diet')
       cambridge = FactoryGirl.create(:diet, :name => 'Cambridge diet')
       weight_watchers = FactoryGirl.create(:diet, :name => 'WeightWatchers diet')
       Diet.popular.should == [dukan, atkins, cambridge]
+    end
+  end
+
+  describe '#inclusive?' do
+    it 'checks if it is inclusive' do
+      FactoryGirl.build(:diet, :exclusive => false).should be_inclusive
+    end
+
+    it 'checks if it is inclusive' do
+      FactoryGirl.build(:diet, :exclusive => true).should be_exclusive
+    end
+  end
+
+  describe '#has_allowed_foods?' do
+    it 'returns true if it has allowed foods' do
+      FactoryGirl.build(:diet, :allowed_foods => [FactoryGirl.build(:food)]).should have_allowed_foods
+    end
+    
+    it 'returns false if it does not have allowed foods' do
+      FactoryGirl.build(:diet, :allowed_foods => []).should_not have_allowed_foods
     end
   end
 end
