@@ -61,4 +61,14 @@ describe Diet do
       Diet.create_exclusive('exclusive diet').should be_exclusive
     end
   end
+
+  describe '#popular' do
+    it 'returns the first 3 diets' do
+      dukan = FactoryGirl.create(:diet, :name => 'Dukan diet')
+      atkins = FactoryGirl.create(:diet, :name => 'Atkins diet')
+      cambridge = FactoryGirl.create(:diet, :name => 'Cambridge diet')
+      weight_watchers = FactoryGirl.create(:diet, :name => 'WeightWatchers diet')
+      Diet.popular.should == [dukan, atkins, cambridge]
+    end
+  end
 end
