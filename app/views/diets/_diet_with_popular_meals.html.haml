@@ -1,0 +1,4 @@
+.span4
+  = diet.name
+  %br
+  = render :partial => 'meals/meal_short', :collection => diet.popular_meals, :as => :meal
