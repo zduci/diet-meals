@@ -1,0 +1,5 @@
+.row
+  .span4
+    %h3 Popular Diets
+.row
+  = render :partial => 'diets/diet_with_popular_meals', :collection => @diets, :as => :diet
