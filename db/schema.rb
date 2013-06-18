@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618202219) do
+ActiveRecord::Schema.define(:version => 20130618202535) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -100,9 +100,9 @@ ActiveRecord::Schema.define(:version => 20130618202219) do
   end
 
   create_table "stars", :force => true do |t|
-    t.integer  "diet_id"
-    t.integer  "meal_id"
-    t.integer  "user_id"
+    t.integer  "diet_id",    :null => false
+    t.integer  "meal_id",    :null => false
+    t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

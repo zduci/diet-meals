@@ -1,3 +1,3 @@
-class Stars < ActiveRecord::Base
+class Star < ActiveRecord::Base
   # attr_accessible :title, :body
 end
