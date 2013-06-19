@@ -1,3 +1,5 @@
 class Star < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :user_id, :presence => true
+  validates :meal_id, :presence => true
+  validates :diet_id, :presence => true
 end
