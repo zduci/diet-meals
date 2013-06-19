@@ -12,4 +12,12 @@ describe Star do
 
     it { should validate_presence_of(:diet_id) }
   end
+
+  context 'associations' do
+    it { should belong_to(:diet) }
+
+    it { should belong_to(:meal) }
+
+    it { should belong_to(:user) }
+  end
 end
