@@ -1,0 +1,12 @@
+%p
+  %p
+    = f.fields_for :food do |builder|
+      = render 'food_fields', :f => builder
+
+  %p
+    = f.label :quantity, 'Quantity'
+    = f.text_field :quantity
+
+  %p
+    = f.fields_for :unit_of_measurement do |builder|
+      = render 'unit_of_measurement_fields', :f => builder
