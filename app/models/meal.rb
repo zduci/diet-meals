@@ -9,6 +9,8 @@ class Meal < ActiveRecord::Base
   validates :name, :presence => true
   validates :duration, :numericality => {:greater_than_or_equal_to => 1}
 
+  accepts_nested_attributes_for :ingredients
+
   def self.create_meal(name, instructions, duration, *ingredients)
     create!(:name => name, 
             :instructions => instructions, 
