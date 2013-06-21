@@ -17,4 +17,10 @@ class Meal < ActiveRecord::Base
             :duration => duration,
             :ingredients => ingredients)
   end
+
+  def self.new_meal
+    Meal.new do |meal|
+      2.times { meal.ingredients.build(:food => Food.new) }
+    end
+  end
 end

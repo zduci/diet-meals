@@ -37,4 +37,12 @@ describe Meal do
       Meal.find_by_name('Boiled egg').should == boiled_egg
     end
   end
+
+  describe '#new_meal' do
+    it 'builds a new meal with 2 ingredients each with a new food' do
+      Meal.new_meal.ingredients.size.should == 2
+      Meal.new_meal.ingredients.first.food.should_not be_nil
+      Meal.new_meal.ingredients.second.food.should_not be_nil
+    end
+  end
 end
