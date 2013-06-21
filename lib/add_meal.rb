@@ -12,10 +12,11 @@ class AddMeal
   end
 
   def self.create_ingredient_for(meal, ingredient)
-    food = Food.find_by_name!(ingredient[:name])
+    food = Food.find_by_name!(ingredient.fetch(:food).fetch(:name))
     quantity = ingredient[:quantity]
-    if ingredient.has_key?(:unit_of_measurement)
-      unit_of_measurement = UnitOfMeasurement.find_by_short_name!(ingredient.fetch(:unit_of_measurement))
+    unit_of_measurement_short_name = ingredient.fetch(:unit_of_measurement).fetch(:short_name)
+    if unit_of_measurement_short_name.present?
+      unit_of_measurement = UnitOfMeasurement.find_by_short_name!(unit_of_measurement_short_name)
       Ingredient.create_ingredient(meal, 
                                    food,
                                    quantity,
