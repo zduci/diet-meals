@@ -31,8 +31,12 @@ describe UnitOfMeasurement do
   end
 
   describe '::PIECE' do
-    it "is named 'piece'" do
+    it "has name 'piece'" do
       UnitOfMeasurement::PIECE.name.should == 'piece'
+    end
+
+    it "has short name 'x'" do
+      UnitOfMeasurement::PIECE.short_name.should == 'x'
     end
   end
 
