@@ -1,6 +1,6 @@
 class MealsController < ApplicationController
   def new
-    @meal = Meal.new
+    @meal = Meal.new_meal
   end
 
   def show

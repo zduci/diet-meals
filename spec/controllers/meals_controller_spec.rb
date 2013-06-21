@@ -5,7 +5,7 @@ describe MealsController do
     let(:meal) { stub(:meal) }
 
     before(:each) do
-      Meal.stub(:new) { meal }
+      Meal.stub(:new_meal) { meal }
       get :new
     end
 
