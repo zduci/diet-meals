@@ -11,7 +11,6 @@
     = f.label :duration
     = f.text_field :duration
 
-  %p
   = f.fields_for :ingredients do |builder|
     = render "ingredient_fields", :f => builder
 
