@@ -41,13 +41,13 @@ describe MealsController do
     let(:name) { 'toast' }
     let(:instructions) { 'toast the bread' }
     let(:duration) { '3' }
-    let(:ingredient) { {'name' => 'bread', 'quantity' => '2', 'unit_of_measurement' => 'slices'} }
+    let(:ingredient) { {'food' => { 'name' => 'bread' }, 'quantity' => '2', 'unit_of_measurement' => { 'short_name' => 'slices'} }}
 
     def do_post
       post :create, :meal => { :name => name,
                     :instructions => instructions,
                     :duration => duration,
-                    :ingredients => {'0' => ingredient} }
+                    :ingredients_attributes => {'0' => ingredient} }
     end
 
     context 'success' do
