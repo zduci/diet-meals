@@ -1,0 +1,4 @@
+= javascript_tag "var autocomplete_foods = #{ @food_names.to_json };"
+:javascript
+  jQuery(document).ready(function() { $('.auto_complete').typeahead({source: autocomplete_foods});    });
+
