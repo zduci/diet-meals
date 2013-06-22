@@ -13,7 +13,8 @@ describe 'adding a meal' do
     visit '/meals/new'
     fill_in 'meal_name', :with => 'boiled eggs'
     fill_in 'meal_instructions', :with => 'boil the eggs, add salt'
-    fill_in 'meal_duration', :with => 5
+    select '0', :from => 'meal_duration_hours'
+    select '5', :from => 'meal_duration_minutes'
 
     fill_in 'meal_ingredients_attributes_0_food_name', :with => 'egg'
     fill_in 'meal_ingredients_attributes_0_quantity', :with => 2

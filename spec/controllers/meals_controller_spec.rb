@@ -41,12 +41,19 @@ describe MealsController do
     let(:name) { 'toast' }
     let(:instructions) { 'toast the bread' }
     let(:duration) { '3' }
+    let(:duration_hours) { '0' }
+    let(:duration_minutes) { '3' }
     let(:ingredient) { {'food' => { 'name' => 'bread' }, 'quantity' => '2', 'unit_of_measurement' => { 'short_name' => 'slices'} }}
+
+    before(:each) do
+      MealDuration.stub(:to_minutes).with(duration_hours, duration_minutes) { duration }
+    end
 
     def do_post
       post :create, :meal => { :name => name,
                     :instructions => instructions,
-                    :duration => duration,
+                    :duration_hours => duration_hours,
+                    :duration_minutes => duration_minutes,
                     :ingredients_attributes => {'0' => ingredient} }
     end
 
