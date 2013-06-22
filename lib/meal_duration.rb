@@ -10,4 +10,8 @@ class MealDuration
   def self.pairs(limit)
     (0..limit).map { |i| [i, i] }
   end
+
+  def self.to_minutes(hours, minutes)
+    hours * 60 + minutes
+  end
 end
