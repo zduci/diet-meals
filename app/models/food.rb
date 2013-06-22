@@ -20,4 +20,8 @@ class Food < ActiveRecord::Base
   def self.create_food(name)
     create!(:name => name)
   end
+
+  def self.all_names
+    find(:all, :select => :name).map(&:name)
+  end
 end

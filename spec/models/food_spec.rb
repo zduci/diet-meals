@@ -25,4 +25,13 @@ describe Food do
       Food.find_by_name('avocado').should == avocado
     end
   end
+
+  context 'queries' do
+    it 'returns the names of all foods' do
+      FactoryGirl.create(:food, :name => 'avocado')
+      FactoryGirl.create(:food, :name => 'peanut')
+      FactoryGirl.create(:food, :name => 'melon')
+      Food.all_names.should =~ ['avocado', 'peanut', 'melon']
+    end
+  end
 end
