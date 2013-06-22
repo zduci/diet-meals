@@ -12,6 +12,6 @@ class MealDuration
   end
 
   def self.to_minutes(hours, minutes)
-    hours * 60 + minutes
+    hours.to_i * 60 + minutes.to_i
   end
 end
