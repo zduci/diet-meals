@@ -40,14 +40,14 @@ describe UnitOfMeasurement do
     end
   end
 
-  describe 'UnitOfMeasurement#find_by_short_name' do
+  describe 'UnitOfMeasurement#find_by_short_name!' do
     it 'returns PIECE for empty string' do
-      UnitOfMeasurement.find_by_short_name('').should == UnitOfMeasurement::PIECE
+      UnitOfMeasurement.find_by_short_name!('').should == UnitOfMeasurement::PIECE
     end
 
     it 'returns a unit of measurement by short name for present string' do
       cm = FactoryGirl.create(:unit_of_measurement, :short_name => 'cm')
-      UnitOfMeasurement.find_by_short_name('cm').should == cm
+      UnitOfMeasurement.find_by_short_name!('cm').should == cm
     end
   end
 end

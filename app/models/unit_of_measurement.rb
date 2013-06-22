@@ -12,7 +12,7 @@ class UnitOfMeasurement < ActiveRecord::Base
     create!(:name => name, :short_name => short_name)
   end
 
-  def self.find_by_short_name(short_name)
+  def self.find_by_short_name!(short_name)
     if short_name.present?
       super(short_name)
     else
