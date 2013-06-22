@@ -15,22 +15,15 @@ class AddMeal
     food = Food.find_by_name!(ingredient.fetch(:food).fetch(:name))
     quantity = ingredient[:quantity]
     unit_of_measurement_short_name = ingredient.fetch(:unit_of_measurement).fetch(:short_name)
-    if unit_of_measurement_short_name.present?
-      unit_of_measurement = UnitOfMeasurement.find_by_short_name!(unit_of_measurement_short_name)
-      Ingredient.create_ingredient(meal, 
-                                   food,
-                                   quantity,
-                                   unit_of_measurement)
-    else 
-      Ingredient.create_ingredient(meal, 
-                                   food,
-                                   quantity)
-    end
+    unit_of_measurement = UnitOfMeasurement.find_by_short_name!(unit_of_measurement_short_name)
+    Ingredient.create_ingredient(meal, 
+                                 food,
+                                 quantity,
+                                 unit_of_measurement)
   end
 
   def self.create_classifications(meal)
-    diets = MealClassifier.classify(meal)
-    diets.each do |diet|
+    MealClassifier.classify(meal).each do |diet|
       DietClassification.create_classification(meal, diet)
     end
   end

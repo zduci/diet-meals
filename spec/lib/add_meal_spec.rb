@@ -8,6 +8,7 @@ describe AddMeal do
       let(:egg) { stub(:egg)  }
       let(:salt) { stub(:salt)  }
       let(:gram) { stub(:gram) }
+      let(:piece) { stub(:piece) }
       let(:diet) { stub(:diet) }
 
       before(:each) do
@@ -15,7 +16,8 @@ describe AddMeal do
         Food.stub(:find_by_name!).with('egg') { egg }
         Food.stub(:find_by_name!).with('salt') { salt }
         UnitOfMeasurement.stub(:find_by_short_name!).with('g') { gram }
-        Ingredient.stub(:create_ingredient).with(meal, egg, '2')
+        UnitOfMeasurement.stub(:find_by_short_name!).with('') { piece }
+        Ingredient.stub(:create_ingredient).with(meal, egg, '2', piece)
         Ingredient.stub(:create_ingredient).with(meal, salt, '1', gram)
         MealClassifier.stub(:classify).with(meal) { [diet] }
         DietClassification.stub(:create_classification).with(meal, diet)
@@ -31,7 +33,7 @@ describe AddMeal do
       end
 
       it 'creates the ingredients for the new meal' do
-        Ingredient.should_receive(:create_ingredient).with(meal, egg, '2')
+        Ingredient.should_receive(:create_ingredient).with(meal, egg, '2', piece)
         Ingredient.should_receive(:create_ingredient).with(meal, salt, '1', gram)
         add_meal
       end
