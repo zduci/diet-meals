@@ -50,4 +50,12 @@ describe UnitOfMeasurement do
       UnitOfMeasurement.find_by_short_name!('cm').should == cm
     end
   end
+
+  context 'select forms' do
+    it 'returns the options for a select form' do
+      FactoryGirl.create(:unit_of_measurement, :name => 'meter', :short_name => 'm')
+      FactoryGirl.create(:unit_of_measurement, :name => 'gram', :short_name => 'g')
+      UnitOfMeasurement.options_for_select.should =~ [['meters', 'm'], ['grams', 'g']]
+    end
+  end
 end
