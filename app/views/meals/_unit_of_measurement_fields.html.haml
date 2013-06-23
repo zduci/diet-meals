@@ -1,2 +1,2 @@
 = f.label :short_name, 'Unit of measurement'
-= f.text_field :short_name
+= f.select :short_name, options_for_select(@units_of_measurement)

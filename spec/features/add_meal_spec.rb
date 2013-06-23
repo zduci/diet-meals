@@ -20,7 +20,7 @@ describe 'adding a meal' do
     fill_in 'meal_ingredients_attributes_0_quantity', :with => 2
 
     fill_in 'meal_ingredients_attributes_1_food_name', :with => 'salt'
-    fill_in 'meal_ingredients_attributes_1_unit_of_measurement_short_name', :with => 'g'
+    select 'g', :from => 'meal_ingredients_attributes_1_unit_of_measurement_short_name'
     fill_in 'meal_ingredients_attributes_1_quantity', :with => 2
     
     click_button 'Add Meal'
