@@ -17,11 +17,11 @@ describe 'adding a meal' do
     select '5', :from => 'meal_duration_minutes'
 
     fill_in 'meal_ingredients_attributes_0_food_name', :with => 'egg'
-    fill_in 'meal_ingredients_attributes_0_quantity', :with => 2
+    select '2', :from => 'meal_ingredients_attributes_0_quantity'
 
     fill_in 'meal_ingredients_attributes_1_food_name', :with => 'salt'
     select 'g', :from => 'meal_ingredients_attributes_1_unit_of_measurement_short_name'
-    fill_in 'meal_ingredients_attributes_1_quantity', :with => 2
+    select '2', :from => 'meal_ingredients_attributes_1_quantity'
     
     click_button 'Add Meal'
 

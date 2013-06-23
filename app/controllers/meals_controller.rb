@@ -5,6 +5,7 @@ class MealsController < ApplicationController
     @hours = SelectOptions.hours
     @minutes = SelectOptions.minutes
     @units_of_measurement = UnitOfMeasurement.options_for_select
+    @quantities = SelectOptions.quantity
   end
 
   def show

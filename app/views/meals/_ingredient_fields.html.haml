@@ -5,7 +5,7 @@
 
   %p
     = f.label :quantity, 'Quantity'
-    = f.text_field :quantity
+    = f.select :quantity, options_for_select(@quantities)
 
   %p
     = f.fields_for :unit_of_measurement do |builder|
