@@ -2,8 +2,8 @@ class MealsController < ApplicationController
   def new
     @meal = Meal.new_meal
     @food_names = Food.all_names
-    @hours = MealDuration.hours
-    @minutes = MealDuration.minutes
+    @hours = SelectOptions.hours
+    @minutes = SelectOptions.minutes
     @units_of_measurement = UnitOfMeasurement.options_for_select
   end
 
