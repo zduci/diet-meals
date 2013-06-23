@@ -3,14 +3,29 @@ require 'spec_helper'
 describe MealsController do
   describe '#new' do
     let(:meal) { stub(:meal) }
+    let(:food_names) { stub(:food_names) }
+    let(:hours) { stub(:hours) }
+    let(:minutes) { stub(:minutes) }
+    let(:units_of_measurement) { stub(:units_of_measurement) }
+    let(:quantities) { stub(:quantities) }
 
     before(:each) do
       Meal.stub(:new_meal) { meal }
+      Food.stub(:all_names) { food_names }
+      SelectOptions.stub(:hours) { hours }
+      SelectOptions.stub(:minutes) { minutes }
+      UnitOfMeasurement.stub(:options_for_select) { units_of_measurement }
+      SelectOptions.stub(:quantity) { quantities }
       get :new
     end
 
     it 'returns an empty meal' do
       assigns['meal'].should == meal
+      assigns['food_names'].should == food_names
+      assigns['hours'].should == hours
+      assigns['minutes'].should == minutes
+      assigns['units_of_measurement'].should == units_of_measurement
+      assigns['quantities'].should == quantities
     end
 
     it 'renders new' do
