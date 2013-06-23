@@ -7,7 +7,7 @@ class SelectOptions
     pairs(59)
   end
 
-  def self.quantity
+  def self.quantities
     pairs(1, 30)
   end
 
