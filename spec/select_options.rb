@@ -18,4 +18,10 @@ describe SelectOptions do
       MealDuration.minutes.should == MealDuration.pairs(59)
     end
   end
+
+  context 'quantity' do
+    it 'creates form pairs for quantity' do
+      MealDuration.hours.should == MealDuration.pairs(30)
+    end
+  end
 end
