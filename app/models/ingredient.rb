@@ -1,5 +1,5 @@
 class Ingredient < ActiveRecord::Base
-  attr_accessible :quantity, :food, :unit_of_measurement, :meal
+  attr_accessible :quantity, :food, :unit_of_measurement, :meal, :food_id, :unit_of_measurement_id
   belongs_to :food
   belongs_to :unit_of_measurement
   belongs_to :meal
