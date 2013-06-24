@@ -4,7 +4,6 @@ class Ingredient < ActiveRecord::Base
   belongs_to :unit_of_measurement
   belongs_to :meal
 
-  validates :meal_id, :presence => true
   validates :food_id, :presence => true
   validates :quantity, :presence => true, :numericality => {:greater_than_or_equal_to => 1}
 

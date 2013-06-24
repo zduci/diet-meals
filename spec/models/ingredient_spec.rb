@@ -8,8 +8,6 @@ describe Ingredient do
 
     it { should validate_presence_of(:food_id) }
 
-    it { should validate_presence_of(:meal_id) }
-
     it { should validate_presence_of(:quantity) }
 
     it 'is invalid without a positive value greater than 0' do
