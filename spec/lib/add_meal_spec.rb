@@ -69,4 +69,24 @@ describe AddMeal do
       end
     end
   end
+
+  describe '#from_params' do
+    let(:name) { 'toast' }
+    let(:instructions) { 'toast the bread' }
+    let(:duration) { '3' }
+    let(:duration_hours) { '0' }
+    let(:duration_minutes) { '3' }
+    let(:ingredient) { {'food' => { 'name' => 'bread' }, 'quantity' => '2', 'unit_of_measurement' => { 'short_name' => 'slices'}} }
+    let(:meal_params) { {:name => name,
+                         :instructions => instructions,
+                         :duration_hours => duration_hours,
+                         :duration_minutes => duration_minutes,
+                         :ingredients_attributes => {'0' => ingredient}} }
+
+    it 'calls #add with the correct parameters' do
+      MealDuration.stub(:to_minutes).with(duration_hours, duration_minutes) { duration }
+      AddMeal.should_receive(:add).with(name, instructions, duration, ingredient)
+      AddMeal.from_params(meal_params)
+    end
+  end
 end

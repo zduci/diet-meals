@@ -1,4 +1,11 @@
 class AddMeal
+  def self.from_params(meal_params)
+    add(meal_params[:name], 
+        meal_params[:instructions], 
+        MealDuration.to_minutes(meal_params[:duration_hours], meal_params[:duration_minutes]),
+        *meal_params[:ingredients_attributes].values)
+  end
+
   def self.add(name, instructions, duration, *ingredients)
     meal = Meal.create_meal(name, instructions, duration)
     create_ingredients_for(meal, ingredients)
