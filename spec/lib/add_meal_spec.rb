@@ -13,8 +13,8 @@ describe AddMeal do
 
       before(:each) do
         Meal.stub(:create_meal).with('boiled eggs', 'boil the eggs, add salt', '5') { meal }
-        Food.stub(:find_by_name!).with('egg') { egg }
-        Food.stub(:find_by_name!).with('salt') { salt }
+        Food.stub(:find).with('10') { egg }
+        Food.stub(:find).with('20') { salt }
         UnitOfMeasurement.stub(:find_by_short_name!).with('g') { gram }
         UnitOfMeasurement.stub(:find_by_short_name!).with('') { piece }
         Ingredient.stub(:create_ingredient).with(meal, egg, '2', piece)
@@ -24,7 +24,7 @@ describe AddMeal do
       end
 
       def add_meal
-        AddMeal.add('boiled eggs', 'boil the eggs, add salt', '5', {:food => {:name => 'egg'}, :quantity => '2', :unit_of_measurement => {:short_name => ''}}, {:food => {:name => 'salt'}, :quantity => '1', :unit_of_measurement =>{ :short_name =>'g'}})
+        AddMeal.add('boiled eggs', 'boil the eggs, add salt', '5', {:food => {:id => '10'}, :quantity => '2', :unit_of_measurement => {:short_name => ''}}, {:food => {:id => '20'}, :quantity => '1', :unit_of_measurement =>{ :short_name =>'g'}})
       end
 
       it 'creates a new meal' do
@@ -50,19 +50,19 @@ describe AddMeal do
     end
 
     context 'error handling' do
-      it 'fails for inexistent food name' do
+      it 'fails for inexistent food id' do
         expect{ 
           AddMeal.add('boiled eggs', 'boil the eggs, add salt', '5', 
-                      { :food => {:name => 'does not exist'}, 
+                      { :food => {:id => 'does not exist'}, 
                         :quantity => '2'}) 
         }.to raise_error ActiveRecord::RecordNotFound
       end
 
       it 'fails for inexistent unit of measurement short name' do
-        FactoryGirl.create(:food, :name => 'salt')
+        FactoryGirl.create(:food, :id => '1')
         expect{ 
           AddMeal.add('boiled eggs', 'boil the eggs, add salt', '5', 
-                      { :food => {:name => 'salt'}, 
+                      { :food => {:id => '1'}, 
                         :quantity => '1', 
                         :unit_of_measurement => { :short_name => 'does not exist'}}) 
         }.to raise_error ActiveRecord::RecordNotFound
