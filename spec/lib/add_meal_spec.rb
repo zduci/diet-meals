@@ -15,8 +15,8 @@ describe AddMeal do
         Meal.stub(:create_meal).with('boiled eggs', 'boil the eggs, add salt', '5') { meal }
         Food.stub(:find).with('10') { egg }
         Food.stub(:find).with('20') { salt }
-        UnitOfMeasurement.stub(:find_by_short_name!).with('g') { gram }
-        UnitOfMeasurement.stub(:find_by_short_name!).with('') { piece }
+        UnitOfMeasurement.stub(:find).with('30') { gram }
+        UnitOfMeasurement.stub(:find).with('') { piece }
         Ingredient.stub(:create_ingredient).with(meal, egg, '2', piece)
         Ingredient.stub(:create_ingredient).with(meal, salt, '1', gram)
         MealClassifier.stub(:classify).with(meal) { [diet] }
@@ -24,7 +24,7 @@ describe AddMeal do
       end
 
       def add_meal
-        AddMeal.add('boiled eggs', 'boil the eggs, add salt', '5', {:food => {:id => '10'}, :quantity => '2', :unit_of_measurement => {:short_name => ''}}, {:food => {:id => '20'}, :quantity => '1', :unit_of_measurement =>{ :short_name =>'g'}})
+        AddMeal.add('boiled eggs', 'boil the eggs, add salt', '5', {:food => {:id => '10'}, :quantity => '2', :unit_of_measurement => {:id => ''}}, {:food => {:id => '20'}, :quantity => '1', :unit_of_measurement =>{ :id =>'30'}})
       end
 
       it 'creates a new meal' do
@@ -64,7 +64,7 @@ describe AddMeal do
           AddMeal.add('boiled eggs', 'boil the eggs, add salt', '5', 
                       { :food => {:id => '1'}, 
                         :quantity => '1', 
-                        :unit_of_measurement => { :short_name => 'does not exist'}}) 
+                        :unit_of_measurement => { :id => 'does not exist'}}) 
         }.to raise_error ActiveRecord::RecordNotFound
       end
     end
@@ -76,7 +76,7 @@ describe AddMeal do
     let(:duration) { '3' }
     let(:duration_hours) { '0' }
     let(:duration_minutes) { '3' }
-    let(:ingredient) { {'food' => { 'name' => 'bread' }, 'quantity' => '2', 'unit_of_measurement' => { 'short_name' => 'slices'}} }
+    let(:ingredient) { {'food' => { 'name' => 'bread' }, 'quantity' => '2', 'unit_of_measurement' => { 'id' => '13'}} }
     let(:meal_params) { {:name => name,
                          :instructions => instructions,
                          :duration_hours => duration_hours,

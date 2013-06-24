@@ -1,2 +1,2 @@
 = f.label :short_name, 'Unit of measurement'
-= f.select :short_name, options_for_select(@units_of_measurement)
+= f.collection_select :id, UnitOfMeasurement.all, :id, :name

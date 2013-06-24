@@ -21,8 +21,8 @@ class AddMeal
   def self.create_ingredient_for(meal, ingredient)
     food = Food.find(ingredient.fetch(:food).fetch(:id))
     quantity = ingredient[:quantity]
-    unit_of_measurement_short_name = ingredient.fetch(:unit_of_measurement).fetch(:short_name)
-    unit_of_measurement = UnitOfMeasurement.find_by_short_name!(unit_of_measurement_short_name)
+    unit_of_measurement_id = ingredient.fetch(:unit_of_measurement).fetch(:id)
+    unit_of_measurement = UnitOfMeasurement.find(unit_of_measurement_id)
     Ingredient.create_ingredient(meal, 
                                  food,
                                  quantity,

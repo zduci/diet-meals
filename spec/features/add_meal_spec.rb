@@ -20,7 +20,7 @@ describe 'adding a meal' do
     select '2', :from => 'meal_ingredients_attributes_0_quantity'
 
     select :salt, :from => 'meal_ingredients_attributes_1_food_id'
-    select 'g', :from => 'meal_ingredients_attributes_1_unit_of_measurement_short_name'
+    select 'gram', :from => 'meal_ingredients_attributes_1_unit_of_measurement_id'
     select '2', :from => 'meal_ingredients_attributes_1_quantity'
     
     click_button 'Add Meal'
