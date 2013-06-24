@@ -1,5 +1,5 @@
 class Meal < ActiveRecord::Base
-  attr_accessible :duration, :instructions, :ingredients, :name
+  attr_accessible :duration, :instructions, :ingredients, :name, :ingredients_attributes
   has_many :ingredients, :include => [:food, :unit_of_measurement], :dependent => :destroy
   has_many :foods, :through => :ingredients
   has_many :diet_classifications
