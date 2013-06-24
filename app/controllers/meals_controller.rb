@@ -13,7 +13,7 @@ class MealsController < ApplicationController
   end
 
   def create
-    meal = AddMeal.add(params[:meal][:name], params[:meal][:instructions], MealDuration.to_minutes(params[:meal][:duration_hours], params[:meal][:duration_minutes]), *params[:meal][:ingredients_attributes].values)
+    meal = AddMeal.from_params(params[:meal])
     redirect_to meal_url(meal)
   rescue StandardError
     flash[:error] = 'There were errors. Meal was not saved'

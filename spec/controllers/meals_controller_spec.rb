@@ -53,40 +53,27 @@ describe MealsController do
 
   describe '#create' do
     let(:meal) { stub(:meal) }
-    let(:name) { 'toast' }
-    let(:instructions) { 'toast the bread' }
-    let(:duration) { '3' }
-    let(:duration_hours) { '0' }
-    let(:duration_minutes) { '3' }
-    let(:ingredient) { {'food' => { 'name' => 'bread' }, 'quantity' => '2', 'unit_of_measurement' => { 'short_name' => 'slices'} }}
-
-    before(:each) do
-      MealDuration.stub(:to_minutes).with(duration_hours, duration_minutes) { duration }
-    end
+    let(:meal_params) { {} }
 
     def do_post
-      post :create, :meal => { :name => name,
-                    :instructions => instructions,
-                    :duration_hours => duration_hours,
-                    :duration_minutes => duration_minutes,
-                    :ingredients_attributes => {'0' => ingredient} }
+      post :create, :meal => meal_params
     end
 
     context 'success' do
       it "adds a new meal" do
-        AddMeal.should_receive(:add).with(name, instructions, duration, ingredient) { meal }
+        AddMeal.should_receive(:from_params).with(meal_params)
         do_post
       end
 
       it "redirects to the new meal's url" do
-        AddMeal.stub(:add).with(name, instructions, duration, ingredient) { meal }
+        AddMeal.stub(:from_params).with(meal_params) { meal }
         do_post
         response.should redirect_to(meal_url(meal))
       end
     end
 
     context 'fail' do
-      before(:each) { AddMeal.stub(:add).and_raise(StandardError.new) }
+      before(:each) { AddMeal.stub(:from_params).and_raise(StandardError.new) }
       it 'displays error for invalid data' do
         do_post
         flash[:error].should_not be_nil
