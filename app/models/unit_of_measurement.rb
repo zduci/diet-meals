@@ -19,11 +19,4 @@ class UnitOfMeasurement < ActiveRecord::Base
       PIECE
     end
   end
-
-  def self.options_for_select
-    find(:all, :select => [:name, :short_name]).map do |unit_of_measurement|
-      [unit_of_measurement.name.pluralize, unit_of_measurement.short_name]
-    end
-  end
-
 end
