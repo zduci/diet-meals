@@ -14,6 +14,8 @@ describe MealsController do
       SelectOptions.stub(:hours) { hours }
       SelectOptions.stub(:minutes) { minutes }
       SelectOptions.stub(:quantities) { quantities }
+      Food.stub(:all) { foods }
+      UnitOfMeasurement.stub(:all) { units_of_measurement }
       get :new
     end
 
@@ -22,6 +24,8 @@ describe MealsController do
       assigns['hours'].should == hours
       assigns['minutes'].should == minutes
       assigns['quantities'].should == quantities
+      assigns['foods'].should == foods
+      assigns['units_of_measurement'].should == units_of_measurement
     end
 
     it 'renders new' do

@@ -1,7 +1,7 @@
 .ingredient
   %p
     = f.label :name, 'Food'
-    = f.collection_select :food_id, Food.all, :id, :name
+    = f.collection_select :food_id, @foods, :id, :name
 
   %p
     = f.label :quantity, 'Quantity'
@@ -9,4 +9,4 @@
 
   %p
     = f.label :short_name, 'Unit of measurement'
-    = f.collection_select :unit_of_measurement_id, UnitOfMeasurement.all, :id, :name
+    = f.collection_select :unit_of_measurement_id, @units_of_measurement, :id, :name
