@@ -14,8 +14,8 @@ describe MealsController do
       SelectOptions.stub(:hours) { hours }
       SelectOptions.stub(:minutes) { minutes }
       SelectOptions.stub(:quantities) { quantities }
-      Food.stub(:all) { foods }
-      UnitOfMeasurement.stub(:all) { units_of_measurement }
+      Food.stub(:ordered_by_name) { foods }
+      UnitOfMeasurement.stub(:ordered_by_name) { units_of_measurement }
       get :new
     end
 
