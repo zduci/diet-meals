@@ -58,12 +58,12 @@ describe MealsController do
       post :create, :meal => meal_params
     end
 
-    context 'success' do
       it "adds a new meal" do
         AddMeal.should_receive(:from_params).with(meal_params) { stub(:meal, :new_record? => false) }
         do_post
       end
 
+    context 'success' do
       it "redirects to the new meal's url" do
         meal = stub(:meal, :new_record? => false)
         AddMeal.stub(:from_params).with(meal_params) { meal }
@@ -74,7 +74,7 @@ describe MealsController do
 
     context 'fail' do
       before(:each) do
-        AddMeal.stub(:from_params).with(meal_params) { stub(:meal, :new_record? => true) } 
+        AddMeal.stub(:from_params).with(meal_params) { stub(:meal, :new_record? => true) }
       end
 
       it 'displays error for invalid data' do
