@@ -20,6 +20,8 @@ class MealsController < ApplicationController
       @hours = SelectOptions.hours
       @minutes = SelectOptions.minutes
       @quantities = SelectOptions.quantities
+      @units_of_measurement = UnitOfMeasurement.ordered_by_name
+      @foods = Food.ordered_by_name
       flash[:error] = 'There were errors. Meal was not saved'
       render :action => :new
     end
