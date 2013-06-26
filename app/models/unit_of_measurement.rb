@@ -19,4 +19,8 @@ class UnitOfMeasurement < ActiveRecord::Base
       PIECE
     end
   end
+
+  def self.ordered_by_name
+    order(:name)
+  end
 end

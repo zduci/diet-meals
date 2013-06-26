@@ -40,14 +40,26 @@ describe UnitOfMeasurement do
     end
   end
 
-  describe 'UnitOfMeasurement#find_by_short_name!' do
-    it 'returns PIECE for empty string' do
-      UnitOfMeasurement.find_by_short_name!('').should == UnitOfMeasurement::PIECE
+  context 'queries' do
+    describe 'UnitOfMeasurement#find_by_short_name!' do
+      it 'returns PIECE for empty string' do
+        UnitOfMeasurement.find_by_short_name!('').should == UnitOfMeasurement::PIECE
+      end
+
+      it 'returns a unit of measurement by short name for present string' do
+        cm = FactoryGirl.create(:unit_of_measurement, :short_name => 'cm')
+        UnitOfMeasurement.find_by_short_name!('cm').should == cm
+      end
     end
 
-    it 'returns a unit of measurement by short name for present string' do
-      cm = FactoryGirl.create(:unit_of_measurement, :short_name => 'cm')
-      UnitOfMeasurement.find_by_short_name!('cm').should == cm
+
+    describe 'UnitOfMeasurement#order_by_name' do
+      it 'retrieves all foods ordered by name' do
+        meter = FactoryGirl.create(:unit_of_measurement, :name => 'meter', :short_name => 'm')
+        gram = FactoryGirl.create(:unit_of_measurement, :name => 'gram', :short_name => 'g')
+        kilogram = FactoryGirl.create(:unit_of_measurement, :name => 'kilogram', :short_name => 'kg')
+        UnitOfMeasurement.ordered_by_name.should == [gram, kilogram, meter]
+      end
     end
   end
 end
