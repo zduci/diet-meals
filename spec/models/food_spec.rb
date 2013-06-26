@@ -25,4 +25,13 @@ describe Food do
       Food.find_by_name('avocado').should == avocado
     end
   end
+
+  describe 'Food#ordered_by_name' do
+    it 'retrieves all foods ordered by name' do
+      orange = FactoryGirl.create(:food, :name => 'orange')
+      apple = FactoryGirl.create(:food, :name => 'apple')
+      banana = FactoryGirl.create(:food, :name => 'banana')
+      Food.ordered_by_name.should == [apple, banana, orange]
+    end
+  end
 end
