@@ -1,10 +1,8 @@
 class MealsController < ApplicationController
   def new
     @meal = Meal.new_meal
-    @foods = Food.all_names
     @hours = SelectOptions.hours
     @minutes = SelectOptions.minutes
-    @units_of_measurement = UnitOfMeasurement.options_for_select
     @quantities = SelectOptions.quantities
   end
 
@@ -13,10 +11,15 @@ class MealsController < ApplicationController
   end
 
   def create
-    meal = AddMeal.from_params(params[:meal])
-    redirect_to meal_url(meal)
-  rescue StandardError
-    flash[:error] = 'There were errors. Meal was not saved'
-    redirect_to :action => :new
+    @meal = AddMeal.from_params(params[:meal])
+    unless @meal.new_record?
+      redirect_to meal_url(@meal)
+    else 
+      @hours = SelectOptions.hours
+      @minutes = SelectOptions.minutes
+      @quantities = SelectOptions.quantities
+      flash[:error] = 'There were errors. Meal was not saved'
+      render :action => :new
+    end
   end
 end
