@@ -10,7 +10,7 @@ describe Star do
 
     it { should validate_presence_of(:meal_id) }
 
-    it { should validate_presence_of(:diet_id) }
+    it { should validate_presence_of(:meal_diet_classification_id) }
 
     it 'validates uniqueness of diet_id, meal_id and user_id' do
       meal = FactoryGirl.create(:meal)
@@ -22,7 +22,7 @@ describe Star do
   end
 
   context 'associations' do
-    it { should belong_to(:diet) }
+    it { should belong_to(:meal_diet_classification) }
 
     it { should belong_to(:meal) }
 
