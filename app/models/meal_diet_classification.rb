@@ -1,4 +1,4 @@
-class DietClassification < ActiveRecord::Base
+class MealDietClassification < ActiveRecord::Base
   attr_accessible :diet, :meal
   belongs_to :meal
   belongs_to :diet
