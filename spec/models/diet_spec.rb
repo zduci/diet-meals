@@ -27,7 +27,7 @@ describe Diet do
 
     it { should have_many(:forbidden_foods) }
 
-    it { should have_many(:diet_classifications) }
+    it { should have_many(:meal_diet_classifications) }
 
     it { should have_many(:meals) }
   end

@@ -32,7 +32,7 @@ describe AddMeal do
       Meal.should_receive(:new).with(meal_params_with_duration) { meal }
       meal.should_receive(:save)
       MealClassifier.stub(:classify).with(meal) { [diet] }
-      DietClassification.stub(:create_classification).with(meal, diet)
+      MealDietClassification.stub(:create_classification).with(meal, diet)
       add_meal
     end
 
@@ -41,7 +41,7 @@ describe AddMeal do
       diet = stub
       Meal.stub(:new).with(meal_params_with_duration) { meal }
       MealClassifier.stub(:classify).with(meal) { [diet] }
-      DietClassification.should_receive(:create_classification).with(meal, diet)
+      MealDietClassification.should_receive(:create_classification).with(meal, diet)
       add_meal
     end
 
@@ -50,7 +50,7 @@ describe AddMeal do
       diet = stub
       Meal.stub(:new).with(meal_params_with_duration) { meal }
       MealClassifier.stub(:classify).with(meal) { [diet] }
-      DietClassification.stub(:create_classification).with(meal, diet)
+      MealDietClassification.stub(:create_classification).with(meal, diet)
       add_meal.should == meal
     end
   end

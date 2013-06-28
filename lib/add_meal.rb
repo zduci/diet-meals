@@ -13,7 +13,7 @@ class AddMeal
 
   def self.create_classifications(meal)
     MealClassifier.classify(meal).each do |diet|
-      DietClassification.create_classification(meal, diet)
+      MealDietClassification.create_classification(meal, diet)
     end
   end
 end

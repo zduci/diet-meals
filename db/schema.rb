@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618202535) do
+ActiveRecord::Schema.define(:version => 20130628163818) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -30,17 +30,6 @@ ActiveRecord::Schema.define(:version => 20130618202535) do
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
-
-  create_table "diet_classifications", :force => true do |t|
-    t.integer  "diet_id",                   :null => false
-    t.integer  "meal_id",                   :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "stars",      :default => 0, :null => false
-  end
-
-  add_index "diet_classifications", ["diet_id"], :name => "index_diet_classifications_on_diet_id"
-  add_index "diet_classifications", ["meal_id"], :name => "index_diet_classifications_on_meal_id"
 
   create_table "diet_food_connections", :force => true do |t|
     t.integer  "diet_id",    :null => false
@@ -91,6 +80,17 @@ ActiveRecord::Schema.define(:version => 20130618202535) do
   add_index "ingredients", ["meal_id"], :name => "index_ingredients_on_meal_id"
   add_index "ingredients", ["unit_of_measurement_id"], :name => "index_ingredients_on_unit_of_measurement_id"
 
+  create_table "meal_diet_classifications", :force => true do |t|
+    t.integer  "diet_id",                   :null => false
+    t.integer  "meal_id",                   :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "stars",      :default => 0, :null => false
+  end
+
+  add_index "meal_diet_classifications", ["diet_id"], :name => "index_diet_classifications_on_diet_id"
+  add_index "meal_diet_classifications", ["meal_id"], :name => "index_diet_classifications_on_meal_id"
+
   create_table "meals", :force => true do |t|
     t.text     "instructions", :null => false
     t.integer  "duration",     :null => false
@@ -100,11 +100,10 @@ ActiveRecord::Schema.define(:version => 20130618202535) do
   end
 
   create_table "stars", :force => true do |t|
-    t.integer  "diet_id",    :null => false
-    t.integer  "meal_id",    :null => false
-    t.integer  "user_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "meal_diet_classification_id", :null => false
+    t.integer  "user_id",                     :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "unit_of_measurements", :force => true do |t|

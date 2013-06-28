@@ -1,9 +1,10 @@
 class Star < ActiveRecord::Base
-  validates :user_id, :presence => true, :uniqueness => { :scope => [:meal_id, :diet_id] }
-  validates :meal_id, :presence => true
+  attr_accessible :meal_diet_classification_id
+  validates :user_id, :presence => true, :uniqueness => { :scope => [:meal_diet_classification_id] }
   validates :meal_diet_classification_id, :presence => true
 
-  belongs_to :meal
   belongs_to :meal_diet_classification
+  has_one :meal, :through => :meal_diet_classification
+  has_one :diet, :through => :meal_diet_classification
   belongs_to :user
 end
