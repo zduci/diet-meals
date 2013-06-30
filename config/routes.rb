@@ -7,4 +7,5 @@ DietMeals::Application.routes.draw do
 
   resources :meals, :only => [:new, :show, :create]
   resources :diets, :only => [:show]
+  resources :stars, :only => [:create]
 end
