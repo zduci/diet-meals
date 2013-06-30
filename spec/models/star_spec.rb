@@ -35,4 +35,15 @@ describe Star do
       classification.reload.stars_count.should == 1
     end
   end
+
+  context 'constructors' do
+    describe 'Star#create_star' do
+      it 'creates a new star by meal diet classification id and user' do
+        classification = FactoryGirl.create(:meal_diet_classification)
+        user = FactoryGirl.create(:user)
+        Star.create_star(classification.id, user)
+        Star.find_by_meal_diet_classification_id_and_user_id(classification.id, user.id)
+      end
+    end
+  end
 end
