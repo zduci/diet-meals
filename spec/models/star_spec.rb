@@ -38,11 +38,23 @@ describe Star do
 
   context 'constructors' do
     describe 'Star#create_star' do
-      it 'creates a new star by meal diet classification id and user' do
-        classification = FactoryGirl.create(:meal_diet_classification)
-        user = FactoryGirl.create(:user)
-        Star.create_star(classification.id, user)
-        Star.find_by_meal_diet_classification_id_and_user_id(classification.id, user.id)
+      context 'star does not exist' do
+        it 'creates a new star by meal diet classification id and user' do
+          classification = FactoryGirl.create(:meal_diet_classification)
+          user = FactoryGirl.create(:user)
+
+          Star.find_by_meal_diet_classification_id_and_user_id(classification.id, user.id)
+        end
+      end
+
+      context 'star already exists' do
+        it 'returns false if a star already exists' do
+          classification = FactoryGirl.create(:meal_diet_classification)
+          user = FactoryGirl.create(:user)
+          FactoryGirl.create(:star, :meal_diet_classification => classification, :user => user)
+
+          Star.create_star(classification.id, user).should == false
+        end
       end
     end
   end
