@@ -9,7 +9,7 @@ describe 'adding a meal' do
     FactoryGirl.create(:diet, :name => 'do not eat eggs', :exclusive => false, :forbidden_foods => [@egg])
   end
 
-  it 'adds a new meals and classifies it into the right diets' do
+  it 'creates a new meals and classifies it into the correct diets' do
     visit '/meals/new'
     fill_in 'meal_name', :with => 'boiled eggs'
     fill_in 'meal_instructions', :with => 'boil the eggs, add salt'
