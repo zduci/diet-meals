@@ -17,6 +17,8 @@ describe MealDietClassification do
     it { should belong_to(:meal) }
 
     it { should belong_to(:diet) }
+
+    it { should have_many(:stars) }
   end
 
   describe 'DietClassification#create_classifiction' do
