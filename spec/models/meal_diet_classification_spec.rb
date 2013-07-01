@@ -29,4 +29,14 @@ describe MealDietClassification do
       MealDietClassification.find_by_meal_id_and_diet_id(meal.id, diet.id).should == diet_classification
     end
   end
+
+  describe 'DietClassification#stars_count' do
+    it 'retrieves the stars count' do
+      classification = FactoryGirl.create(:meal_diet_classification)
+      FactoryGirl.create(:star, :meal_diet_classification_id => classification.id, :user_id => 1)
+      FactoryGirl.create(:star, :meal_diet_classification_id => classification.id, :user_id => 2)
+
+      MealDietClassification.stars_count(classification.id).should == 2
+    end
+  end
 end

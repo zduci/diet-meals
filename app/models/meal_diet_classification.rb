@@ -10,4 +10,8 @@ class MealDietClassification < ActiveRecord::Base
   def self.create_classification(meal, diet)
     create!(:meal => meal, :diet => diet)
   end
+
+  def self.stars_count(id)
+    find(id).stars_count
+  end
 end
