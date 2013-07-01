@@ -8,7 +8,7 @@ describe StarsController do
         user = FactoryGirl.create(:user)
         sign_in user
 
-        Star.should_receive(:create_star).with(classification_id, user)
+        AddStar.should_receive(:add).with(classification_id, user)
 
         post :create, :meal_diet_classification_id => classification_id
       end
