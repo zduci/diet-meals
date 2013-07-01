@@ -12,6 +12,20 @@ describe StarsController do
 
         post :create, :meal_diet_classification_id => classification_id
       end
+      
+      context 'creates a new star' do
+        it 'returns the stars count' do
+          classification_id = '1'
+          user = FactoryGirl.create(:user)
+          sign_in user
+          stars_count = 1
+
+          AddStar.stub(:add).with(classification_id, user) { stars_count }
+
+          post :create, :meal_diet_classification_id => classification_id
+          response.body.should == "{\"stars_count\":#{stars_count}}"
+        end
+      end
     end
   end
 end
