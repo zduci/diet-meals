@@ -16,26 +16,33 @@ describe StarsController do
 
       it 'tries to create a new star' do
         AddStar.should_receive(:add).with(classification_id, user)
-
         do_post
       end
       
       context 'creates a new star' do
-        it 'returns the stars count' do
-          stars_count = 1
-          AddStar.stub(:add).with(classification_id, user) { stars_count }
+        let(:stars_count) { 1 }
 
+        before(:each) do
+          AddStar.stub(:add).with(classification_id, user) { stars_count }
           do_post
-          response.body.should == "{\"stars_count\":#{stars_count}}"
+        end
+
+        it 'renders the correct template' do
+          response.should render_template(:create)
+        end
+
+        it 'assigns instance variables' do
+          assigns['meal_classification_id'].should == classification_id
+          assigns['stars_count'].should == stars_count
         end
       end
 
       context 'fails to create a new star' do
-        it 'returns the stars count' do
+        it 'renders nothing' do
           AddStar.stub(:add).with(classification_id, user) { false }
 
           do_post
-          response.body.should == "{}"
+          response.body.should be_blank
         end
       end
     end
