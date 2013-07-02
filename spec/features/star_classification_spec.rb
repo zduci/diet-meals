@@ -16,12 +16,11 @@ describe 'starring a meal' do
     Warden.test_reset!
   end
 
-  it 'increments the stars count' do
-    pending
+  it 'increments the stars count', :js => true do
     visit meal_path(@meal)
 
     click_link 'Star'
 
-    page.should have_content '1'
+    find('.diet_classification').text.should include('1')
   end
 end
