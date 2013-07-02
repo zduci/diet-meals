@@ -12,6 +12,8 @@ gem 'haml'
 
 gem 'therubyracer'
 
+gem 'jquery-rails'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -20,11 +22,11 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-gem 'jquery-rails'
+group :development do
+  gem 'launchy' 
+end
 
-gem 'launchy' 
-
-group :development, :test do
+group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
