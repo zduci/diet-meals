@@ -22,6 +22,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'launchy' 
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
