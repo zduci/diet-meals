@@ -12,6 +12,10 @@ describe 'starring a meal' do
     @classification = FactoryGirl.create(:meal_diet_classification, :meal => @meal, :diet => diet)
   end
 
+  after(:each) do
+    Warden.test_reset!
+  end
+
   it 'increments the stars count' do
     pending
     visit meal_path(@meal)
