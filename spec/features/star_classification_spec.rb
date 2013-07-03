@@ -21,6 +21,6 @@ describe 'starring a meal' do
 
     click_link 'Star'
 
-    find('.diet_classification').text.should include('1')
+    find('.diet_classification').should have_content('1')
   end
 end
