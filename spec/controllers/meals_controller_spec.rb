@@ -53,20 +53,25 @@ describe MealsController do
 
   describe '#create' do
     let(:meal_params) { {} }
+    let(:user) { FactoryGirl.create(:user) }
+
+    before(:each) do
+      sign_in user
+    end
 
     def do_post
       post :create, :meal => meal_params
     end
 
       it "adds a new meal" do
-        AddMeal.should_receive(:from_params).with(meal_params) { stub(:meal, :new_record? => false) }
+        AddMeal.should_receive(:from_params).with(meal_params, user) { stub(:meal, :new_record? => false) }
         do_post
       end
 
     context 'success' do
       it "redirects to the new meal's url" do
         meal = stub(:meal, :new_record? => false)
-        AddMeal.stub(:from_params).with(meal_params) { meal }
+        AddMeal.stub(:from_params).with(meal_params, user) { meal }
         do_post
         response.should redirect_to(meal_url(meal))
       end
@@ -80,7 +85,6 @@ describe MealsController do
       let(:units_of_measurement) { stub(:units_of_measurement) }
       let(:quantities) { stub(:quantities) }
 
-
       before(:each) do
         Meal.stub(:new_meal) { meal }
         SelectOptions.stub(:hours) { hours }
@@ -88,7 +92,7 @@ describe MealsController do
         SelectOptions.stub(:quantities) { quantities }
         Food.stub(:ordered_by_name) { foods }
         UnitOfMeasurement.stub(:ordered_by_name) { units_of_measurement }
-        AddMeal.stub(:from_params).with(meal_params) { meal }
+        AddMeal.stub(:from_params).with(meal_params, user) { meal }
         do_post
       end
 

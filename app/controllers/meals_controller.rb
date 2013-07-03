@@ -13,7 +13,7 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meal = AddMeal.from_params(params[:meal])
+    @meal = AddMeal.from_params(params[:meal], current_user)
     unless @meal.new_record?
       redirect_to meal_url(@meal)
     else 
