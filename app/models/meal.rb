@@ -4,6 +4,7 @@ class Meal < ActiveRecord::Base
   has_many :foods, :through => :ingredients
   has_many :meal_diet_classifications
   has_many :diets, :through => :meal_diet_classifications
+  belongs_to :user
 
   validates :instructions, :presence => true
   validates :name, :presence => true

@@ -28,6 +28,8 @@ describe Meal do
 
     it { should have_many(:diets) }
 
+    it { should belong_to(:user) }
+
     it { should accept_nested_attributes_for(:ingredients) }
   end
 
