@@ -18,6 +18,12 @@
             %span.icon-bar
             %span.icon-bar
           %a.brand{ :href=> "/" } DietMeals
+          - if user_signed_in?
+            %ul.nav.pull-right
+              %li= link_to('Sign out', destroy_user_session_path, :method => :delete)
+          - else
+            %ul.nav.pull-right
+              %li= link_to('Sign in', new_user_session_path)
 
     .left_margin
       = yield
