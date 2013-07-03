@@ -3,17 +3,19 @@ require 'spec_helper'
 
 describe 'starring a meal' do
   include Warden::Test::Helpers
-  Warden.test_mode!
+  before(:all) do
+    Warden.test_mode!
+  end
+
+  after(:all) do
+    Warden.test_reset!
+  end
 
   before(:each) do
     login_as(FactoryGirl.create(:user), :scope => :user)
     diet = FactoryGirl.create(:diet)
     @meal = FactoryGirl.create(:meal)
     @classification = FactoryGirl.create(:meal_diet_classification, :meal => @meal, :diet => diet)
-  end
-
-  after(:each) do
-    Warden.test_reset!
   end
 
   it 'increments the stars count', :js => true do
