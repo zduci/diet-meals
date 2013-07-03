@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe MealsController do
-  describe '#new' do
-    let(:meal) { stub(:meal) }
-    let(:foods) { stub(:foods) }
-    let(:hours) { stub(:hours) }
-    let(:minutes) { stub(:minutes) }
-    let(:units_of_measurement) { stub(:units_of_measurement) }
-    let(:quantities) { stub(:quantities) }
+  let(:meal) { stub(:meal, :new_record? => true) }
+  let(:foods) { stub(:foods) }
+  let(:hours) { stub(:hours) }
+  let(:minutes) { stub(:minutes) }
+  let(:units_of_measurement) { stub(:units_of_measurement) }
+  let(:quantities) { stub(:quantities) }
 
+  describe '#new' do
     before(:each) do
       Meal.stub(:new_meal) { meal }
       SelectOptions.stub(:hours) { hours }
@@ -78,13 +78,6 @@ describe MealsController do
     end
 
     context 'fail' do
-      let(:meal) { stub(:meal, :new_record? => true) }
-      let(:foods) { stub(:foods) }
-      let(:hours) { stub(:hours) }
-      let(:minutes) { stub(:minutes) }
-      let(:units_of_measurement) { stub(:units_of_measurement) }
-      let(:quantities) { stub(:quantities) }
-
       before(:each) do
         Meal.stub(:new_meal) { meal }
         SelectOptions.stub(:hours) { hours }
