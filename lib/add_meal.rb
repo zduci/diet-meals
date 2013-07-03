@@ -11,8 +11,7 @@ class AddMeal
   end
 
   def self.add_user(meal_params, user)
-    meal_params[:user_id] = user.id
-    meal_params
+    meal_params.merge(:user_id =>  user.id)
   end
 
   def self.add_duration(meal_params)
