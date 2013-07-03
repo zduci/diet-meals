@@ -1,7 +1,17 @@
 require 'spec_helper'
 
 describe 'adding a meal' do
+  include Warden::Test::Helpers
+  before(:all) do
+    Warden.test_mode!
+  end
+
+  after(:all) do
+    Warden.test_reset!
+  end
+
   before(:each) do
+    login_as(FactoryGirl.create(:user), :scope => :user)
     @egg = FactoryGirl.create(:food, :name => :egg)
     @salt = FactoryGirl.create(:food, :name => :salt)
     FactoryGirl.create(:unit_of_measurement, :name => 'gram', :short_name => 'g')
