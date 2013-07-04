@@ -1,1 +1,2 @@
 $("#stars_count_<%=@meal_classification_id%>").text(<%=@stars_count%>);
+$("#star_<%=@meal_classification_id%>").html('<%=link_to 'Unstar', stars_path(:meal_diet_classification_id => @meal_classification_id), :remote => true, :method => :delete, :id => "unstar_#{@meal_classification_id}"%>')

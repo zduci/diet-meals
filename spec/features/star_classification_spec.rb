@@ -24,5 +24,6 @@ describe 'starring a meal' do
     click_link 'Star'
 
     find('.diet_classification').should have_content('1')
+    find('.diet_classification').should have_content('Unstar')
   end
 end

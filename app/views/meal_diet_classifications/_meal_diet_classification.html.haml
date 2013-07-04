@@ -1,4 +1,4 @@
 .diet_classification
   = meal_diet_classification.diet.name
   %span{:id => "stars_count_#{meal_diet_classification.id}"}= meal_diet_classification.stars_count 
-  = link_to 'Star', stars_path(:meal_diet_classification_id => meal_diet_classification.id), :remote => true, :method => :post
+  = link_to 'Star', stars_path(:meal_diet_classification_id => meal_diet_classification.id), :remote => true, :method => :post, :id => "star_#{meal_diet_classification.id}"
