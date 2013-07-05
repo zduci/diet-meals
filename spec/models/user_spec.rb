@@ -7,5 +7,7 @@ describe User do
     end
 
     it { should have_many(:meals) }
+
+    it { should have_many(:stars) }
   end
 end
