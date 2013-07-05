@@ -15,7 +15,7 @@ describe StarsController do
       end
 
       it 'tries to create a new star' do
-        AddStar.should_receive(:add).with(classification_id, user)
+        StarRepository.should_receive(:add).with(classification_id, user)
         do_post
       end
       
@@ -23,7 +23,7 @@ describe StarsController do
         let(:stars_count) { 1 }
 
         before(:each) do
-          AddStar.stub(:add).with(classification_id, user) { stars_count }
+          StarRepository.stub(:add).with(classification_id, user) { stars_count }
           do_post
         end
 
@@ -39,7 +39,7 @@ describe StarsController do
 
       context 'fails to create a new star' do
         it 'renders nothing' do
-          AddStar.stub(:add).with(classification_id, user) { false }
+          StarRepository.stub(:add).with(classification_id, user) { false }
 
           do_post
           response.body.should be_blank
