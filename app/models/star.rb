@@ -11,4 +11,12 @@ class Star < ActiveRecord::Base
   def self.create_star(meal_diet_classification_id, user)
     new(:meal_diet_classification_id => meal_diet_classification_id, :user => user).save
   end
+
+  def self.delete_star(meal_diet_classification_id, user)
+    star = find_by_meal_diet_classification_id_and_user_id!(meal_diet_classification_id, user)
+    star.destroy
+    true
+  rescue ActiveRecord::RecordNotFound => e
+    false
+  end
 end

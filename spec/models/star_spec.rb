@@ -58,4 +58,34 @@ describe Star do
       end
     end
   end
+
+  describe 'Star#find_star' do
+    context 'star exists' do
+      it 'deletes the star by meal diet classification id and user' do
+        classification = FactoryGirl.create(:meal_diet_classification)
+        user = FactoryGirl.create(:user)
+        FactoryGirl.create(:star, :meal_diet_classification => classification, :user => user)
+
+        Star.delete_star(classification.id, user)
+        Star.find_by_meal_diet_classification_id_and_user_id(classification, user).should be_nil
+      end
+
+      it 'return true' do
+        classification = FactoryGirl.create(:meal_diet_classification)
+        user = FactoryGirl.create(:user)
+        FactoryGirl.create(:star, :meal_diet_classification => classification, :user => user)
+
+        Star.delete_star(classification.id, user).should be_true
+      end
+    end
+
+    context 'star does not exist' do
+      it 'returns false' do
+        classification = FactoryGirl.create(:meal_diet_classification)
+        user = FactoryGirl.create(:user)
+
+        Star.delete_star(classification.id, user).should be_false
+      end
+    end
+  end
 end
