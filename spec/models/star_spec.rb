@@ -54,7 +54,7 @@ describe Star do
     end
   end
 
-  describe 'Star#find_star' do
+  describe 'Star#delete_star' do
     context 'star exists' do
       it 'deletes the star by meal diet classification id and user' do
         FactoryGirl.create(:star, :meal_diet_classification => classification, :user => user)
