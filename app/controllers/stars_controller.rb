@@ -11,4 +11,13 @@ class StarsController < ApplicationController
       render :nothing => true
     end
   end
+
+  def destroy
+    star = Star.destroy(params[:id])
+    @stars_count = star.meal_diet_classification.stars_count
+    @meal_classification_id = star.meal_diet_classification.id
+    render :formats => [:js]
+  rescue ActiveRecord::RecordNotFound => e
+    render :nothing => true
+  end
 end
