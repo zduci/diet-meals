@@ -2,7 +2,7 @@ require 'spec_helper'
 include Devise::TestHelpers
 include Warden::Test::Helpers
 
-describe 'meal classification stars' do
+describe 'starring meal classifications' do
   before(:all) do
     Warden.test_mode!
   end
@@ -12,29 +12,43 @@ describe 'meal classification stars' do
   end
 
   before(:each) do
-    @user = FactoryGirl.create(:user)
-    login_as(@user, :scope => :user)
     diet = FactoryGirl.create(:diet)
     @meal = FactoryGirl.create(:meal)
     @classification = FactoryGirl.create(:meal_diet_classification, :meal => @meal, :diet => diet)
   end
 
-  it 'starring a meal increments the stars count', :js => true do
-    visit meal_path(@meal)
+  context 'user is signed in' do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      login_as(@user, :scope => :user)
+    end
 
-    click_link 'Star'
+    it 'starring a meal increments the stars count', :js => true do
+      visit meal_path(@meal)
 
-    find('.diet_classification').should have_content('1')
-    find('.diet_classification').should have_content('Unstar')
+      click_link 'Star'
+
+      find('.diet_classification').should have_content('1')
+      find('.diet_classification').should have_content('Unstar')
+    end
+
+    it 'unstarring a meal decrements the stars count', :js => true do
+      FactoryGirl.create(:star, :user => @user)
+      visit meal_path(@meal)
+
+      click_link 'Unstar'
+
+      find('.diet_classification').should have_content('0')
+      find('.diet_classification').should have_content('Star')
+    end
   end
 
-  it 'unstarring a meal decrements the stars count', :js => true do
-    FactoryGirl.create(:star, :user => @user)
-    visit meal_path(@meal)
+  context 'user is not signed in' do
+    it 'user cannot star or unstar', :js => true do
+      visit meal_path(@meal)
 
-    click_link 'Unstar'
-
-    find('.diet_classification').should have_content('0')
-    find('.diet_classification').should have_content('Star')
+      page.should_not have_content('Star')
+      page.should_not have_content('Unstar')
+    end
   end
 end
