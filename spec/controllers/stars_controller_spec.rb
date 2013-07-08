@@ -4,6 +4,7 @@ describe StarsController do
   let(:classification_id) { '1' }
   let(:user) { FactoryGirl.create(:user) }
   let(:stars_count) { 1 }
+  let(:star_id) { '2' }
 
   describe '#create' do
     def do_post
@@ -23,6 +24,7 @@ describe StarsController do
       context 'creates a new star' do
         before(:each) do
           StarRepository.stub(:add).with(classification_id, user) { stars_count }
+          StarRepository.stub(:find).with(classification_id, user) { star_id }
           do_post
         end
 

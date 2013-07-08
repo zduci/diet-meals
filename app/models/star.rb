@@ -19,4 +19,8 @@ class Star < ActiveRecord::Base
   rescue ActiveRecord::RecordNotFound => e
     false
   end
+
+  def self.find_star(classification_id, user)
+    Star.find_by_meal_diet_classification_id_and_user_id(classification_id, user)
+  end
 end
