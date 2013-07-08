@@ -24,7 +24,7 @@ describe StarsController do
       context 'creates a new star' do
         before(:each) do
           StarRepository.stub(:add).with(classification_id, user) { stars_count }
-          StarRepository.stub(:find).with(classification_id, user) { star_id }
+          Star.stub(:find_star).with(classification_id, user) { star_id }
           do_post
         end
 
@@ -35,6 +35,7 @@ describe StarsController do
         it 'assigns instance variables' do
           assigns['meal_classification_id'].should == classification_id
           assigns['stars_count'].should == stars_count
+          assigns['star_id'].should == star_id
         end
       end
 

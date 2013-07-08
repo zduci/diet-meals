@@ -6,7 +6,7 @@ class StarsController < ApplicationController
     @stars_count = StarRepository.add(@meal_classification_id, current_user)
 
     if @stars_count
-      @star_id = StarRepository.find(@meal_classification_id, current_user)
+      @star_id = Star.find_star(@meal_classification_id, current_user)
       render :formats => [:js]
     else
       render :nothing => true
