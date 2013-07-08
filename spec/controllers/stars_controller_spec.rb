@@ -52,7 +52,7 @@ describe StarsController do
     context 'user is not signed in' do
       it 'redirects to sign in' do
         do_post
-        response.code.should redirect_to('/users/sign_in') 
+        response.should redirect_to('/users/sign_in') 
       end
     end
   end
@@ -104,7 +104,7 @@ describe StarsController do
     context 'user is not signed in' do
       it 'redirects to sign in' do
         do_delete
-        response.code.should redirect_to('/users/sign_in') 
+        response.should redirect_to('/users/sign_in') 
       end
     end
   end
