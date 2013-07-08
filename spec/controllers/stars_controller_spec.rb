@@ -55,8 +55,8 @@ describe StarsController do
   end
 
   describe '#destroy' do
-    let(:star_id) { '2' }
-    let(:star) { stub(:star, :meal_diet_classification => stub(:meal_diet_classification, :stars_count => stars_count, :id => classification_id)) }
+    let(:star) { stub(:star, :meal_diet_classification => stub(:reload => meal_classification))} 
+    let(:meal_classification) { stub(:meal_diet_classification, :stars_count => stars_count, :id => classification_id, :reload => true) }
 
     def do_delete
       delete :destroy, :id => star_id
