@@ -1,4 +1,6 @@
 class MealsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+
   def new
     @meal = Meal.new_meal
     @hours = SelectOptions.hours
