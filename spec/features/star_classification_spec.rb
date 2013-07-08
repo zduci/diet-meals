@@ -44,7 +44,7 @@ describe 'starring meal classifications' do
   end
 
   context 'user is not signed in' do
-    it 'user cannot star or unstar', :js => true do
+    it 'user cannot star or unstar' do
       visit meal_path(@meal)
 
       page.should_not have_content('Star')
