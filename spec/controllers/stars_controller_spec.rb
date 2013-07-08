@@ -42,7 +42,6 @@ describe StarsController do
       context 'fails to create a new star' do
         it 'renders nothing' do
           StarRepository.stub(:add).with(classification_id, user) { false }
-
           do_post
           response.body.should be_blank
         end
@@ -94,7 +93,6 @@ describe StarsController do
       context 'fails to delete a star' do
         it 'renders nothing' do
           Star.stub(:destroy).with(star_id) { raise ActiveRecord::RecordNotFound }
-
           do_delete
           response.body.should be_blank
         end
