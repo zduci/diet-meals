@@ -1,8 +1,8 @@
 require 'spec_helper'
-  include Devise::TestHelpers
+include Devise::TestHelpers
+include Warden::Test::Helpers
 
-describe 'starring a meal' do
-  include Warden::Test::Helpers
+describe 'meal classification stars' do
   before(:all) do
     Warden.test_mode!
   end
@@ -12,18 +12,29 @@ describe 'starring a meal' do
   end
 
   before(:each) do
-    login_as(FactoryGirl.create(:user), :scope => :user)
+    @user = FactoryGirl.create(:user)
+    login_as(@user, :scope => :user)
     diet = FactoryGirl.create(:diet)
     @meal = FactoryGirl.create(:meal)
     @classification = FactoryGirl.create(:meal_diet_classification, :meal => @meal, :diet => diet)
   end
 
-  it 'increments the stars count', :js => true do
+  it 'starring a meal increments the stars count', :js => true do
     visit meal_path(@meal)
 
     click_link 'Star'
 
     find('.diet_classification').should have_content('1')
     find('.diet_classification').should have_content('Unstar')
+  end
+
+  it 'unstarring a meal decrements the stars count', :js => true do
+    FactoryGirl.create(:star, :user => @user)
+    visit meal_path(@meal)
+
+    click_link 'Unstar'
+
+    find('.diet_classification').should have_content('0')
+    find('.diet_classification').should have_content('Star')
   end
 end
