@@ -6,7 +6,7 @@ class StarsController < ApplicationController
     @stars_count = StarRepository.add(@meal_classification_id, current_user)
 
     if @stars_count
-      @star_id = Star.find_star(@meal_classification_id, current_user)
+      @star = Star.find_star(@meal_classification_id, current_user)
       render :formats => [:js]
     else
       render :nothing => true
@@ -15,9 +15,7 @@ class StarsController < ApplicationController
 
   def destroy
     star = Star.destroy(params[:id])
-    meal_classification = star.meal_diet_classification.reload
-    @stars_count = meal_classification.stars_count
-    @meal_classification_id = meal_classification.id
+    @meal_classification = star.meal_diet_classification.reload
     render :formats => [:js]
   rescue ActiveRecord::RecordNotFound => e
     render :nothing => true

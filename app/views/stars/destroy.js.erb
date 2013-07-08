@@ -1,2 +1,2 @@
-$("#stars_count_<%=@meal_classification_id%>").text(<%=@stars_count%>);
-$("#unstar_<%=@meal_classification_id%>").html('<%=link_to 'Star', stars_path(:meal_diet_classification_id => @meal_classification_id), :remote => true, :method => :post, :id => "star_#{@meal_classification_id}"%>')
+$("#stars_count_<%=@meal_classification.id%>").text(<%=@meal_classification.stars_count%>);
+$("#unstar_<%=@meal_classification.id%>").html('<%=link_to 'Star', stars_path(:meal_diet_classification_id => @meal_classification.id), :remote => true, :method => :post, :id => "star_#{@meal_classification.id}"%>')

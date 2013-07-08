@@ -4,7 +4,7 @@ describe StarsController do
   let(:classification_id) { '1' }
   let(:user) { FactoryGirl.create(:user) }
   let(:stars_count) { 1 }
-  let(:star_id) { '2' }
+  let(:star) { '2' }
 
   describe '#create' do
     def do_post
@@ -24,7 +24,7 @@ describe StarsController do
       context 'creates a new star' do
         before(:each) do
           StarRepository.stub(:add).with(classification_id, user) { stars_count }
-          Star.stub(:find_star).with(classification_id, user) { star_id }
+          Star.stub(:find_star).with(classification_id, user) { star }
           do_post
         end
 
@@ -35,7 +35,7 @@ describe StarsController do
         it 'assigns instance variables' do
           assigns['meal_classification_id'].should == classification_id
           assigns['stars_count'].should == stars_count
-          assigns['star_id'].should == star_id
+          assigns['star'].should == star
         end
       end
 
@@ -58,8 +58,9 @@ describe StarsController do
   end
 
   describe '#destroy' do
+    let(:star_id) { '2' }
     let(:star) { stub(:star, :meal_diet_classification => stub(:reload => meal_classification))} 
-    let(:meal_classification) { stub(:meal_diet_classification, :stars_count => stars_count, :id => classification_id, :reload => true) }
+    let(:meal_classification) { stub(:meal_diet_classification) }
 
     def do_delete
       delete :destroy, :id => star_id
@@ -86,8 +87,7 @@ describe StarsController do
         end
 
         it 'assigns instance variables' do
-          assigns['meal_classification_id'].should == classification_id
-          assigns['stars_count'].should == stars_count
+          assigns['meal_classification'].should == meal_classification
         end
       end
 
