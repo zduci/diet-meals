@@ -9,7 +9,7 @@ class Star < ActiveRecord::Base
   has_one :diet, :through => :meal_diet_classification
 
   def self.create_star(meal_diet_classification_id, user)
-    new(:meal_diet_classification_id => meal_diet_classification_id, :user => user).save
+    create!(:meal_diet_classification_id => meal_diet_classification_id, :user => user)
   end
 
   def self.find_star(classification_id, user)

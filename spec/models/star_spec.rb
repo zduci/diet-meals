@@ -39,16 +39,17 @@ describe Star do
 
   context 'constructors' do
     describe 'Star#create_star' do
-      context 'star does not exist' do
+      context 'if star does not exist' do
         it 'creates a new star by meal diet classification id and user' do
-          Star.find_by_meal_diet_classification_id_and_user_id(classification.id, user.id)
+          star = Star.create_star(classification.id, user)
+          Star.find_by_meal_diet_classification_id_and_user_id(classification.id, user.id).should == star
         end
       end
 
-      context 'star already exists' do
-        it 'returns false' do
+      context 'if star already exists' do
+        it 'raises error' do
           FactoryGirl.create(:star, :meal_diet_classification => classification, :user => user)
-          Star.create_star(classification.id, user).should == false
+          expect { Star.create_star(classification.id, user) }.to raise_error ActiveRecord::RecordInvalid
         end
       end
     end
