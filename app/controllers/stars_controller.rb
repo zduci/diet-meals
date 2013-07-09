@@ -3,14 +3,11 @@ class StarsController < ApplicationController
 
   def create
     @meal_classification_id = params[:meal_diet_classification_id]
-    @stars_count = StarRepository.add(@meal_classification_id, current_user)
-
-    if @stars_count
-      @star = Star.find_star(@meal_classification_id, current_user)
-      render :formats => [:js]
-    else
-      render :nothing => true
-    end
+    @star = Star.create_star(@meal_classification_id, current_user)
+    @stars_count = MealDietClassification.stars_count(@meal_classification_id)
+    render :formats => [:js]
+  rescue ActiveRecord::RecordInvalid
+    render :nothing => true
   end
 
   def destroy

@@ -4,7 +4,7 @@ describe StarsController do
   let(:classification_id) { '1' }
   let(:user) { FactoryGirl.create(:user) }
   let(:stars_count) { 1 }
-  let(:star) { '2' }
+  let(:star) { stub(:star) }
 
   describe '#create' do
     def do_post
@@ -15,16 +15,11 @@ describe StarsController do
       before(:each) do
         sign_in user
       end
-
-      it 'tries to create a new star' do
-        StarRepository.should_receive(:add).with(classification_id, user)
-        do_post
-      end
       
       context 'creates a new star' do
         before(:each) do
-          StarRepository.stub(:add).with(classification_id, user) { stars_count }
-          Star.stub(:find_star).with(classification_id, user) { star }
+          Star.stub(:create_star).with(classification_id, user) { star }
+          MealDietClassification.stub(:stars_count).with(classification_id) { stars_count }
           do_post
         end
 
@@ -41,7 +36,7 @@ describe StarsController do
 
       context 'fails to create a new star' do
         it 'renders nothing' do
-          StarRepository.stub(:add).with(classification_id, user) { false }
+          Star.stub(:create_star).with(classification_id, user).and_raise ActiveRecord::RecordInvalid.new(stub.as_null_object)
           do_post
           response.body.should be_blank
         end
