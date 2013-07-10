@@ -42,7 +42,7 @@ describe Diet do
     end
   end
 
-  describe 'Diet#popular' do
+  describe '::popular' do
     it 'returns the first 3 diets' do
       dukan = FactoryGirl.create(:diet, :name => 'Dukan diet')
       atkins = FactoryGirl.create(:diet, :name => 'Atkins diet')

@@ -33,14 +33,14 @@ describe Meal do
     it { should accept_nested_attributes_for(:ingredients) }
   end
 
-  describe '#create_meal' do
+  describe '::create_meal' do
     it 'creates a new meal by name, instructions, duration and ingredients' do
       boiled_egg = Meal.create_meal('Boiled egg', 'boil the egg', 30, FactoryGirl.create(:ingredient))
       Meal.find_by_name('Boiled egg').should == boiled_egg
     end
   end
 
-  describe '#new_meal' do
+  describe '::new_meal' do
     it 'builds a new meal with 2 ingredients each with a new food' do
       Meal.new_meal.ingredients.size.should == 2
       Meal.new_meal.ingredients.first.food.should_not be_nil
