@@ -48,17 +48,20 @@ describe MealsController do
     let(:id) { '1' }
     let(:meal) { stub(:meal) }
 
-    before(:each) do
-      Meal.stub(:find_by_id).with(id) { meal }
-      get :show, :id => id
-    end
+    context 'meal exists' do
+      before(:each) do
+        Meal.stub(:find).with(id) { meal }
+      end
 
-    it 'fetches the requested meal' do
-      assigns['meal'].should == meal
-    end
+      it 'fetches the requested meal' do
+        get :show, :id => id
+        assigns['meal'].should == meal
+      end
 
-    it 'renders show' do
-      response.should render_template(:show)
+      it 'renders show' do
+        get :show, :id => id
+        response.should render_template(:show)
+      end
     end
   end
 
