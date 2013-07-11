@@ -39,4 +39,19 @@ describe MealDietClassification do
       MealDietClassification.stars_count(classification.id).should == 2
     end
   end
+
+  describe '#find_star' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it "finds a user's star'" do
+      classification = FactoryGirl.create(:meal_diet_classification)
+      star = FactoryGirl.create(:star, :meal_diet_classification_id => classification.id, :user_id => user.id)
+      classification.find_star(user).should == star
+    end
+
+    it 'raises error if user has not starred this classification' do
+      classification = FactoryGirl.create(:meal_diet_classification)
+      expect { classification.find_star(user) }.to raise_error ActiveRecord::RecordNotFound
+    end
+  end
 end

@@ -14,4 +14,8 @@ class MealDietClassification < ActiveRecord::Base
   def self.stars_count(id)
     find(id).stars_count
   end
+
+  def find_star(user)
+    stars.find_by_user_id!(user.id)
+  end
 end
