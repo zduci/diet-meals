@@ -54,19 +54,4 @@ describe Star do
       end
     end
   end
-
-  describe 'Star#find_star' do
-    context 'star exists' do
-      it 'find the star by classification id and user' do
-        star = FactoryGirl.create(:star, :meal_diet_classification => classification, :user => user)
-        Star.find_star(classification.id, user.id).should == star
-      end
-    end
-
-    context 'star does not exist' do
-      it 'returns nil' do
-        Star.find_star(classification.id, user.id).should be_nil
-      end
-    end
-  end
 end

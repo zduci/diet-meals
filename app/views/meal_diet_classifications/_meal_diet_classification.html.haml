@@ -2,7 +2,4 @@
   = meal_diet_classification.diet.name
   %span{:id => "stars_count_#{meal_diet_classification.id}"}= meal_diet_classification.stars_count 
   - if current_user
-    - if star = Star.find_star(meal_diet_classification.id, current_user)
-      = link_to 'Unstar', star, :remote => true, :method => :delete, :id => "unstar_#{meal_diet_classification.id}"
-    - else
-      = link_to 'Star', stars_path(:meal_diet_classification_id => meal_diet_classification.id), :remote => true, :method => :post, :id => "star_#{meal_diet_classification.id}"
+    = link_to_stars(meal_diet_classification, current_user)
