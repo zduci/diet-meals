@@ -48,7 +48,7 @@ describe MealsController do
     let(:id) { '1' }
     let(:meal) { stub(:meal) }
 
-    context 'meal exists' do
+    context 'when meal exists' do
       before(:each) do
         Meal.stub(:find).with(id) { meal }
       end
@@ -59,8 +59,17 @@ describe MealsController do
       end
 
       it 'renders show' do
+        Meal.stub(:find).with(id) { meal }
         get :show, :id => id
         response.should render_template(:show)
+      end
+    end
+
+    context 'when meal does not exist' do
+      it 'redirects to root' do
+        Meal.stub(:find).with(id).and_raise ActiveRecord::RecordNotFound
+        get :show, :id => id
+        response.should redirect_to(:root)
       end
     end
   end

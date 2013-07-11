@@ -12,6 +12,8 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to :root
   end
 
   def create
