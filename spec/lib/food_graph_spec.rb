@@ -8,17 +8,23 @@ describe FoodGraph do
     let(:orange) { stub(:orange, :name => :orange, :child_foods => [], :parent_foods => [citrus, sugar]) }
     let(:sugar) { stub(:sugar, :name => :sugar, :child_foods => [], :parent_foods => []) }
 
-    it 'retrieves all ancestors' do
-      FoodGraph.find_ancestors(orange).should =~ [fruit, citrus, sugar]
+    describe '::find_ancestors' do
+      it 'retrieves all ancestors' do
+        FoodGraph.find_ancestors(orange).should =~ [fruit, citrus, sugar]
+      end
     end
 
-    it 'checks for ancestor' do
-      FoodGraph.has_ancestor(orange, fruit).should be_true
-      FoodGraph.has_ancestor(orange, apple).should be_false
+    describe '::has_ancestor' do
+      it 'checks for ancestor' do
+        FoodGraph.has_ancestor(orange, fruit).should be_true
+        FoodGraph.has_ancestor(orange, apple).should be_false
+      end
     end
 
-    it 'returns the foods along with their ancestors' do
-      FoodGraph.including_ancestors([apple, orange]).should == [apple, orange, fruit, citrus, sugar]
+    describe '::including_ancestors' do
+      it 'returns the foods along with their ancestors' do
+        FoodGraph.including_ancestors([apple, orange]).should == [apple, orange, fruit, citrus, sugar]
+      end
     end
   end
 
@@ -29,17 +35,23 @@ describe FoodGraph do
     let(:orange) { stub(:orange, :name => :orange, :child_foods => [], :parent_foods => []) }
     let(:sugar) { stub(:sugar, :name => :sugar, :child_foods => [orange], :parent_foods => []) }
 
-    it 'retrieves all descendants' do
-      FoodGraph.find_descendants(fruit).should =~ [apple, citrus, orange]
+    describe '::find_descendants' do
+      it 'retrieves all descendants' do
+        FoodGraph.find_descendants(fruit).should =~ [apple, citrus, orange]
+      end
     end
 
-    it 'checks for descendant' do
-      FoodGraph.has_descendant(citrus, orange).should be_true
-      FoodGraph.has_descendant(citrus, apple).should be_false
+    describe '::has_descendant' do
+      it 'checks for descendant' do
+        FoodGraph.has_descendant(citrus, orange).should be_true
+        FoodGraph.has_descendant(citrus, apple).should be_false
+      end
     end
 
-    it 'returns the foods along with their descendants' do
-      FoodGraph.including_descendants([citrus, sugar]).should =~ [citrus, orange, sugar]
+    describe '::including_descendants' do
+      it 'returns the foods along with their descendants' do
+        FoodGraph.including_descendants([citrus, sugar]).should =~ [citrus, orange, sugar]
+      end
     end
   end
 end
