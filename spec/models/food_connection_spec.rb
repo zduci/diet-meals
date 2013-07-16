@@ -4,20 +4,6 @@ describe FoodConnection do
   let(:fruit) { FactoryGirl.create(:food, :name => :fruit) }
   let(:orange) { FactoryGirl.create(:food, :name => :orange) }
 
-  context 'Food#connect' do
-    it 'creates a connection between foods if it does not exist' do
-      FoodConnection.connect(fruit, orange)
-
-      orange.parent_foods.should == [fruit]
-      fruit.child_foods.should == [orange]
-    end
-
-    it 'does not create a connection between foods if it already exists' do
-      connection = FoodConnection.connect(fruit, orange)
-      FoodConnection.connect(fruit, orange).should == connection
-    end
-  end
-
   context 'validations' do
     it 'can create a valid object' do
       FactoryGirl.build(:food_connection).should be_valid
@@ -37,5 +23,19 @@ describe FoodConnection do
     it { should belong_to(:parent_food) }
 
     it { should belong_to(:child_food) }
+  end
+
+  context '::connect' do
+    it 'creates a connection between foods if it does not exist' do
+      FoodConnection.connect(fruit, orange)
+
+      orange.parent_foods.should == [fruit]
+      fruit.child_foods.should == [orange]
+    end
+
+    it 'does not create a connection between foods if it already exists' do
+      connection = FoodConnection.connect(fruit, orange)
+      FoodConnection.connect(fruit, orange).should == connection
+    end
   end
 end

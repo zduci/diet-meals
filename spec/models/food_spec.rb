@@ -19,14 +19,14 @@ describe Food do
     it { should have_many(:ingredients) }
   end
 
-  context 'constructors' do
+  describe '::create_food' do
     it 'creates an instance by name' do
       avocado = Food.create_food('avocado')
       Food.find_by_name('avocado').should == avocado
     end
   end
 
-  describe 'Food#ordered_by_name' do
+  describe '::ordered_by_name' do
     it 'retrieves all foods ordered by name' do
       orange = FactoryGirl.create(:food, :name => 'orange')
       apple = FactoryGirl.create(:food, :name => 'apple')

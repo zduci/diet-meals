@@ -32,7 +32,7 @@ describe Diet do
     it { should have_many(:meals) }
   end
 
-  context 'constructors' do
+  context 'initializers' do
     it 'creates inclusive diets' do
       Diet.create_inclusive('inclusive diet').should be_inclusive
     end

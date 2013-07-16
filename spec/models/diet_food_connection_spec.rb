@@ -35,7 +35,7 @@ describe DietFoodConnection do
     end
   end
 
-  describe 'alternative constructors' do
+  describe 'initializers' do
     let(:diet) { FactoryGirl.create(:diet) }
     let(:food) { FactoryGirl.create(:food) }
 

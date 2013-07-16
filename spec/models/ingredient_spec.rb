@@ -29,12 +29,12 @@ describe Ingredient do
       FactoryGirl.build(:ingredient, :unit_of_measurement => unit_of_measurement).unit_of_measurement.should == unit_of_measurement
     end
 
-    it 'returns unit of measurement if different to nil' do
+    it 'returns UnitOfMeasurement::PIECE if unit of measurement is nil' do
       FactoryGirl.build(:ingredient, :unit_of_measurement => nil).unit_of_measurement.should == UnitOfMeasurement::PIECE
     end
   end
 
-  context 'alternative constructors' do
+  context '::create_ingredient' do
     let(:meal) { FactoryGirl.create(:meal) }
     let(:food) { FactoryGirl.create(:food) }
     let(:unit_of_measurement) { FactoryGirl.create(:unit_of_measurement) }

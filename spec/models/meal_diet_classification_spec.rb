@@ -30,7 +30,7 @@ describe MealDietClassification do
     end
   end
 
-  describe 'DietClassification#stars_count' do
+  describe '::stars_count' do
     it 'retrieves the stars count' do
       classification = FactoryGirl.create(:meal_diet_classification)
       FactoryGirl.create(:star, :meal_diet_classification_id => classification.id, :user_id => 1)
@@ -43,7 +43,7 @@ describe MealDietClassification do
   describe '#find_star' do
     let(:user) { FactoryGirl.create(:user) }
 
-    it "finds a user's star'" do
+    it "finds a user's star" do
       classification = FactoryGirl.create(:meal_diet_classification)
       star = FactoryGirl.create(:star, :meal_diet_classification_id => classification.id, :user_id => user.id)
       classification.find_star(user).should == star

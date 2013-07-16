@@ -29,28 +29,26 @@ describe Star do
     it { should belong_to(:user) }
   end
 
-  context 'adding a new star' do
-    it 'updates stars_count on MealDietClassification' do
+  describe '#stars_count' do
+    it 'returns the number of stars for this classification' do
       classification = FactoryGirl.create(:meal_diet_classification, :stars_count => 0)
       FactoryGirl.create(:star, :user => FactoryGirl.create(:user), :meal_diet_classification => classification)
       classification.reload.stars_count.should == 1
     end
   end
 
-  context 'constructors' do
-    describe 'Star#create_star' do
-      context 'if star does not exist' do
-        it 'creates a new star by meal diet classification id and user' do
-          star = Star.create_star(classification.id, user)
-          Star.find_by_meal_diet_classification_id_and_user_id(classification.id, user.id).should == star
-        end
+  describe '::create_star' do
+    context 'if star does not exist' do
+      it 'creates a new star by meal diet classification id and user' do
+        star = Star.create_star(classification.id, user)
+        Star.find_by_meal_diet_classification_id_and_user_id(classification.id, user.id).should == star
       end
+    end
 
-      context 'if star already exists' do
-        it 'raises error' do
-          FactoryGirl.create(:star, :meal_diet_classification => classification, :user => user)
-          expect { Star.create_star(classification.id, user) }.to raise_error ActiveRecord::RecordInvalid
-        end
+    context 'if star already exists' do
+      it 'raises error' do
+        FactoryGirl.create(:star, :meal_diet_classification => classification, :user => user)
+        expect { Star.create_star(classification.id, user) }.to raise_error ActiveRecord::RecordInvalid
       end
     end
   end

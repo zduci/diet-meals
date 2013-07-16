@@ -53,7 +53,7 @@ describe UnitOfMeasurement do
     end
 
 
-    describe 'UnitOfMeasurement#order_by_name' do
+    describe '::order_by_name' do
       it 'retrieves all foods ordered by name' do
         meter = FactoryGirl.create(:unit_of_measurement, :name => 'meter', :short_name => 'm')
         gram = FactoryGirl.create(:unit_of_measurement, :name => 'gram', :short_name => 'g')
