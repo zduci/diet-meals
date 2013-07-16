@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe StarsController do
-  let(:classification_id) { '1' }
   let(:user) { FactoryGirl.create(:user) }
-  let(:stars_count) { 1 }
-  let(:star) { stub(:star) }
 
   describe '#create' do
+    let(:classification_id) { '1' }
+    let(:stars_count) { 1 }
+    let(:star) { stub(:star) }
+
     def do_post
       post :create, :meal_diet_classification_id => classification_id
     end
@@ -16,7 +17,7 @@ describe StarsController do
         sign_in user
       end
       
-      context 'creates a new star' do
+      context 'if it creates a new star' do
         before(:each) do
           Star.stub(:create_star).with(classification_id, user) { star }
           MealDietClassification.stub(:stars_count).with(classification_id) { stars_count }
@@ -34,7 +35,7 @@ describe StarsController do
         end
       end
 
-      context 'fails to create a new star' do
+      context 'if it fails to create a new star' do
         it 'renders nothing' do
           Star.stub(:create_star).with(classification_id, user).and_raise ActiveRecord::RecordInvalid.new(stub.as_null_object)
           do_post
