@@ -3,17 +3,11 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new_meal
-    @hours = SelectOptions.hours
-    @minutes = SelectOptions.minutes
-    @quantities = SelectOptions.quantities
-    @units_of_measurement = UnitOfMeasurement.ordered_by_name
-    @foods = Food.ordered_by_name
+    instantiate_instance_variables
   end
 
   def show
     @meal = Meal.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to :root
   end
 
   def create
@@ -21,13 +15,17 @@ class MealsController < ApplicationController
     unless @meal.new_record?
       redirect_to meal_url(@meal)
     else 
-      @hours = SelectOptions.hours
-      @minutes = SelectOptions.minutes
-      @quantities = SelectOptions.quantities
-      @units_of_measurement = UnitOfMeasurement.ordered_by_name
-      @foods = Food.ordered_by_name
+      instantiate_instance_variables
       flash[:error] = 'There were errors. Meal was not saved'
       render :action => :new
     end
+  end
+
+  def instantiate_instance_variables
+    @hours = SelectOptions.hours
+    @minutes = SelectOptions.minutes
+    @quantities = SelectOptions.quantities
+    @units_of_measurement = UnitOfMeasurement.ordered_by_name
+    @foods = Food.ordered_by_name
   end
 end

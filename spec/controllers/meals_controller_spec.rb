@@ -9,20 +9,23 @@ describe MealsController do
   let(:quantities) { stub(:quantities) }
   let(:user) { FactoryGirl.create(:user) }
 
+  before(:each) do
+    SelectOptions.stub(:hours) { hours }
+    SelectOptions.stub(:minutes) { minutes }
+    SelectOptions.stub(:quantities) { quantities }
+    Food.stub(:ordered_by_name) { foods }
+    UnitOfMeasurement.stub(:ordered_by_name) { units_of_measurement }
+  end
+
   describe '#new' do
     context 'user is signed in' do
       before(:each) do
         Meal.stub(:new_meal) { meal }
-        SelectOptions.stub(:hours) { hours }
-        SelectOptions.stub(:minutes) { minutes }
-        SelectOptions.stub(:quantities) { quantities }
-        Food.stub(:ordered_by_name) { foods }
-        UnitOfMeasurement.stub(:ordered_by_name) { units_of_measurement }
         sign_in user
         get :new
       end
 
-      it 'returns an empty meal' do
+      it 'returns an empty meal with all the instance variables needed for meal creation' do
         assigns['meal'].should == meal
         assigns['hours'].should == hours
         assigns['minutes'].should == minutes
@@ -48,29 +51,19 @@ describe MealsController do
     let(:id) { '1' }
     let(:meal) { stub(:meal) }
 
-    context 'when meal exists' do
-      before(:each) do
-        Meal.stub(:find).with(id) { meal }
-      end
-
-      it 'fetches the requested meal' do
-        get :show, :id => id
-        assigns['meal'].should == meal
-      end
-
-      it 'renders show' do
-        Meal.stub(:find).with(id) { meal }
-        get :show, :id => id
-        response.should render_template(:show)
-      end
+    before(:each) do
+      Meal.stub(:find).with(id) { meal }
     end
 
-    context 'when meal does not exist' do
-      it 'redirects to root' do
-        Meal.stub(:find).with(id).and_raise ActiveRecord::RecordNotFound
-        get :show, :id => id
-        response.should redirect_to(:root)
-      end
+    it 'fetches the requested meal' do
+      get :show, :id => id
+      assigns['meal'].should == meal
+    end
+
+    it 'renders show' do
+      Meal.stub(:find).with(id) { meal }
+      get :show, :id => id
+      response.should render_template(:show)
     end
   end
 
@@ -87,12 +80,7 @@ describe MealsController do
         sign_in user
       end
 
-      it "adds a new meal" do
-        AddMeal.should_receive(:from_params).with(meal_params, user) { stub(:meal, :new_record? => false) }
-        do_post
-      end
-
-      context 'success' do
+      context 'when it creates new meal' do
         it "redirects to the new meal's url" do
           meal = stub(:meal, :new_record? => false)
           AddMeal.stub(:from_params).with(meal_params, user) { meal }
@@ -101,23 +89,17 @@ describe MealsController do
         end
       end
 
-      context 'fail' do
+      context 'when it fails to create new meal' do
         before(:each) do
-          Meal.stub(:new_meal) { meal }
-          SelectOptions.stub(:hours) { hours }
-          SelectOptions.stub(:minutes) { minutes }
-          SelectOptions.stub(:quantities) { quantities }
-          Food.stub(:ordered_by_name) { foods }
-          UnitOfMeasurement.stub(:ordered_by_name) { units_of_measurement }
           AddMeal.stub(:from_params).with(meal_params, user) { meal }
           do_post
         end
 
-        it 'displays error for invalid data' do
+        it 'contains errors' do
           flash[:error].should_not be_nil
         end
 
-        it 'redirects to new' do
+        it 'renders new' do
           response.should render_template(:new)
         end
 
@@ -133,7 +115,7 @@ describe MealsController do
     end
 
     context 'user is not signed in' do
-      it 'redirects to sign in' do
+      it 'redirects to sign in page' do
         do_post
         response.should redirect_to('/users/sign_in') 
       end
