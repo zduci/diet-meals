@@ -21,7 +21,7 @@ describe MealDietClassification do
     it { should have_many(:stars) }
   end
 
-  describe 'DietClassification#create_classifiction' do
+  describe '::create_classifiction' do
     it 'creates instances with meal and diet' do
       meal = FactoryGirl.create(:meal)
       diet = FactoryGirl.create(:diet)
