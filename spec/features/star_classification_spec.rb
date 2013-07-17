@@ -11,20 +11,21 @@ describe 'starring meal classifications' do
     Warden.test_reset!
   end
 
+  let(:diet) { FactoryGirl.create(:diet) }
+  let(:meal) { FactoryGirl.create(:meal) }
+  let(:user) { FactoryGirl.create(:user) }
+
   before(:each) do
-    diet = FactoryGirl.create(:diet)
-    @meal = FactoryGirl.create(:meal)
-    @classification = FactoryGirl.create(:meal_diet_classification, :meal => @meal, :diet => diet)
+    FactoryGirl.create(:meal_diet_classification, :meal => meal, :diet => diet)
   end
 
   context 'user is signed in' do
     before(:each) do
-      @user = FactoryGirl.create(:user)
-      login_as(@user, :scope => :user)
+      login_as(user, :scope => :user)
     end
 
     it 'starring a meal increments the stars count', :js => true do
-      visit meal_path(@meal)
+      visit meal_path(meal)
 
       click_link 'Star'
 
@@ -33,8 +34,8 @@ describe 'starring meal classifications' do
     end
 
     it 'unstarring a meal decrements the stars count', :js => true do
-      FactoryGirl.create(:star, :user => @user)
-      visit meal_path(@meal)
+      FactoryGirl.create(:star, :user => user)
+      visit meal_path(meal)
 
       click_link 'Unstar'
 
@@ -45,7 +46,7 @@ describe 'starring meal classifications' do
 
   context 'user is not signed in' do
     it 'user cannot star or unstar' do
-      visit meal_path(@meal)
+      visit meal_path(meal)
 
       page.should_not have_content('Star')
       page.should_not have_content('Unstar')
