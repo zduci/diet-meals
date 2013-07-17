@@ -11,21 +11,21 @@ describe SelectOptions do
     end
   end
 
-  describe '::hours' do
+  describe '::HOURS' do
     it 'creates form pairs for hours' do
-      SelectOptions.hours.should == SelectOptions.pairs(12)
+      SelectOptions::HOURS.should == SelectOptions.pairs(12)
     end
   end
 
-  describe '::minutes' do
+  describe '::MINUTES' do
     it 'creates form pairs for minutes' do
-      SelectOptions.minutes.should == SelectOptions.pairs(59)
+      SelectOptions::MINUTES.should == SelectOptions.pairs(59)
     end
   end
 
-  describe '::quantities' do
+  describe '::QUANTITIES' do
     it 'creates form pairs for quantity' do
-      SelectOptions.quantities.should == SelectOptions.pairs(1, 30)
+      SelectOptions::QUANTITIES.should == SelectOptions.pairs(1, 30)
     end
   end
 end

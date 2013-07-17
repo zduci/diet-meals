@@ -3,16 +3,10 @@ require 'spec_helper'
 describe MealsController do
   let(:meal) { stub(:meal, :new_record? => true) }
   let(:foods) { stub(:foods) }
-  let(:hours) { stub(:hours) }
-  let(:minutes) { stub(:minutes) }
   let(:units_of_measurement) { stub(:units_of_measurement) }
-  let(:quantities) { stub(:quantities) }
   let(:user) { FactoryGirl.create(:user) }
 
   before(:each) do
-    SelectOptions.stub(:hours) { hours }
-    SelectOptions.stub(:minutes) { minutes }
-    SelectOptions.stub(:quantities) { quantities }
     Food.stub(:ordered_by_name) { foods }
     UnitOfMeasurement.stub(:ordered_by_name) { units_of_measurement }
   end
@@ -27,9 +21,9 @@ describe MealsController do
 
       it 'returns an empty meal with all the instance variables needed for meal creation' do
         assigns['meal'].should == meal
-        assigns['hours'].should == hours
-        assigns['minutes'].should == minutes
-        assigns['quantities'].should == quantities
+        assigns['hours'].should == SelectOptions::HOURS
+        assigns['minutes'].should == SelectOptions::MINUTES
+        assigns['quantities'].should == SelectOptions::QUANTITIES
         assigns['foods'].should == foods
         assigns['units_of_measurement'].should == units_of_measurement
       end
@@ -105,9 +99,9 @@ describe MealsController do
 
         it 'assigns instance variables' do
           assigns['meal'].should == meal
-          assigns['hours'].should == hours
-          assigns['minutes'].should == minutes
-          assigns['quantities'].should == quantities
+          assigns['hours'].should == SelectOptions::HOURS
+          assigns['minutes'].should == SelectOptions::MINUTES
+          assigns['quantities'].should == SelectOptions::QUANTITIES
           assigns['foods'].should == foods
           assigns['units_of_measurement'].should == units_of_measurement
         end

@@ -22,9 +22,9 @@ class MealsController < ApplicationController
   end
 
   def instantiate_instance_variables
-    @hours = SelectOptions.hours
-    @minutes = SelectOptions.minutes
-    @quantities = SelectOptions.quantities
+    @hours = SelectOptions::HOURS
+    @minutes = SelectOptions::MINUTES
+    @quantities = SelectOptions::QUANTITIES
     @units_of_measurement = UnitOfMeasurement.ordered_by_name
     @foods = Food.ordered_by_name
   end

@@ -1,17 +1,9 @@
 class SelectOptions
-  def self.hours
-    pairs(12)
-  end
-
-  def self.minutes
-    pairs(59)
-  end
-
-  def self.quantities
-    pairs(1, 30)
-  end
-
   def self.pairs(start=0, to_end)
     (start..to_end).map { |i| [i, i] }
   end
+
+  HOURS = pairs(12)
+  MINUTES = pairs(59)
+  QUANTITIES = pairs(1, 30)
 end
