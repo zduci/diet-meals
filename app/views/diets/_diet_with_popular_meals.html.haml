@@ -1,4 +1,4 @@
 .span4
   = diet.name
   %br
-  = render :partial => 'meals/meal_short', :collection => diet.popular_meals, :as => :meal
+  = render :partial => 'meal_diet_classifications/meal_diet_classification_meal', :collection => diet.popular_classifications, :as => :meal_diet_classification

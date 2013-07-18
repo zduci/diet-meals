@@ -43,7 +43,7 @@ class Diet < ActiveRecord::Base
     Diet.all(:limit => 3)
   end
 
-  def popular_meals
-    meals.all(:limit => 5)
+  def popular_classifications
+    meal_diet_classifications.order('stars_count DESC').limit(5)
   end
 end

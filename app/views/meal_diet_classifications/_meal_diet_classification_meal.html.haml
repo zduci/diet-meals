@@ -1,0 +1,5 @@
+.diet_classification
+  = meal_diet_classification.meal.name
+  %span{:id => "stars_count_#{meal_diet_classification.id}"}= meal_diet_classification.stars_count 
+  - if current_user
+    = link_to_stars(meal_diet_classification, current_user)
