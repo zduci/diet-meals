@@ -24,4 +24,8 @@ class Meal < ActiveRecord::Base
       2.times { meal.ingredients.build(:food => Food.new) }
     end
   end
+
+  def popular_classifications
+    meal_diet_classifications.order('stars_count DESC').limit(5)
+  end
 end

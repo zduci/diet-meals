@@ -47,4 +47,19 @@ describe Meal do
       Meal.new_meal.ingredients.second.food.should_not be_nil
     end
   end
+
+  describe '::popular_classifications' do
+    it 'returns the first 5 classifications for this meal ordered by number of stars' do
+      boiled_egg = FactoryGirl.create(:meal, :name => 'Boiled egg')
+
+      eat_anything_classification = FactoryGirl.create(:meal_diet_classification, :diet => FactoryGirl.create(:diet, :name => 'eat anything'), :meal => boiled_egg, :stars_count => 1)
+      slow_carb_classification = FactoryGirl.create(:meal_diet_classification, :diet => FactoryGirl.create(:diet, :name => 'Slow Carb Diet'), :meal => boiled_egg, :stars_count => 2)
+      atkins_classification = FactoryGirl.create(:meal_diet_classification, :diet => FactoryGirl.create(:diet, :name => 'Atkins Diet'), :meal => boiled_egg, :stars_count => 0)
+      paleo_classification = FactoryGirl.create(:meal_diet_classification, :diet => FactoryGirl.create(:diet, :name => 'Paleo Diet'), :meal => boiled_egg, :stars_count => 3)
+      weight_watchers_classification = FactoryGirl.create(:meal_diet_classification, :diet => FactoryGirl.create(:diet, :name => 'Weight Watchers'), :meal => boiled_egg, :stars_count => 0)
+      only_eggs_classification = FactoryGirl.create(:meal_diet_classification, :diet => FactoryGirl.create(:diet, :name => 'Only eat eggs!'), :meal => boiled_egg, :stars_count => 4)
+
+      boiled_egg.popular_classifications.should == [only_eggs_classification, paleo_classification, slow_carb_classification, eat_anything_classification, atkins_classification]
+    end
+  end
 end
