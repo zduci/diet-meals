@@ -21,9 +21,6 @@ describe MealsController do
 
       it 'returns an empty meal with all the instance variables needed for meal creation' do
         assigns['meal'].should == meal
-        assigns['hours'].should == SelectOptions::HOURS
-        assigns['minutes'].should == SelectOptions::MINUTES
-        assigns['quantities'].should == SelectOptions::QUANTITIES
         assigns['foods'].should == foods
         assigns['units_of_measurement'].should == units_of_measurement
       end
@@ -99,9 +96,6 @@ describe MealsController do
 
         it 'assigns instance variables' do
           assigns['meal'].should == meal
-          assigns['hours'].should == SelectOptions::HOURS
-          assigns['minutes'].should == SelectOptions::MINUTES
-          assigns['quantities'].should == SelectOptions::QUANTITIES
           assigns['foods'].should == foods
           assigns['units_of_measurement'].should == units_of_measurement
         end

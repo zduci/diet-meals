@@ -11,8 +11,8 @@
 
   %p
     = f.label :duration
-    = select_tag 'meal[duration_hours]', options_for_select(@hours)
-    = select_tag 'meal[duration_minutes]', options_for_select(@minutes)
+    = select_tag 'meal[duration_hours]', options_for_select(SelectOptions::HOURS)
+    = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES)
 
   = f.fields_for :ingredients do |builder|
     = render "ingredient_fields", :f => builder

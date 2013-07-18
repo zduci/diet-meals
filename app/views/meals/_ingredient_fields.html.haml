@@ -5,7 +5,7 @@
 
   %p
     = f.label :quantity, 'Quantity'
-    = f.select :quantity, options_for_select(@quantities)
+    = f.select :quantity, options_for_select(SelectOptions::QUANTITIES)
 
   %p
     = f.label :short_name, 'Unit of measurement'
