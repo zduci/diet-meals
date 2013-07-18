@@ -10,4 +10,4 @@
   .instructions= @meal.instructions
   %b Compatible with diets:
   %br
-  = render @meal.meal_diet_classifications
+  = render :partial => 'meal_diet_classifications/popular_diets', :collection => @meal.popular_classifications, :as => :meal_diet_classification
