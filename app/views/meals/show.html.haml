@@ -3,6 +3,8 @@
   %br
   %b= "#{@meal.duration} minutes"
   %br
+  %b= "by #{@meal.user.email}"
+  %br
   %b Ingredients: 
   %br
   = render @meal.ingredients
