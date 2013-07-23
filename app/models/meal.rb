@@ -28,4 +28,8 @@ class Meal < ActiveRecord::Base
   def popular_classifications
     meal_diet_classifications.order('stars_count DESC').limit(5)
   end
+
+  def author
+    user || User::ANONYMOUS
+  end
 end

@@ -62,4 +62,17 @@ describe Meal do
       boiled_egg.popular_classifications.should == [only_eggs_classification, paleo_classification, slow_carb_classification, eat_anything_classification, atkins_classification]
     end
   end
+
+  describe '#author' do
+    it 'returns the user who created this meal if there is one' do
+      bob = FactoryGirl.create(:user)
+      chips = FactoryGirl.create(:meal, :user => bob)
+      chips.author.should == bob
+    end
+
+    it 'returns the anonymous user if there is no author' do
+      fish_cakes = FactoryGirl.create(:meal, :user => nil)
+      fish_cakes.author.should == User::ANONYMOUS
+    end
+  end
 end
