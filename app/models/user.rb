@@ -9,8 +9,9 @@ class User < ActiveRecord::Base
 
   has_many :stars
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
-  #
+
+  def name
+    email.slice(/[^@]*/)
+  end
 end

@@ -10,4 +10,11 @@ describe User do
 
     it { should have_many(:stars) }
   end
+
+  describe '::name' do
+    it 'extracts an username from the email address' do
+      bob = FactoryGirl.build(:user, :email => 'bob@example.com')
+      bob.name.should == 'bob'
+    end
+  end
 end
