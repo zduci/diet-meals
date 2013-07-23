@@ -14,4 +14,10 @@ class User < ActiveRecord::Base
   def name
     email.slice(/[^@]*/)
   end
+
+  ANONYMOUS = Class.new do
+    def self.name
+      "anonymous"
+    end
+  end
 end

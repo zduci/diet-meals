@@ -17,4 +17,10 @@ describe User do
       bob.name.should == 'bob'
     end
   end
+
+  describe '::ANONYMOUS' do
+    it "has the name 'anonymous" do
+      User::ANONYMOUS.name.should == 'anonymous'
+    end
+  end
 end
