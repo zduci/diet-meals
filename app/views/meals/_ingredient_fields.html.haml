@@ -10,3 +10,6 @@
   %p
     = f.label :short_name, 'Unit of measurement'
     = f.collection_select :unit_of_measurement_id, @units_of_measurement, :id, :name
+
+  %p.remove_ingredient
+    = link_to 'Delete', '#'
