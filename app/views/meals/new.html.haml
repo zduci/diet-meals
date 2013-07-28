@@ -1,5 +1,6 @@
 = render 'autocomplete_js'
 = render 'remove_ingredients'
+= render 'add_ingredients'
 
 = form_for(@meal) do |f|
   %p
@@ -17,5 +18,8 @@
 
   = f.fields_for :ingredients do |builder|
     = render "ingredient_fields", :f => builder
+
+  = link_to 'Add ingredient', '#', :id => 'add_ingredient'
+  = javascript_tag "var ingredient_attributes = #{ '"' + escape_javascript(ingredient_attributes(f)) + '"'};"
 
   = f.submit 'Add Meal'
