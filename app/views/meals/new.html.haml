@@ -34,7 +34,7 @@
     = render "ingredient_fields", :f => builder
 
   = link_to 'Add ingredient', '#', :id => 'add_ingredient'
-  = javascript_tag "var ingredient_attributes = #{ '"' + escape_javascript(ingredient_attributes(f)) + '"'};"
+  = javascript_tag "var ingredient_attributes = #{ ingredient_attributes(f) };"
 
   .row
     .span1
