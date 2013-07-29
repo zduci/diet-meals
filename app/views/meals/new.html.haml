@@ -6,23 +6,33 @@
   .row
     .span2
       = f.label :name
+  .row
     .span2
-      = f.text_field :name
+      = f.text_field :name, :class => :meal_name
 
   .row
     .span2
       = f.label :instructions
+  .row
     .span4
-      = f.text_field :instructions
+      = f.text_area :instructions, :class => :meal_instructions
 
   .row
     .span2
       = f.label :duration
+  .row
     .span1
       = select_tag 'meal[duration_hours]', options_for_select(SelectOptions::HOURS), :class => 'number_select'
     .span1
+      hours
+    .span1
       = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES), :class => 'number_select'
+    .span1
+      minutes
 
+  .row
+    .span2
+      = f.label :ingredients
   .row
     .span2
       = label_tag :name
