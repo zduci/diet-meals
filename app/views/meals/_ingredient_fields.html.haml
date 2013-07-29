@@ -1,15 +1,13 @@
-.ingredient
-  %p
-    = f.label :name, 'Food'
-    = f.collection_select :food_id, @foods, :id, :name
+.ingredient.row
+  .span2
+    = f.collection_select :food_id, @foods, :id, :name, {}, :class => :food_select
 
-  %p
-    = f.label :quantity, 'Quantity'
-    = f.select :quantity, options_for_select(SelectOptions::QUANTITIES)
+  .span1
+    = f.select :quantity, options_for_select(SelectOptions::QUANTITIES), {}, :class => 'number_select'
 
-  %p
-    = f.label :short_name, 'Unit of measurement'
-    = f.collection_select :unit_of_measurement_id, @units_of_measurement, :id, :name
+  .span2
+    = f.collection_select :unit_of_measurement_id, @units_of_measurement, :id, :name, {}, :class => 'unit_of_measurement_select'
 
-  %p.remove_ingredient
-    = link_to 'Delete', '#'
+  .span1
+    %p.remove_ingredient
+      = link_to 'Delete', '#'

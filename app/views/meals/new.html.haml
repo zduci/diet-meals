@@ -3,23 +3,39 @@
 = render 'add_ingredients'
 
 = form_for(@meal) do |f|
-  %p
-    = f.label :name
-    = f.text_field :name
+  .row
+    .span2
+      = f.label :name
+    .span2
+      = f.text_field :name
 
-  %p
-    = f.label :instructions
-    = f.text_field :instructions
+  .row
+    .span2
+      = f.label :instructions
+    .span4
+      = f.text_field :instructions
 
-  %p
-    = f.label :duration
-    = select_tag 'meal[duration_hours]', options_for_select(SelectOptions::HOURS)
-    = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES)
+  .row
+    .span2
+      = f.label :duration
+    .span1
+      = select_tag 'meal[duration_hours]', options_for_select(SelectOptions::HOURS), :class => 'number_select'
+    .span1
+      = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES), :class => 'number_select'
 
+  .row
+    .span2
+      = label_tag :name
+    .span1
+      = label_tag :quantity
+    .span2
+      = label_tag :unit_of_measurement
   = f.fields_for :ingredients do |builder|
     = render "ingredient_fields", :f => builder
 
   = link_to 'Add ingredient', '#', :id => 'add_ingredient'
   = javascript_tag "var ingredient_attributes = #{ '"' + escape_javascript(ingredient_attributes(f)) + '"'};"
 
-  = f.submit 'Add Meal'
+  .row
+    .span1
+      = f.submit 'Add Meal'
