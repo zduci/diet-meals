@@ -2,50 +2,52 @@
 = render 'remove_ingredients'
 = render 'add_ingredients'
 
-= form_for(@meal) do |f|
-  .row
-    .span2
-      = f.label :name
-  .row
-    .span2
-      = f.text_field :name, :class => :meal_name
+.center
+  %h3 Create new meal
+  = form_for(@meal) do |f|
+    .row
+      .span2
+        = f.label :name
+    .row
+      .span2
+        = f.text_field :name, :class => :meal_name
 
-  .row
-    .span2
-      = f.label :instructions
-  .row
-    .span4
-      = f.text_area :instructions, :class => :meal_instructions
+    .row
+      .span2
+        = f.label :instructions
+    .row
+      .span4
+        = f.text_area :instructions, :class => :meal_instructions
 
-  .row
-    .span2
-      = f.label :duration
-  .row
-    .span1
-      = select_tag 'meal[duration_hours]', options_for_select(SelectOptions::HOURS), :class => 'number_select'
-    .span1
-      hours
-    .span1
-      = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES), :class => 'number_select'
-    .span1
-      minutes
+    .row
+      .span2
+        = f.label :duration
+    .row
+      .span1
+        = select_tag 'meal[duration_hours]', options_for_select(SelectOptions::HOURS), :class => 'number_select'
+      .span1
+        hours
+      .span1
+        = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES), :class => 'number_select'
+      .span1
+        minutes
 
-  .row
-    .span2
-      = f.label :ingredients
-  .row
-    .span2
-      = label_tag :name
-    .span1
-      = label_tag :quantity
-    .span2
-      = label_tag :unit_of_measurement
-  = f.fields_for :ingredients do |builder|
-    = render "ingredient_fields", :f => builder
+    .row
+      .span2
+        = f.label :ingredients
+    .row
+      .span2
+        = label_tag :name
+      .span1
+        = label_tag :quantity
+      .span2
+        = label_tag :unit_of_measurement
+    = f.fields_for :ingredients do |builder|
+      = render "ingredient_fields", :f => builder
 
-  = link_to 'Add ingredient', '#', :id => 'add_ingredient'
-  = javascript_tag "var ingredient_attributes = #{ ingredient_attributes(f) };"
+    = link_to 'Add ingredient', '#', :id => 'add_ingredient'
+    = javascript_tag "var ingredient_attributes = #{ ingredient_attributes(f) };"
 
-  .row
-    .span1
-      = f.submit 'Add Meal'
+    .row
+      .span1
+        = f.submit 'Create meal'
