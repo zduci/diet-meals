@@ -45,7 +45,8 @@
     = f.fields_for :ingredients do |builder|
       = render "ingredient_fields", :f => builder
 
-    = link_to 'Add ingredient', '#', :id => 'add_ingredient'
+    %a.btn#add_ingredient
+      %i.icon-plus-sign Add ingredient
     = javascript_tag "var ingredient_attributes = #{ ingredient_attributes(f) };"
 
     .row
