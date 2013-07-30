@@ -6,7 +6,7 @@ class UnitOfMeasurement < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :short_name, :presence => true, :uniqueness => { :case_sensitive => false }
 
-  PIECE = UnitOfMeasurement.find_or_create_by_name_and_short_name('piece', 'x')
+  PIECE = UnitOfMeasurement.find_or_create_by(:name => 'piece', :short_name => 'x')
 
   def self.create_unit_of_measurement(name, short_name)
     create!(:name => name, :short_name => short_name)
