@@ -12,6 +12,8 @@ class Meal < ActiveRecord::Base
 
   accepts_nested_attributes_for :ingredients
 
+  NO_OF_INGREDIENTS = 4
+
   def self.create_meal(name, instructions, duration, *ingredients)
     create!(:name => name, 
             :instructions => instructions, 
@@ -21,7 +23,7 @@ class Meal < ActiveRecord::Base
 
   def self.new_meal
     Meal.new do |meal|
-      2.times { meal.ingredients.build(:food => Food.new) }
+      NO_OF_INGREDIENTS.times { meal.ingredients.build(:food => Food.new) }
     end
   end
 
