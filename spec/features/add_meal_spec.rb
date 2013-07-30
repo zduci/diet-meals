@@ -15,8 +15,11 @@ describe 'adding a meal' do
     @egg = FactoryGirl.create(:food, :name => :egg)
     @salt = FactoryGirl.create(:food, :name => :salt)
     FactoryGirl.create(:unit_of_measurement, :name => 'gram', :short_name => 'g')
-    @allows_eggs = FactoryGirl.create(:diet, :name => 'allows eggs', :exclusive => true, :allowed_foods => [@egg, @salt])
-    FactoryGirl.create(:diet, :name => 'do not eat eggs', :exclusive => false, :forbidden_foods => [@egg])
+    @allows_eggs = FactoryGirl.create(:diet, :name => 'allows eggs', :exclusive => true) 
+    FactoryGirl.create(:diet_food_connection, :diet => @allows_eggs, :food => @egg, :allowed => true) 
+    FactoryGirl.create(:diet_food_connection, :diet => @allows_eggs, :food => @salt, :allowed => true) 
+    no_eggs = FactoryGirl.create(:diet, :name => 'do not eat eggs', :exclusive => false) 
+    FactoryGirl.create(:diet_food_connection, :diet => no_eggs, :food => @egg, :allowed => false)
   end
 
   it 'creates a new meals and classifies it into the correct diets' do

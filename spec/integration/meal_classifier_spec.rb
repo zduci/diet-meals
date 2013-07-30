@@ -7,11 +7,13 @@ describe MealClassifier do
     before(:each) do
       @egg = FactoryGirl.create(:egg)
       @boiled_egg = FactoryGirl.build(:boiled_egg, :foods => [@egg])
-      @eggs_only = FactoryGirl.create(:eggs_only, :allowed_foods => [@egg])
+      @eggs_only = FactoryGirl.create(:eggs_only)
+      FactoryGirl.create(:diet_food_connection, :diet => @eggs_only, :food => @egg, :allowed => true)
 
       @carrot = FactoryGirl.create(:carrot)
       @boiled_carrot = FactoryGirl.build(:boiled_carrot, :foods => [@carrot])
-      @carrots_only = FactoryGirl.create(:carrots_only, :allowed_foods => [@carrot])
+      @carrots_only = FactoryGirl.create(:carrots_only)
+      FactoryGirl.create(:diet_food_connection, :diet => @carrots_only, :food => @carrot, :allowed => true)
     end
 
     it 'classifies boiled egg as compatible with eggs only diet' do
