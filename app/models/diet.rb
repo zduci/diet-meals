@@ -40,7 +40,7 @@ class Diet < ActiveRecord::Base
   end
 
   def self.popular
-    Diet.all(:limit => 3)
+    Diet.limit(3)
   end
 
   def popular_classifications
