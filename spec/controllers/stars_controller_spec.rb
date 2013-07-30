@@ -37,7 +37,7 @@ describe StarsController do
 
       context 'if it fails to create a new star' do
         it 'renders nothing' do
-          Star.stub(:create_star).with(classification_id, user).and_raise ActiveRecord::RecordInvalid.new(stub.as_null_object)
+          Star.stub(:create_star).with(classification_id, user).and_raise ActiveRecord::RecordInvalid.new(Star.new)
           do_post
           response.body.should be_blank
         end
