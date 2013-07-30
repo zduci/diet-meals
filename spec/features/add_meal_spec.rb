@@ -36,7 +36,7 @@ describe 'adding a meal' do
     select 'gram', :from => 'meal_ingredients_attributes_1_unit_of_measurement_id'
     select '2', :from => 'meal_ingredients_attributes_1_quantity'
     
-    click_button 'Add Meal'
+    click_button 'Create meal'
 
     page.should have_content 'allows eggs'
     page.should_not have_content 'do not eat eggs'
