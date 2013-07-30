@@ -2,7 +2,7 @@ class Diet < ActiveRecord::Base
   attr_accessible :name, :exclusive
 
   has_many :allowed_diet_food_connections, 
-           :conditions => { :allowed => true }, 
+           -> { where :allowed => true },
            :class_name => DietFoodConnection
   has_many :allowed_foods, 
            :through => :allowed_diet_food_connections,
@@ -10,7 +10,7 @@ class Diet < ActiveRecord::Base
            :dependent => :destroy
 
   has_many :forbidden_diet_food_connections, 
-           :conditions => { :allowed => false }, 
+           -> { where :allowed => false }, 
            :class_name => DietFoodConnection
   has_many :forbidden_foods, 
            :through => :forbidden_diet_food_connections,
