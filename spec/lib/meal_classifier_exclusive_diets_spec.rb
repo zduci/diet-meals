@@ -1,28 +1,28 @@
 require 'meal_classifier'
 
 describe MealClassifier do
-  let(:empty_meal) { stub(:foods => []) }
+  let(:empty_meal) { double(:foods => []) }
 
-  let(:meat) { stub(:meat, :child_foods => [chicken]) }
-  let(:chicken) { stub(:chicken, :child_foods => [chicken_breast]) }
-  let(:chicken_breast) { stub(:chicken_breast, :child_foods => [fat_free_chicken_breast]) }
-  let(:fat_free_chicken_breast) { stub(:fat_free_chicken_breast, :child_foods => []) }
+  let(:meat) { double(:meat, :child_foods => [chicken]) }
+  let(:chicken) { double(:chicken, :child_foods => [chicken_breast]) }
+  let(:chicken_breast) { double(:chicken_breast, :child_foods => [fat_free_chicken_breast]) }
+  let(:fat_free_chicken_breast) { double(:fat_free_chicken_breast, :child_foods => []) }
 
-  let(:chicken_meal) { stub(:foods => [chicken]) }
-  let(:chicken_breast_meal) { stub(:foods => [chicken_breast]) }
-  let(:fat_free_chicken_breast_meal) { stub(:foods => [fat_free_chicken_breast]) }
+  let(:chicken_meal) { double(:foods => [chicken]) }
+  let(:chicken_breast_meal) { double(:foods => [chicken_breast]) }
+  let(:fat_free_chicken_breast_meal) { double(:foods => [fat_free_chicken_breast]) }
 
-  let(:allows_meat) { stub(:exclusive? => true, :allowed_foods => [meat], :forbidden_foods => [], :has_allowed_foods? => true) }
-  let(:empty_exclusive_diet) { stub(:exclusive? => true, :allowed_foods => [], :forbidden_foods => [], :has_allowed_foods? => false) }
+  let(:allows_meat) { double(:exclusive? => true, :allowed_foods => [meat], :forbidden_foods => [], :has_allowed_foods? => true) }
+  let(:empty_exclusive_diet) { double(:exclusive? => true, :allowed_foods => [], :forbidden_foods => [], :has_allowed_foods? => false) }
 
-  let(:allows_meat_except_chicken) { stub(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true) }
+  let(:allows_meat_except_chicken) { double(:exclusive? => true, :forbidden_foods => [chicken], :allowed_foods => [meat], :has_allowed_foods? => true) }
 
   it 'rejects any meal for empty diets' do
     MealClassifier.compatible?(empty_exclusive_diet, empty_meal).should be_false
   end
 
   it 'accepts meals containing allowed foods' do
-    allows_chicken = stub(:exclusive? => true, :allowed_foods => [chicken], :forbidden_foods => [], :has_allowed_foods? => true)
+    allows_chicken = double(:exclusive? => true, :allowed_foods => [chicken], :forbidden_foods => [], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_chicken, chicken_meal).should be_true
   end
 
@@ -39,7 +39,7 @@ describe MealClassifier do
   end
 
   it 'rejects meals containing forbidden foods with accepted ancestor foods' do
-    allows_meat_except_chicken_breast = stub(:exclusive? => true, :forbidden_foods => [chicken_breast], :allowed_foods => [meat], :has_allowed_foods? => true)
+    allows_meat_except_chicken_breast = double(:exclusive? => true, :forbidden_foods => [chicken_breast], :allowed_foods => [meat], :has_allowed_foods? => true)
     MealClassifier.compatible?(allows_meat_except_chicken_breast, chicken_breast_meal).should be_false
   end
 

@@ -6,9 +6,9 @@ describe AddMeal do
     let(:duration) { '3' }
     let(:duration_hours) { '0' }
     let(:duration_minutes) { '3' }
-    let(:ingredient) { stub(:ingredient) }
+    let(:ingredient) { double(:ingredient) }
     let(:user_id) { 1 }
-    let(:user) { stub(:user, :id => user_id) }
+    let(:user) { double(:user, :id => user_id) }
     let(:meal_params) { 
                       { :duration_hours => duration_hours,
                         :duration_minutes => duration_minutes,
@@ -18,8 +18,8 @@ describe AddMeal do
                         :user_id => user_id,
                         :ingredients_attributes => {'0' => ingredient}} }
 
-    let(:meal) { stub(:meal, :save => true) }
-    let(:diet) { stub }
+    let(:meal) { double(:meal, :save => true) }
+    let(:diet) { double(:diet) }
 
     before(:each) do
       MealDuration.stub(:to_minutes).with(duration_hours, duration_minutes) { duration }

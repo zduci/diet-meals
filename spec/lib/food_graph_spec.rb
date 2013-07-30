@@ -2,11 +2,11 @@ require_relative '../../lib/food_graph'
 
 describe FoodGraph do
   context 'ancestors' do
-    let(:fruit) { stub(:fruit, :name => :fruit, :child_foods => [], :parent_foods => []) }
-    let(:apple) { stub(:apple, :name => :apple, :child_foods => [], :parent_foods => [fruit]) }
-    let(:citrus) { stub(:citrus, :name => :citrus, :child_foods => [], :parent_foods => [fruit]) }
-    let(:orange) { stub(:orange, :name => :orange, :child_foods => [], :parent_foods => [citrus, sugar]) }
-    let(:sugar) { stub(:sugar, :name => :sugar, :child_foods => [], :parent_foods => []) }
+    let(:fruit) { double(:fruit, :name => :fruit, :child_foods => [], :parent_foods => []) }
+    let(:apple) { double(:apple, :name => :apple, :child_foods => [], :parent_foods => [fruit]) }
+    let(:citrus) { double(:citrus, :name => :citrus, :child_foods => [], :parent_foods => [fruit]) }
+    let(:orange) { double(:orange, :name => :orange, :child_foods => [], :parent_foods => [citrus, sugar]) }
+    let(:sugar) { double(:sugar, :name => :sugar, :child_foods => [], :parent_foods => []) }
 
     describe '::find_ancestors' do
       it 'retrieves all ancestors' do
@@ -29,11 +29,11 @@ describe FoodGraph do
   end
 
   context 'descendants' do
-    let(:fruit) { stub(:fruit, :name => :fruit, :child_foods => [apple, citrus], :parent_foods => []) }
-    let(:apple) { stub(:apple, :name => :apple, :child_foods => [], :parent_foods => []) }
-    let(:citrus) { stub(:citrus, :name => :citrus, :child_foods => [orange], :parent_foods => []) }
-    let(:orange) { stub(:orange, :name => :orange, :child_foods => [], :parent_foods => []) }
-    let(:sugar) { stub(:sugar, :name => :sugar, :child_foods => [orange], :parent_foods => []) }
+    let(:fruit) { double(:fruit, :name => :fruit, :child_foods => [apple, citrus], :parent_foods => []) }
+    let(:apple) { double(:apple, :name => :apple, :child_foods => [], :parent_foods => []) }
+    let(:citrus) { double(:citrus, :name => :citrus, :child_foods => [orange], :parent_foods => []) }
+    let(:orange) { double(:orange, :name => :orange, :child_foods => [], :parent_foods => []) }
+    let(:sugar) { double(:sugar, :name => :sugar, :child_foods => [orange], :parent_foods => []) }
 
     describe '::find_descendants' do
       it 'retrieves all descendants' do

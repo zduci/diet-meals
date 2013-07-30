@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe MealsController do
-  let(:meal) { stub(:meal, :new_record? => true) }
-  let(:foods) { stub(:foods) }
-  let(:units_of_measurement) { stub(:units_of_measurement) }
+  let(:meal) { double(:meal, :new_record? => true) }
+  let(:foods) { double(:foods) }
+  let(:units_of_measurement) { double(:units_of_measurement) }
   let(:user) { FactoryGirl.create(:user) }
 
   before(:each) do
@@ -40,7 +40,7 @@ describe MealsController do
 
   describe '#show' do
     let(:id) { '1' }
-    let(:meal) { stub(:meal) }
+    let(:meal) { double(:meal) }
 
     before(:each) do
       Meal.stub(:find).with(id) { meal }
@@ -73,7 +73,7 @@ describe MealsController do
 
       context 'when it creates new meal' do
         it "redirects to the new meal's url" do
-          meal = stub(:meal, :new_record? => false)
+          meal = double(:meal, :new_record? => false)
           AddMeal.stub(:from_params).with(meal_params, user) { meal }
           do_post
           response.should redirect_to(meal_url(meal))

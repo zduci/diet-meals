@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe HomeController do
   describe '#index' do
-    let(:diets) { stub(:diets) }
+    let(:diets) { double(:diets) }
 
     before(:each) do
       Diet.stub(:popular) { diets }

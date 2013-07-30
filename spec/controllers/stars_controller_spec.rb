@@ -6,7 +6,7 @@ describe StarsController do
   describe '#create' do
     let(:classification_id) { '1' }
     let(:stars_count) { 1 }
-    let(:star) { stub(:star) }
+    let(:star) { double(:star) }
 
     def do_post
       post :create, :meal_diet_classification_id => classification_id
@@ -54,8 +54,8 @@ describe StarsController do
 
   describe '#destroy' do
     let(:star_id) { '2' }
-    let(:star) { stub(:star, :meal_diet_classification => stub(:reload => meal_classification))} 
-    let(:meal_classification) { stub(:meal_diet_classification) }
+    let(:star) { double(:star, :meal_diet_classification => double(:reload => meal_classification))} 
+    let(:meal_classification) { double(:meal_diet_classification) }
 
     def do_delete
       delete :destroy, :id => star_id
