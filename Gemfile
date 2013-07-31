@@ -33,7 +33,3 @@ group :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner'
 end
-gem 'rails-observers'
-gem 'actionpack-page_caching'
-gem 'actionpack-action_caching'
-gem 'activerecord-deprecated_finders'
