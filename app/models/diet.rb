@@ -1,6 +1,4 @@
 class Diet < ActiveRecord::Base
-  attr_accessible :name, :exclusive
-
   has_many :allowed_diet_food_connections, 
            -> { where :allowed => true },
            :class_name => DietFoodConnection

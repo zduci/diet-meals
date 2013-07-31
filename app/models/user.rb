@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
 
   has_many :stars
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-
   def name
     email.slice(/[^@]*/)
   end

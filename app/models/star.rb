@@ -1,5 +1,4 @@
 class Star < ActiveRecord::Base
-  attr_accessible :meal_diet_classification_id, :user
   validates :user_id, :presence => true, :uniqueness => { :scope => [:meal_diet_classification_id] }
   validates :meal_diet_classification_id, :presence => true
 

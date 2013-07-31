@@ -1,6 +1,4 @@
 class DietFoodConnection < ActiveRecord::Base
-  attr_accessible :diet, :food, :allowed
-
   belongs_to :diet
   belongs_to :food
 

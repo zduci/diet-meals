@@ -1,6 +1,4 @@
 class Food < ActiveRecord::Base
-  attr_accessible :name
-
   has_many :parent_connections, 
            :class_name => FoodConnection, 
            :foreign_key => :child_food_id,

@@ -1,5 +1,4 @@
 class Meal < ActiveRecord::Base
-  attr_accessible :duration, :instructions, :ingredients, :name, :ingredients_attributes, :user_id
   has_many :ingredients, :dependent => :destroy
   has_many :foods, :through => :ingredients
   has_many :meal_diet_classifications

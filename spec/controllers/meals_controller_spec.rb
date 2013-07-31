@@ -59,7 +59,8 @@ describe MealsController do
   end
 
   describe '#create' do
-    let(:meal_params) { {} }
+    let(:meal_attributes) { {} }
+    let(:meal_params) { {:meal => meal_attributes} }
     let(:user) { FactoryGirl.create(:user) }
 
     def do_post
@@ -74,7 +75,7 @@ describe MealsController do
       context 'when it creates new meal' do
         it "redirects to the new meal's url" do
           meal = double(:meal, :new_record? => false)
-          AddMeal.stub(:from_params).with(meal_params, user) { meal }
+          AddMeal.stub(:from_params).with(meal_attributes, user) { meal }
           do_post
           response.should redirect_to(meal_url(meal))
         end
@@ -82,7 +83,7 @@ describe MealsController do
 
       context 'when it fails to create new meal' do
         before(:each) do
-          AddMeal.stub(:from_params).with(meal_params, user) { meal }
+          AddMeal.stub(:from_params).with(meal_attributes, user) { meal }
           do_post
         end
 
