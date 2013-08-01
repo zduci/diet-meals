@@ -27,7 +27,7 @@
       .span1
         hours
       .span1
-        = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES, SelectOptions::DEFAULT_MINUTES), :class => 'number_select'
+        = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES, SelectOptions::DEFAULT_MINUTES), :class => 'number_select', 'data-content' => "You cannot cook a meal that fast!" ,'data-placement' => "right", 'data-toggle' => "popover"
       .span1
         minutes
 
@@ -56,7 +56,7 @@
   jQuery(document).ready(function() { 
     $('#new_meal').submit(function(){
       if($('#meal_duration_hours').val() == '0' && $('#meal_duration_minutes').val() == '0'){
-        alert('You cannot cook anything in 0 minutes! Can you?');
+        $('#meal_duration_minutes').popover('show');
         return false;
       }
     });
