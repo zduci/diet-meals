@@ -39,3 +39,5 @@ group :doc do
 end
 
 gem 'jbuilder', '~> 1.2'
+
+gem 'turbolinks'
