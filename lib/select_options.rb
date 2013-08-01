@@ -1,4 +1,7 @@
 class SelectOptions
+  DEFAULT_HOURS = 0
+  DEFAULT_MINUTES = 10
+
   def self.pairs(start=0, to_end)
     (start..to_end).map { |i| [i, i] }
   end

@@ -23,11 +23,11 @@
         = f.label :duration
     .row
       .span1
-        = select_tag 'meal[duration_hours]', options_for_select(SelectOptions::HOURS), :class => 'number_select'
+        = select_tag 'meal[duration_hours]', options_for_select(SelectOptions::HOURS, SelectOptions::DEFAULT_HOURS), :selected => '1', :class => 'number_select'
       .span1
         hours
       .span1
-        = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES), :class => 'number_select'
+        = select_tag 'meal[duration_minutes]', options_for_select(SelectOptions::MINUTES, SelectOptions::DEFAULT_MINUTES), :class => 'number_select'
       .span1
         minutes
 
