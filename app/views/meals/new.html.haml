@@ -51,3 +51,14 @@
     .row
       .span1
         = f.submit 'Create meal'
+
+:javascript
+  jQuery(document).ready(function() { 
+    $('#new_meal').submit(function(){
+      if($('#meal_duration_hours').val() == '0' && $('#meal_duration_minutes').val() == '0'){
+        alert('You cannot cook anything in 0 minutes! Can you?');
+        return false;
+      }
+    });
+  })
+
