@@ -11,7 +11,7 @@ class Meal < ActiveRecord::Base
 
   accepts_nested_attributes_for :ingredients
 
-  NO_OF_INGREDIENTS = 4
+  NO_OF_INGREDIENTS = 2
 
   def self.create_meal(name, instructions, duration, *ingredients)
     create!(:name => name, 
