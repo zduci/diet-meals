@@ -41,8 +41,8 @@ describe Meal do
   end
 
   describe '::new_meal' do
-    it 'builds a new meal with 2 ingredients each with a new food' do
-      Meal.new_meal.ingredients.size.should == 2
+    it 'builds a new meal with 4 ingredients each with a new food' do
+      Meal.new_meal.ingredients.size.should == 4
       Meal.new_meal.ingredients.first.food.should_not be_nil
       Meal.new_meal.ingredients.second.food.should_not be_nil
     end
