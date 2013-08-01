@@ -33,3 +33,9 @@ group :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner'
 end
+
+group :doc do
+  gem 'sdoc', require: false
+end
+
+gem 'jbuilder', '~> 1.2'
