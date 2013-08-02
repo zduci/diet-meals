@@ -69,6 +69,30 @@
         $('#meal_duration_minutes').popover('show');
         return false;
       }
+
+      var validIngredients = true;
+      $('.ingredient').each(function(index) { 
+        ingredient = $(this).find('.food_select')
+        if (!ingredient.val()){
+          ingredient.popover('show');
+          validIngredients = false;
+          return false;
+        }
+        quantity = $(this).find('.number_select')
+        if (!quantity.val()){
+          quantity.popover('show');
+          validIngredients = false;
+          return false;
+        }
+        unitOfMeasurement = $(this).find('.unit_of_measurement_select')
+        if (!unitOfMeasurement.val()){
+          unitOfMeasurement.popover('show');
+          validIngredients = false;
+          return false;
+        }
+      });
+      return validIngredients;
+
     });
   })
 

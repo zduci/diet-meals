@@ -1,12 +1,12 @@
 .ingredient.row
   .span2
-    = f.collection_select :food_id, @foods, :id, :name, {:include_blank => true}, :class => :food_select, :required => true
+    = f.collection_select :food_id, @foods, :id, :name, {:include_blank => true}, :class => :food_select, 'data-content' => "Please select a food for this ingredient", 'data-placement' => 'left', 'data-toggle' => 'popover'
 
   .span1
-    = f.select :quantity, options_for_select(SelectOptions::QUANTITIES), {:include_blank => true}, :class => 'number_select', :required => true
+    = f.select :quantity, options_for_select(SelectOptions::QUANTITIES), {:include_blank => true}, :class => 'number_select', 'data-content' => "Please select a quantity for this ingredient", 'data-placement' => 'top', 'data-toggle' => 'popover'
 
   .span1
-    = f.collection_select :unit_of_measurement_id, @units_of_measurement, :id, :name, {:include_blank => true}, :class => 'unit_of_measurement_select', :required => true
+    = f.collection_select :unit_of_measurement_id, @units_of_measurement, :id, :name, {:include_blank => true}, :class => 'unit_of_measurement_select', 'data-content' => "Please select a unit of measurement for this ingredient", 'data-placement' => 'right', 'data-toggle' => 'popover'
 
   .span1
     %a.btn.remove_ingredient
