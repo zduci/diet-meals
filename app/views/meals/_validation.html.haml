@@ -1,13 +1,20 @@
 :javascript
   jQuery(document).ready(function() { 
+    function invalid(selector){
+      element = $(selector);
+      if (!$.trim(element.val())){
+        element.popover('show');
+        return true;
+      } else {
+        return false;
+      }
+    }
     $('#new_meal').submit(function(){
-      if (!$.trim($('#meal_name').val())){
-        $('#meal_name').popover('show');
+      if (invalid('#meal_name')){
         return false;
       }
 
-      if (!$.trim($('#meal_instructions').val())){
-        $('#meal_instructions').popover('show');
+      if (invalid('#meal_instructions')){
         return false;
       }
 
@@ -18,27 +25,23 @@
 
       var validIngredients = true;
       $('.ingredient').each(function(index) { 
-        ingredient = $(this).find('.food_select')
-        if (!ingredient.val()){
-          ingredient.popover('show');
+        food = $(this).find('.food_select')
+        if (invalid(food)){
           validIngredients = false;
           return false;
         }
         quantity = $(this).find('.number_select')
-        if (!quantity.val()){
-          quantity.popover('show');
+        if (invalid(quantity)){
           validIngredients = false;
           return false;
         }
         unitOfMeasurement = $(this).find('.unit_of_measurement_select')
-        if (!unitOfMeasurement.val()){
-          unitOfMeasurement.popover('show');
+        if (invalid(unitOfMeasurement)){
           validIngredients = false;
           return false;
         }
       });
       return validIngredients;
-
     });
   })
 
