@@ -1,6 +1,7 @@
-= render 'remove_ingredients'
-= render 'add_ingredients'
-= render 'validation'
+- content_for :javascript do
+  = javascript_include_tag "remove_ingredients.js"
+  = javascript_include_tag "add_ingredients.js"
+  = javascript_include_tag "validation.js"
 
 .center
   %h3 Create new meal
