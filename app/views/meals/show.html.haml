@@ -12,4 +12,7 @@
   .instructions= @meal.instructions
   %b Compatible with diets:
   %br
-  = render :partial => 'meal_diet_classifications/popular_diets', :collection => @meal.popular_classifications, :as => :meal_diet_classification
+  - if @meal.popular_classifications.present?
+    = render :partial => 'meal_diet_classifications/popular_diets', :collection => @meal.popular_classifications, :as => :meal_diet_classification
+  - else
+    %span This meal is not compatible with any diet
