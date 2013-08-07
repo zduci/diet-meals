@@ -32,6 +32,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'webrat'
 end
 
 group :doc do
