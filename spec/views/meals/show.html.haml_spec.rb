@@ -2,14 +2,14 @@ require "spec_helper"
 
 describe "meals/show.html.haml" do
   it "displays message if this meal does not belong to any diet" do
-    wat = double(:meal, 
+    meal = double(:meal, 
                  :name => 'fries', 
                  :duration => 10, 
                  :author => stub(:author, :name => 'anon'),
                  :ingredients => [], 
                  :instructions => '', 
                  :popular_classifications => [])
-    assign(:meal, wat)
+    assign(:meal, meal)
 
     render
 
