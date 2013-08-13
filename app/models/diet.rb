@@ -44,4 +44,8 @@ class Diet < ActiveRecord::Base
   def popular_classifications
     meal_diet_classifications.order('stars_count DESC').limit(5)
   end
+
+  def type
+    exclusive ? :exclusive : :inclusive
+  end
 end
