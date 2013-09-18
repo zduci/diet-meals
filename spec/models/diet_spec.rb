@@ -84,4 +84,14 @@ describe Diet do
       eat_anything.popular_classifications.should == [pork_ribs_classification, chips_classification, steak_classification, cheese_pizza_classification, grilled_shrimp_classification]
     end
   end
+
+  describe '#type' do
+    it 'returns :inclusive for inclusive diets' do
+      FactoryGirl.create(:diet, :exclusive => false).type.should == :inclusive
+    end
+
+    it 'returns :inclusive for inclusive diets' do
+      FactoryGirl.create(:diet, :exclusive => true).type.should == :exclusive
+    end
+  end
 end

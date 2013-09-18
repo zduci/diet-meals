@@ -588,7 +588,7 @@
         null,
         null,
         1,
-        170,
+        172,
         null,
         null,
         1,
@@ -596,11 +596,11 @@
         null,
         null,
         1,
-        170,
+        172,
         null,
         null,
         1,
-        170,
+        172,
         null,
         null
       ],
@@ -1698,6 +1698,16 @@
         1,
         null,
         null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
         null
       ],
       "/Users/radu/projects/rails/diet-meals/app/models/diet.rb": [
@@ -1749,7 +1759,7 @@
         null,
         null,
         1,
-        0,
+        2,
         null,
         null
       ],
@@ -2361,6 +2371,6 @@
         null
       ]
     },
-    "timestamp": 1379532742
+    "timestamp": 1379533145
   }
 }
