@@ -35,6 +35,8 @@ group :test do
   gem 'webrat'
 end
 
+gem 'simplecov', :require => false, :group => :test
+
 group :doc do
   gem 'sdoc', require: false
 end
