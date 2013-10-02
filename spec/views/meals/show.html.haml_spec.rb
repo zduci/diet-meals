@@ -5,7 +5,7 @@ describe "meals/show.html.haml" do
     meal = double(:meal, 
                  :name => 'fries', 
                  :duration => 10, 
-                 :author => stub(:author, :name => 'anon'),
+                 :author => double(:author, :name => 'anon'),
                  :ingredients => [], 
                  :instructions => '', 
                  :popular_classifications => [])
